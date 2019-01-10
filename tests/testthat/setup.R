@@ -24,6 +24,7 @@ password <- c("datashield_test&","datashield_test&","datashield_test&")
 table <- c("DASIM.DASIM1", "DASIM.DASIM2", "DASIM.DASIM3")
 login.data <- datashield.build.login.data.frame.o(server,url,table,user,password)
 
+#load up the packages required. As P.B scripts suggested
 load.packages <- function()
 {
   print('Loading packages....')
@@ -60,6 +61,7 @@ load.packages <- function()
   }
 }
 
+#load up packages and verify they have been uploaded 
 context ("packages are loaded")
 load.packages()
 test_that("dsBase, dsModelling, dsGraphics, dsStats.",
@@ -70,12 +72,14 @@ test_that("dsBase, dsModelling, dsGraphics, dsStats.",
             expect_true(require('dsModelling'))
 })
 
+#verifies a server (i.e. VM is running)
 context("A server is available")
 test_that("The virtual machine is loaded.",
 {          
             expect_true(url.exists("192.168.56.100:8080", timeout=5))
 })
 
+#Verifies a connection to opal has been made 
 stats.var <- list('GENDER', 'LAB_TSC')
 connection.opal <- datashield.login(logins=login.data, assign=TRUE,variables=stats.var)
 
