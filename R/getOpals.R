@@ -11,7 +11,14 @@
 getOpals <- function(){
   
   # get the names of all the objects in the current work environment
-  objs <- ls(name=.GlobalEnv)
+  #objs <- ls(name=.GlobalEnv)
+  
+  #if (length(objs) == 0)
+  #{
+    objs <- ls(current_env())
+  #}
+  
+  print(objs)
   
   # check which of the object is a list (the opal objects are kept in a list)
   if(length(objs) > 0){
