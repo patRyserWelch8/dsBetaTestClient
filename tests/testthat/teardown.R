@@ -9,8 +9,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 
+print("teardown.r")
 
-if (!is.null(opals)) {
-    datashield.logout(opals)
-    opals <- NULL
-}
+
+#if (!is.null(opals)) {
+#    datashield.logout(opals)
+#    opals <- NULL
+#}
