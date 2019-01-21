@@ -30,89 +30,81 @@ ds.test_env$login.data <- datashield.build.login.data.frame.o(ds.test_env$server
                                                               ds.test_env$user,
                                                               ds.test_env$password)
 ds.test_env$stats.var <- list('GENDER', 'LAB_TSC')
-a <- 4
-print("------- eheheheh -------")
-print(ls(ds.test_env))
 
-print(ls(ds.test_env))
-connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
-print("------- eheheheh -------")
+
 
 #load up the packages required. As P.B scripts suggested
-#load.packages <- function()
-#{
-#  print('Loading packages....')
-#  print('dsBase')
-#  package.loaded = require('dsBase')
-#  if (!package.loaded)
-#  {
-#    install.packages('dsBase',repos='http://cran.obiba.org')
-#    library('dsBase')
-#  }
-#  
-#  print('dsModelling')
-#  package.loaded = require('dsModelling')
-#  if (!package.loaded)
-#  {
-#    install.packages('dsModelling',repos='http://cran.obiba.org')
-#    library('dsModelling')
-#  }
+load.packages <- function()
+{
+  print('Loading packages....')
+  print('dsBase')
+  package.loaded = require('dsBase')
+  if (!package.loaded)
+  {
+    install.packages('dsBase',repos='http://cran.obiba.org')
+    library('dsBase')
+  }
   
-#  print('dsGraphics')
-#  package.loaded = require('dsGraphics')
-#  if (!package.loaded)
-#  {
-#    install.packages('dsGraphics',repos='http://cran.obiba.org')
-#    library('dsGraphics')
-#  }
-#  
-#  print('dsStats')
-#  package.loaded = require('dsStats')
-# if (!package.loaded)
-#  {
-#    install.packages('dsStats',repos='http://cran.obiba.org')
-#    library('dsStats')
-#  }
-#}
+  print('dsModelling')
+  package.loaded = require('dsModelling')
+  if (!package.loaded)
+  {
+    install.packages('dsModelling',repos='http://cran.obiba.org')
+    library('dsModelling')
+  }
+  
+  print('dsGraphics')
+  package.loaded = require('dsGraphics')
+  if (!package.loaded)
+  {
+    install.packages('dsGraphics',repos='http://cran.obiba.org')
+    library('dsGraphics')
+  }
+  
+  print('dsStats')
+  package.loaded = require('dsStats')
+  if (!package.loaded)
+  {
+    install.packages('dsStats',repos='http://cran.obiba.org')
+    library('dsStats')
+  }
+}
 
 #load up packages and verify they have been uploaded 
-#context ("packages are loaded")
-#load.packages()
+context ("packages are loaded")
+load.packages()
 
-#print("------- eheheheh 2 2-------")
-#objs <- ls(parent.env())
 
-#print("------- eheheheh  2 2-------")
 
-#test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
-#{
-#    expect_true(require('dsBase'))
-#    expect_true(require('dsGraphics'))
-#    expect_true(require('dsStats'))
-#    expect_true(require('dsModelling'))
-#    print ("all the packages are loaded")
-#})
+test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
+{
+    expect_true(require('dsBase'))
+    expect_true(require('dsGraphics'))
+    expect_true(require('dsStats'))
+    expect_true(require('dsModelling'))
+    print ("all the packages are loaded")
+})
 
 #verifies a server (i.e. VM is running)
-#context("A server is available")
-#test_that("The virtual machine is loaded. ",
-#{          
-#    expect_that(url.exists("192.168.56.100:8080", timeout=5), is_true())
-#    print("A server is available")
-#})
+context("A server is available")
+test_that("The virtual machine is loaded. ",
+{          
+    expect_that(url.exists("192.168.56.100:8080", timeout=5), is_true())
+    print("A server is available")
+})
 
 #Verifies a connection to opal has been made 
-#print ("connect to server")
-#stats.var <- list('GENDER', 'LAB_TSC')
-#ls()
-#connection.opal <- datashield.login(logins=login.data, assign=TRUE,variables=stats.var)
-#ls()
+print ("connect to server")
+stats.var <- list('GENDER', 'LAB_TSC')
+ls()
+ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=stats.var)
+ls()
 
 #context("A connection to opal server has been made")
-#test_that("The number of servers the same has setup",
-#{
-#  expect_true(length(connection.opal) == length(server))
-#})
+test_that("The number of servers the same has setup",
+{
+  expect_true(length(ds.test_env$connection.opal) == length(ds.test_env$server))
+})
 
 #ds.assign("D$LAB_TSC", "tsc")
 #stat.mean <- ds.mean.o(x='tsc',type='combine')
