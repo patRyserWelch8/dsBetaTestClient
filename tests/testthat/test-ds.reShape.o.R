@@ -26,7 +26,7 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.reShape.o()")
 test_that("simplest ds.reShape.o", {
-    list <- ds.reShape.o('D$LAB_TSC')
+    list <- ds.reShape.o('D$LAB_TSC', direction='wide')
 
     expect_true(length(list) == 0)
 })

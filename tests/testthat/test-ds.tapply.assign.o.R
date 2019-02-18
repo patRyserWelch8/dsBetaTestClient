@@ -26,7 +26,7 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.tapply.assign.o()")
 test_that("simplest 'tapply.assign'", {
-    list <- ds.tapply.assign.o('D$LAB_TSC')
+    list <- ds.tapply.assign.o('D$LAB_TSC', 'GENDER', 'sum', 'D$TEMP')
 
     expect_true(length(list) == 0)
 })

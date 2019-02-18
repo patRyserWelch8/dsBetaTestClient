@@ -26,9 +26,9 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.seq.o()")
 test_that("simplest ds.seq.o", {
-    list <- ds.seq.o('D$LAB_TSC')
+    list <- ds.seq.o(1, 1, 10, "test", "obj")
 
-    expect_true(length(list) == 0)
+    expect_true(length(list) == 9)
 })
 
 #
