@@ -16,89 +16,34 @@ library(opal)
 library(dsBaseClient)
 library(RCurl)
 
-ds.test_env <- new.env()
-
-#define login data
-ds.test_env$server <- c("study1", "study2", "study3")
-ds.test_env$url <- c("http://192.168.56.100:8080","http://192.168.56.100:8080","http://192.168.56.100:8080")
-ds.test_env$user <- c("administrator","administrator","administrator")
-ds.test_env$password <- c("datashield_test&","datashield_test&","datashield_test&")
-ds.test_env$table <- c("DASIM.DASIM1", "DASIM.DASIM2", "DASIM.DASIM3")
-ds.test_env$login.data <- datashield.build.login.data.frame.o(ds.test_env$server,
-                                                              ds.test_env$url,
-                                                              ds.test_env$table,
-                                                              ds.test_env$user,
-                                                              ds.test_env$password)
-ds.test_env$stats.var <- list('GENDER', 'LAB_TSC')
-
-
-
-#load up the packages required. As P.B scripts suggested
-load.packages <- function()
-{
-  print('Loading packages....')
-  print('dsBase')
-  package.loaded = require('dsBase')
-  if (!package.loaded)
-  {
-    install.packages('dsBase',repos='http://cran.obiba.org')
-    library('dsBase')
-  }
-  
-  print('dsModelling')
-  package.loaded = require('dsModelling')
-  if (!package.loaded)
-  {
-    install.packages('dsModelling',repos='http://cran.obiba.org')
-    library('dsModelling')
-  }
-  
-  print('dsGraphics')
-  package.loaded = require('dsGraphics')
-  if (!package.loaded)
-  {
-    install.packages('dsGraphics',repos='http://cran.obiba.org')
-    library('dsGraphics')
-  }
-  
-  print('dsStats')
-  package.loaded = require('dsStats')
-  if (!package.loaded)
-  {
-    install.packages('dsStats',repos='http://cran.obiba.org')
-    library('dsStats')
-  }
-}
-
-#load up packages and verify they have been uploaded 
-context ("packages are loaded")
-load.packages()
-
-
-
-test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
-{
-    expect_true(require('dsBase'))
-    expect_true(require('dsGraphics'))
-    expect_true(require('dsStats'))
-    expect_true(require('dsModelling'))
-    print ("all the packages are loaded")
-})
-
-#verifies a server (i.e. VM is running)
+#connect to a server
 context("A server is available")
 test_that("The virtual machine is loaded. ",
 {          
-    expect_that(url.exists("192.168.56.100:8080", timeout=5), is_true())
-    print("A server is available")
+  expect_that(url.exists("192.168.56.100:8080", timeout=5), is_true())
+  print("A server is available")
 })
 
-#Verifies a connection to opal has been made 
+#define test_environment variables - connection to data shield and read from local files
+source("defineTestEnv.R")
+
+#load the packages required for datashield to work
+source("loadLibraries.R")
+test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
+{
+  expect_true(require('dsBase'))
+  expect_true(require('dsGraphics'))
+  expect_true(require('dsStats'))
+  expect_true(require('dsModelling'))
+  print ("all the packages are loaded")
+})
+
+
 print ("connect to server")
-stats.var <- list('GENDER', 'LAB_TSC')
 ls()
-ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=stats.var)
-ls()
+ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
+
+
 
 #context("A connection to opal server has been made")
 test_that("The number of servers the same has setup",
@@ -106,38 +51,17 @@ test_that("The number of servers the same has setup",
   expect_true(length(ds.test_env$connection.opal) == length(ds.test_env$server))
 })
 
-#ds.assign("D$LAB_TSC", "tsc")
-#stat.mean <- ds.mean.o(x='tsc',type='combine')
-#print (stat.mean)
+
+dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
+print(dimensions[[1]][1])
+print(nrow(ds.test_env$same.values))
+
+
+#context("The number of rows of the test data are the same on the server and locally")
+test_that("The of rows are the same",
+{
+  expect_true(dimensions[[1]][1] == nrow(ds.test_env$same.values))
+})
 
 
 
-#print(connection.opal)
-
-#ds.dim(x='D', type='combine')
-#ds.summary(x='D$GENDER')
-
-
-#options(verbose=FALSE)
-
-#options(opal.username='administrator',
-#        opal.password='password')
-
-#options(opal.url='http://localhost:8080')
-#options(opal.url='http://demo.obiba.org:8080')
-
-#server <- c(getOption("opal.server1"), getOption("opal.server2"), getOption("opal.server3"))
-#url <- c(getOption("opal.url"), getOption("opal.url"), getOption("opal.url"))
-#user <- c(getOption("opal.username"), getOption("opal.username"), getOption("opal.username"))
-#password <- c(getOption("opal.password"), getOption("opal.password"), getOption("opal.password"))
-#table <- c(getOption("opal.table1"), getOption("opal.table2"), getOption("opal.table3"))
-
-#if (!is.null(getOption("opal.server1"))) {
-#    logindata <- data.frame(server,url,user,password,table)
-
-# adminopals <- datashield.login(logins=logindata,assign=TRUE,variables=getOption("datashield.variables", NULL))
-# opaladmin::dsadmin.install_package(opal=adminopals,pkg="dsBetaTest",githubusername="datashield",ref="master")
-# datashield.logout(adminopals)
-
-#    opals <- datashield.login(logins=logindata,assign=TRUE,variables=getOption("datashield.variables", NULL))
-#}

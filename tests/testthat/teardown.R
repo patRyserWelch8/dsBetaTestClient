@@ -11,10 +11,6 @@
 
 print("teardown.r - clearing all the r objects")
 
-if(!is.null(connection.opal))
-{
-   datashield.logout((connection.opal))
-}
 
 rm("connection.opal", envir=ds.test_env)
 rm("login.data", envir=ds.test_env)
