@@ -17,7 +17,7 @@ context("dsBetaTestClient::ds.tapply.assign.o")
 
 options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
 options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC"))
+options(datashield.variables=list("LAB_TSC","GENDER"))
 source("setup.R")
 
 #
@@ -26,7 +26,7 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.tapply.assign.o()")
 test_that("simplest 'tapply.assign'", {
-    list <- ds.tapply.assign.o('D$LAB_TSC', 'GENDER', 'sum', 'D$TEMP')
+    list <- ds.tapply.assign.o(X.name='D$LAB_TSC', INDEX.name='GENDER', FUN.name='sum', newobj='D$TEMP')
 
     expect_true(length(list) == 0)
 })
