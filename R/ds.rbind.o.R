@@ -1,50 +1,50 @@
-#' 
-#' @title ds.dataFrame.o calling dataFrameDS.o
-#' @description Creates a data frame from its elemental components: pre-existing data frames;
-#' single variables; matrices
-#' @details A data frame is a list of variables all with the same number of rows with unique row
-#' names, which is of class 'data.frame'. ds.dataFrame.o will create a data frame by combining
-#' a series of elemental components which may be pre-existing data.frames, matrices or variables.
-#' A critical requirement is that the length of all component variables, and the
-#' number of rows of the component data.frames or matrices must all be the same. The output
-#' data.frame will then have this same number of rows. ds.dataFrame.o calls the serverside
-#' function dataFrameDS.o which is almost the same as the native R function data.frame()
-#' and so several of the arguments are precisely the same as for data.frame() 
+#' @title ds.rbind.o calling rbindDS.o
+#' @description Take a sequence of vector, matrix or data-frame arguments
+#' and combine them by row to produce a matrix.
+#' @details A sequence of vector, matrix or data-frame arguments
+#' is combined row by row to produce a matrix
+#' which is written to the serverside. For more details see 
+#' the native R function {rbind}. The handling of argument <x>
+#' is similar to that of functions {ds.cbind.o} and {ds.dataFrame.o}
 #' @param x This is a vector of character strings representing the names of the elemental
-#' components to be combined. For example, the call:
-#' ds.dataFrame.o(x=c('DF_input','matrix.m','var_age'),newobj='DF_output') will
-#' combine a pre-existing data.frame called DF_input with a matrix and a variable
-#' called var_age. The output will be the combined data.frame DF_output. As many
-#' elemental components as needed may be combined in any order e.g. 3 data.frames,
-#' 7 variables and 2 matrices. For convenience the x argument can alternatively
+#' components to be combined.  For example, the call:
+#' ds.rbind.o(x=c('matrix.m','matrix.n'),newobj='rbind_output') will
+#' stack matrix.m on top of matrix.n provided the number of
+#' columns of matrix.m and matrix.n are the same. The output
+#' object rbind_output is written to the serverside. As many
+#' elemental components as needed may be combined using ds.rbind.o
+#' provided they all have the same number of columns.
+#' For convenience the x argument can alternatively
 #' be specified in a two step procedure, the first being a call to
 #' the native R environment on the client server:
-#' x.components<-c('DF_input1','matrix.m','DF_input2', 'var_age'); 
-#' ds.dataFrame.o(x=x.components,newobj='DF_output')
-#' @param row.names	NULL or a single integer or character string specifying a
-#' column to be used as row names, or a character or integer vector giving the
-#' row names for the data frame.
-#' @param check.rows if TRUE then the rows are checked for consistency of
-#' length and names.
-#' @param check.names logical. If TRUE then the names of the variables
-#' in the data frame are checked to ensure that they are syntactically
-#' valid variable names and are not duplicated.
-#' If necessary they are adjusted (by make.names) so that they are.
-#' As a slight modification to the standard data.frame() function in native
-#' R, if any column names are duplicated, the second and subsequent
-#' occurances are given the suffixes .1, .2 etc by ds.dataFrame.o and so
-#' there are never any duplicates when check.names is invoked by the
-#' serverside function dataFrameDS.o
-#' @param stringsAsFactors logical: should character vectors be converted
-#' to factors? The 'factory-fresh' default is TRUE.
-#' @param completeCases logical. Default FALSE. If TRUE then any rows with
-#' missing values
-#' in any of the elemental components of the final output data.frame
-#' will be deleted.
-#' @param DataSHIELD.checks logical: If TRUE undertakes all DataSHIELD checks (time
-#' consuming). Default FALSE.
+#' x.components<-c('matrix.m','matrix.n') then 
+#' ds.rbind.o(x=x.components,newobj='rbind_output'). Column names
+#' are taken either from the column names of the first object
+#' specified in the <x> argument. Alternatively new column names
+#' can be user specified using <force.colnames>
+#' @param DataSHIELD.checks logical, if TRUE checks are made that all
+#' input objects exist and are of an appropriate class. These checks
+#' are relatively slow and so the <DataSHIELD.checks> argument is
+#' defaulted to FALSE
+#' param force.colnames NULL or a vector of character strings representing
+#' the required column names of the output object. For example:
+#' force.colnames=c("colname1","name.of.second.column", "lastcol") for an
+#' output object with three columns. If <force.colnames> is NULL
+#' column names are inferred from the names or column names of
+#' the first object specified in the <x> argument.
+#' The vector of column names must have
+#' the same number of elements as there are columns in the output
+#' object. In other words as every specified object in the <x>
+#' argument must have the same number of columns the vector
+#' of column names must have the same number of elements as
+#' there are columns in every object specified in the <x> argument
+#' If the length of the column name vector is incorrect a
+#' studysideMessage is returned: "Number of column names
+#' does not match number of columns in output object. Here 'N' names
+#' are required.Please see help for {ds.rbind.o} function" where 'N'
+#' is the actual number of columns in the output object 
 #' @param newobj This a character string providing a name for the output
-#' data.frame which defaults to 'df_new' if no name is specified.
+#' data.frame which defaults to 'cbind.out' if no name is specified.
 #' @param datasources specifies the particular opal object(s) to use. If the <datasources>
 #' argument is not specified the default set of opals will be used. The default opals
 #' are called default.opals and the default can be set using the function
@@ -54,22 +54,26 @@
 #' the argument can be specified as: e.g. datasources=opals.em[2].
 #' If you wish to specify the first and third opal servers in a set you specify:
 #' e.g. datasources=opals.em[c(1,3)]
-#' @return the object specified by the <newobj> argument (or default name <df_new>).
-#' which is written to the serverside. In addition, two validity messages are returned
+#' @return the object specified by the <newobj> argument (or default name <rbind.out>).
+#' which is written to the serverside. Unlike the {ds.cbind.o} function
+#' even if one of the objects specified in the <x> argument is a data.frame
+#' the output object will always be of class matrix
+#' As well as writing the output object as <newobj>
+#' on the serverside, two validity messages are returned
 #' indicating whether <newobj> has been created in each data source and if so whether
 #' it is in a valid form. If its form is not valid in at least one study - e.g. because
 #' a disclosure trap was tripped and creation of the full output object was blocked -
-#' ds.dataFrame.o() also returns any studysideMessages that can explain the error in creating
+#' ds.cbind.o() also returns any studysideMessages that can explain the error in creating
 #' the full output object. As well as appearing on the screen at run time,if you wish to
 #' see the relevant studysideMessages at a later date you can use the {ds.message.o}
-#' function. If you type ds.message.o("newobj") it will print out the relevant
+#' function. If you type ds.message.o("<newobj>") it will print out the relevant
 #' studysideMessage from any datasource in which there was an error in creating <newobj>
 #' and a studysideMessage was saved. If there was no error and <newobj> was created
-#' without problems no studysideMessage will have been saved and ds.message.o("newobj")
+#' without problems no studysideMessage will have been saved and ds.message.o("<newobj>")
 #' will return the message: "ALL OK: there are no studysideMessage(s) on this datasource".
-#' @author DataSHIELD Development Team
+#' @authors Paul Burton for DataSHIELD Development Team
 #' @export
-ds.dataFrame.o<-function(x=NULL,row.names=NULL,check.rows=FALSE,check.names=TRUE,stringsAsFactors=TRUE,completeCases=FALSE,DataSHIELD.checks=FALSE,newobj='df_new',datasources=NULL){
+ds.rbind.o<-function(x=NULL,DataSHIELD.checks=FALSE,force.colnames=NULL,newobj='rbind.out',datasources=NULL){
   
   # if no opal login details are provided look for 'opal' objects in the environment
   if(is.null(datasources)){
@@ -77,7 +81,7 @@ ds.dataFrame.o<-function(x=NULL,row.names=NULL,check.rows=FALSE,check.names=TRUE
   }
   
   if(is.null(x)){
-    stop("Please provide the name of the list that holds the input vectors!", call.=FALSE)
+    stop("Please provide a vector of character strings holding the name of the input elements!", call.=FALSE)
   }
   
   # the input variable might be given as column table (i.e. D$vector)
@@ -105,14 +109,18 @@ if(DataSHIELD.checks)
       stop(" Only objects of type 'data.frame', 'matrix', 'numeric', 'integer', 'character', 'factor' and 'logical' are allowed.", call.=FALSE)
     }
   }
-  
+ } 
   # check newobj not actively declared as null
   if(is.null(newobj)){
-    newobj <- "df_new"
-  }
+    newobj <- "rbind.out"
 }
 
+
 #CREATE THE VECTOR OF COLUMN NAMES
+if(!is.null(force.colnames)){
+colname.vector<-force.colnames
+}else{
+
   colname.vector<-NULL
   class.vector<-NULL
 
@@ -178,24 +186,19 @@ if(num.duplicates[m]!="0")
 	colname.vector[m]<-paste0(colname.vector[m],".",num.duplicates.c[m])
 	}
 }
+}
 
-
+#prepare name vectors for transmission
+ x.names.transmit<-paste(x,collapse=",")
+ colnames.transmit<-paste(colname.vector,collapse=",")
+ 
  ############################### 
-  # call the server side function
-  #The serverside function dataFrameDS.o calls dsBase::dataframeDS in dsBase repository
-  if(is.null(row.names)){
-    cally <-  paste0("dataFrameDS.o(list(",paste(x,collapse=","),"),", 
-                     'NULL',",", check.rows,",", check.names,
-                     ",list(","'",paste(colname.vector,collapse="','"),"'","),"
-                     ,stringsAsFactors,",",completeCases,")")
-  }else{
-    cally <-  paste0("dataFrameDS.o(list(",paste(x,collapse=","),"),", 
-                     "list(","'",paste(row.names,collapse="','"),"'","),", 
-                     check.rows,",", check.names,
-                     ",list(","'",paste(colname.vector,collapse="','"),"'","),"
-                     ,stringsAsFactors,",",completeCases,")") 
-  }
-  datashield.assign(datasources, newobj, as.symbol(cally))
+ # call the server side function
+ 
+	calltext <- call("rbindDS.o", x.names.transmit,colnames.transmit)	
+ 
+
+	datashield.assign(datasources, newobj, calltext)
   
  
 #############################################################################################################
@@ -204,9 +207,7 @@ if(num.duplicates[m]!="0")
 #SET APPROPRIATE PARAMETERS FOR THIS PARTICULAR FUNCTION                                                 	#
 test.obj.name<-newobj																					 	#
 																											#
-#TRACER																									 	#
-#return(test.obj.name)																					 	#
-#}                                                                                   					 	#
+																											#
 																											#
 																											#							
 # CALL SEVERSIDE FUNCTION                                                                                	#
@@ -279,5 +280,4 @@ if(!no.errors){																								#
 #############################################################################################################
 
 }
-#ds.dataFrame.o
-
+#ds.rbind.o
