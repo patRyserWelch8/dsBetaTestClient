@@ -9,8 +9,23 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #-------------------------------------------------------------------------------
 
+print("teardown.r - clearing all the r objects")
 
-if (!is.null(opals)) {
-    datashield.logout(opals)
-    opals <- NULL
-}
+
+rm("connection.opal", envir=ds.test_env)
+rm("login.data", envir=ds.test_env)
+rm("password", envir=ds.test_env)
+rm("server", envir=ds.test_env)
+rm("stats.var", envir=ds.test_env)
+rm("table", envir=ds.test_env)
+rm("url", envir=ds.test_env)
+rm("user", envir=ds.test_env)
+
+
+
+
+
+#if (!is.null(opals)) {
+#    datashield.logout(opals)
+#    opals <- NULL
+#}
