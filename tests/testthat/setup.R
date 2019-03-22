@@ -17,7 +17,7 @@ library(dsBaseClient)
 library(RCurl)
 
 #connect to a server
-context("A server is available")
+context("VM problems")
 test_that("The virtual machine is loaded. ",
 {          
   expect_that(url.exists("192.168.56.100:8080", timeout=5), is_true())
@@ -42,10 +42,8 @@ test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed 
 print ("connect to server")
 ls()
 ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
+print(class(ds.test_env$connection.opal))
 
-
-
-#context("A connection to opal server has been made")
 test_that("The number of servers the same has setup",
 {
   expect_true(length(ds.test_env$connection.opal) == length(ds.test_env$server))
@@ -53,11 +51,12 @@ test_that("The number of servers the same has setup",
 
 
 dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
+print("dimensions")
 print(dimensions[[1]][1])
 print(nrow(ds.test_env$same.values))
+print(dimensions[[1]][1] == nrow(ds.test_env$same.values))
 
-
-#context("The number of rows of the test data are the same on the server and locally")
+context("The number of rows of the test data are the same on the server and locally")
 test_that("The of rows are the same",
 {
   expect_true(dimensions[[1]][1] == nrow(ds.test_env$same.values))
