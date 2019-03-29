@@ -16,18 +16,18 @@ library(dsBaseClient)
 library(RCurl)
 
 
-
+source("init_all_dataset.r") 
 #connect to a server
 context("VM problems")
 test_that("The virtual machine is loaded. ",
 {          
-    expect_that(url.exists("192.168.56.100:8080", timeout=5), is_true())
+    expect_that(url.exists(ds.test_env$server_ip_address, timeout=5), is_true())
     print("A server is available")
 })
 
 #define test_environment variables - connection to data shield and read from local files
 
-source("init_all_dataset.r")
+
 
 #load the packages required for datashield to work
 source("load_libraries.R")
