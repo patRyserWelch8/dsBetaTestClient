@@ -1,5 +1,5 @@
 ds.test_env <- new.env()
-ds.test_env$server_ip_address = "192.168.56.100"
+ds.test_env$server_ip_address = "localhost"
 ds.test_env$ip_address_1 <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="")
 ds.test_env$ip_address_2 <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="")
 ds.test_env$ip_address_3 <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="")
