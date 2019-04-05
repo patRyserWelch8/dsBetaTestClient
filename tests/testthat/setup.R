@@ -63,3 +63,5 @@ test_that("The of rows are the same",
   expect_true(dimensions[[1]][1] == nrow(ds.test_env$same.values))
 })
 
+#    opals <- datashield.login(logins=logindata,assign=TRUE,variables=getOption("datashield.variables", NULL))
+# }
