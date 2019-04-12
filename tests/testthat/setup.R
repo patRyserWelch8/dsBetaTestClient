@@ -20,8 +20,8 @@ source("init_all_dataset.r")
 #connect to a server
 context("VM problems")
 test_that("The virtual machine is loaded. ",
-{          
-    expect_that(url.exists(ds.test_env$server_ip_address, timeout=5), is_true())
+{      
+    expect_that(url.exists(ds.test_env$ping_address, timeout=5), is_true())
     print("A server is available")
 })
 
@@ -63,5 +63,3 @@ test_that("The of rows are the same",
   expect_true(dimensions[[1]][1] == nrow(ds.test_env$same.values))
 })
 
-#    opals <- datashield.login(logins=logindata,assign=TRUE,variables=getOption("datashield.variables", NULL))
-# }

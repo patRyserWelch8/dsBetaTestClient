@@ -1,8 +1,20 @@
+#This script determine all the login information to the servers used for the testing. 
+#The first time, you will need to edit the server_ip_address. The latter is required to set 
+#access to the data on the virtual machines. 
+
 ds.test_env <- new.env()
-ds.test_env$server_ip_address = "localhost"
-ds.test_env$ip_address_1 <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="")
-ds.test_env$ip_address_2 <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="")
-ds.test_env$ip_address_3 <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="")
+#set here your TCP/IP address of your virtual machine.
+ds.test_env$server_ip_address = "192.168.56.100"
+
+
+
+ds.test_env$ip_address_1 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
+ds.test_env$ip_address_2 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
+ds.test_env$ip_address_3 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
+
+#This TCP/IP address is required to test a connect to the server. 
+ds.test_env$ping_address <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="" )
+
 
 ds.test_env$user_1 <- "administrator"
 ds.test_env$user_2 <- "administrator"
