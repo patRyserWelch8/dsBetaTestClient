@@ -26,7 +26,7 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.asFactor.o()")
 
-ds.asNumeric("D$time.id","TID")
+ds.asNumeric.o("D$time.id","TID")
 
 context("dsBetaTestClient::ds.asFactor.o(force.factor.levels)")
 
