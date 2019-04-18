@@ -41,9 +41,15 @@ test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed 
 
 
 print ("connect to server")
-ls()
-ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
-print(class(ds.test_env$connection.opal))
+if (ds.test_env$context == ds.test_env$contexts[1])
+{
+  ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
+  print(class(ds.test_env$connection.opal))
+  
+}
+
+
+
 
 test_that("The number of servers the same has setup",
 {

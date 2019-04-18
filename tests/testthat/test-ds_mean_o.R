@@ -120,22 +120,22 @@ test_that("split dataset",
     expect_equal(mean.from.servers[[1]][3], mean.from.file.3, tolerance = 10^-15)
 })
 
-context("Returns expected non-numerical values")
-test_that("character",
-{
-  #print("character")
-  mean.from.servers <- ds.mean.o(x='D$CHARACTER',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-  expect_equal(is.na(mean.from.servers),TRUE)
-})
+#context("Returns expected non-numerical values")
+#test_that("character",
+#{
+#  #print("character")
+#  mean.from.servers <- ds.mean.o(x='D$CHARACTER',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+#  expect_equal(is.na(mean.from.servers),TRUE)
+#})
 
-test_that("boolean",
-{          
-  #print("boolean")
-  mean.from.files <- mean(ds.test_env$same.values[,3])
-  mean.from.servers <- ds.mean.o(x='D$BOOLEAN',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-  print("mean.from.files")
-  expect_equal(mean.from.servers,mean.from.files,tolerance = 10^-15)
-})
+#test_that("boolean",
+#{          
+#  #print("boolean")
+#  mean.from.files <- mean(ds.test_env$same.values[,3])
+#  mean.from.servers <- ds.mean.o(x='D$BOOLEAN',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+#  print("mean.from.files")
+#  expect_equal(mean.from.servers,mean.from.files,tolerance = 10^-15)
+#})
 
 context("Mathematical properties")
 test_that("residual deviation tends to 0",

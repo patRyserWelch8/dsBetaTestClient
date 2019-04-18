@@ -12,14 +12,7 @@
 print("teardown.r - clearing all the r objects")
 
 
-rm("connection.opal", envir=ds.test_env)
-rm("login.data", envir=ds.test_env)
-rm("password", envir=ds.test_env)
-rm("server", envir=ds.test_env)
-rm("stats.var", envir=ds.test_env)
-rm("table", envir=ds.test_env)
-rm("url", envir=ds.test_env)
-rm("user", envir=ds.test_env)
+source("clean_test_environment.R")
 
 
 

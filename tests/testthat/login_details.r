@@ -3,9 +3,10 @@
 #access to the data on the virtual machines. 
 
 ds.test_env <- new.env()
+ds.test_env$contexts <- c('opal','dsi','dslite','continuous','coverage')  
 #set here your TCP/IP address of your virtual machine.
 ds.test_env$server_ip_address = "192.168.56.100"
-
+ds.test_env$context = 'opal'
 
 
 ds.test_env$ip_address_1 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
