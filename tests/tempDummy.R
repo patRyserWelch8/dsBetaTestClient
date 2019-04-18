@@ -64,10 +64,10 @@ connection.opal <- datashield.login(logins=login.data, assign=TRUE,variables=sta
 
 ds.dim('D')
 ds.colnames('D')
-ds.class('D$FACTOR_INTEGER')
+ds.class('D$FACTOR_CHARACTER')
 
 ds.asNumeric("D$FACTOR_INTEGER","FACTOR_INT")
 stat.factor <- ds.asFactor.o('FACTOR_INT','FACTOR_INT.f', datasources = connection.opal)
-#print(stat.factor)
+print(stat.factor)
 
 
