@@ -16,7 +16,15 @@ library(dsBaseClient)
 library(RCurl)
 
 
-source("init_all_dataset.r") 
+
+source("connection_to_datasets/login_details.R")
+source("connection_to_datasets/init_all_datasets.R")
+source("libraries/load_libraries.R")
+
+
+init.all.datasets()
+#
+print(ds.test_env$ping_address)
 #connect to a server
 context("VM problems")
 test_that("The virtual machine is loaded. ",
@@ -28,9 +36,8 @@ test_that("The virtual machine is loaded. ",
 #define test_environment variables - connection to data shield and read from local files
 
 
-
+load.libraries()
 #load the packages required for datashield to work
-source("load_libraries.R")
 test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
 {
   expect_true(require('dsBase'))
@@ -60,12 +67,12 @@ test_that("The number of servers the same has setup",
 dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
 #print("dimensions")
 #print(dimensions[[1]][1])
-#print(nrow(ds.test_env$same.values))
-#print(dimensions[[1]][1] == nrow(ds.test_env$same.values))
+#print(nrow(ds.test_env$local.values))
+#print(dimensions[[1]][1] == nrow(ds.test_env$local.values))
 
 context("The number of rows of the test data are the same on the server and locally")
 test_that("The of rows are the same",
 {
-  expect_true(dimensions[[1]][1] == nrow(ds.test_env$same.values))
+  expect_true(dimensions[[1]][1] == nrow(ds.test_env$local.values))
 })
 

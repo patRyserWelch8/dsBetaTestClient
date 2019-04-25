@@ -3,7 +3,7 @@ source("login_details.r")
 if (ds.test_env$secure_login_details)
 {
     print('reading values from files')
-    ds.test_env$same.values.3 <- read.csv("data_files/data_set_3.csv", header = TRUE)
+    ds.test_env$local.values.3 <- read.csv("data_files/data_set_3.csv", header = TRUE)
 
 
     ds.test_env$server <- c("study3")
