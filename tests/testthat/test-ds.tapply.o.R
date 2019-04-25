@@ -26,7 +26,7 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.tapply.o()")
 test_that("simplest 'ds.tapply.o'", {
-    list <- ds.tapply.o('D$LAB_TSC', INDEX.names='GENDER', FUN.name='sum')
+    list <- ds.tapply.o('D$LAB_TSC', INDEX.names='D$GENDER', FUN.name='sum', datasources=opals)
 
     expect_true(length(list) == 0)
 })
