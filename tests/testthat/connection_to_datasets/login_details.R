@@ -4,7 +4,6 @@
 
 ds.test_env <- new.env()
 
-  print ("login details")
   ds.test_env$contexts <- c('opal','dsi','dslite','continuous','coverage')  
   #set here your TCP/IP address of your virtual machine.
   ds.test_env$server_ip_address = "192.168.56.100"
@@ -27,7 +26,6 @@ ds.test_env <- new.env()
   ds.test_env$password_2 <- "datashield_test&"
   ds.test_env$password_3 <- "datashield_test&"
   ds.test_env$secure_login_details = TRUE
-  print("end of login details")
-  
+
 
 

@@ -146,29 +146,21 @@ ds.asFactor.o <- function(input.var.name=NULL, newobj.name=NULL, forced.factor.l
     newobj.name <- paste0(input.var.name,".f")
   }
 
-  print (1)
   #CALL THE FIRST SERVER SIDE FUNCTION (AN AGGREGATE FUNCTION)
   #TO DETERMINE ALL OF THE LEVELS REQUIRED
-  print (2)
   calltext1 <- call("asFactorDS1.o", input.var.name)
-  print (3)
   all.levels <- datashield.aggregate(datasources, calltext1)
-  print (4)
   numstudies <- length(datasources)
-  print (5)
 
   all.levels.all.studies <- NULL
-  print(6)
   for(j in 1:numstudies){
   all.levels.all.studies <- c(all.levels.all.studies,all.levels[[j]])
   }
-  print (7)
   all.unique.levels <- as.character(unique(all.levels.all.studies))
 
   if(!is.null(forced.factor.levels)){
      all.unique.levels <- forced.factor.levels
   }
-  print (8)
 
   all.unique.levels.transmit <- paste0(all.unique.levels, collapse=",")
 
@@ -180,19 +172,16 @@ ds.asFactor.o <- function(input.var.name=NULL, newobj.name=NULL, forced.factor.l
 																										 #
 #SET APPROPRIATE PARAMETERS FOR THIS PARTICULAR FUNCTION                                                 #
 test.obj.name<-newobj.name  
-print(10)
                                                                                                          #
 # CALL SEVERSIDE FUNCTION                                                                                #
 calltext <- call("testObjExistsDS.o", test.obj.name)	
-print(10.5)
 print(calltext)
 #
 object.info<-datashield.aggregate(datasources, calltext)												 #
-print(11)																						 #
 # CHECK IN EACH SOURCE WHETHER OBJECT NAME EXISTS														 #
 # AND WHETHER OBJECT PHYSICALLY EXISTS WITH A NON-NULL CLASS											 #
 num.datasources<-length(object.info)																	 #
-print(12)																										 #
+																										 #
 																										 #
 obj.name.exists.in.all.sources<-TRUE																	 #
 obj.non.null.in.all.sources<-TRUE																		 #

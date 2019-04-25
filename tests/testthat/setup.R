@@ -50,11 +50,11 @@ test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed 
 print ("connect to server")
 if (ds.test_env$context == ds.test_env$contexts[1])
 {
-  ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
+  #ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
+  log.in.data.server()
   print(class(ds.test_env$connection.opal))
   
 }
-
 
 
 
@@ -64,7 +64,6 @@ test_that("The number of servers the same has setup",
 })
 
 
-dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
 #print("dimensions")
 #print(dimensions[[1]][1])
 #print(nrow(ds.test_env$local.values))
@@ -73,6 +72,7 @@ dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.o
 context("The number of rows of the test data are the same on the server and locally")
 test_that("The of rows are the same",
 {
+  dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
   expect_true(dimensions[[1]][1] == nrow(ds.test_env$local.values))
 })
 

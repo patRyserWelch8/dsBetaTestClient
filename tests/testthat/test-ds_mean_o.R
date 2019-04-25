@@ -1,3 +1,6 @@
+source("connection_to_datasets/init_all_datasets.R")
+connect.all.datasets()
+
 context("Returns expected numerical value")
 test_that("combined data set",
 {
@@ -141,10 +144,10 @@ context("Mathematical properties")
 test_that("residual deviation tends to 0",
 {
     mean.from.servers <- ds.mean.o(x='D$INTEGER',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-    expect_equal(sum(ds.test_env$local.values[,6] - mean.from.servers[[1]][1]), 0, tolerance = 10^-10)
+    expect_equal(sum(ds.test_env$local.values[,6] - mean.from.servers[[1]][1]), 0, tolerance = 10^-8)
     
     mean.from.servers <- ds.mean.o(x='D$POSITIVE_INTEGER',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-    expect_equal(sum(ds.test_env$local.values[,8] - mean.from.servers[[1]][1]), 0, tolerance = 10^-10)
+    expect_equal(sum(ds.test_env$local.values[,8] - mean.from.servers[[1]][1]), 0, tolerance = 10^-8)
    
     mean.from.servers <- ds.mean.o(x='D$NEGATIVE_INTEGER',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
     expect_equal(sum(ds.test_env$local.values[,9] - mean.from.servers[[1]][1]), 0, tolerance = 10^-8)
@@ -153,7 +156,7 @@ test_that("residual deviation tends to 0",
     expect_equal(sum(ds.test_env$local.values[,7] - mean.from.servers[[1]][1]), 0, tolerance = 10^-8)
     #----
     mean.from.servers <- ds.mean.o(x='D$NUMERIC',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-    expect_equal(sum(ds.test_env$local.values[,10] - mean.from.servers[[1]][1]), 0, tolerance = 10^-10)
+    expect_equal(sum(ds.test_env$local.values[,10] - mean.from.servers[[1]][1]), 0, tolerance = 10^-8)
     
     mean.from.servers <- ds.mean.o(x='D$POSITIVE_NUMERIC',type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)    
     expect_equal(sum(ds.test_env$local.values[,12] - mean.from.servers[[1]][1]), 0, tolerance = 10^-8)
@@ -174,4 +177,4 @@ test_that("residual deviation tends to 0",
 #    print(ds.mean.o())  
 #})
 
-print("\nEOT")
+
