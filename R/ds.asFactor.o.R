@@ -150,12 +150,15 @@ ds.asFactor.o <- function(input.var.name=NULL, newobj.name=NULL, forced.factor.l
   #TO DETERMINE ALL OF THE LEVELS REQUIRED
   calltext1 <- call("asFactorDS1.o", input.var.name)
   all.levels <- datashield.aggregate(datasources, calltext1)
+  
   numstudies <- length(datasources)
 
   all.levels.all.studies <- NULL
+
   for(j in 1:numstudies){
   all.levels.all.studies <- c(all.levels.all.studies,all.levels[[j]])
   }
+
   all.unique.levels <- as.character(unique(all.levels.all.studies))
 
   if(!is.null(forced.factor.levels)){
@@ -166,18 +169,17 @@ ds.asFactor.o <- function(input.var.name=NULL, newobj.name=NULL, forced.factor.l
 
   calltext2 <- call("asFactorDS2.o", input.var.name, all.unique.levels.transmit, fixed.dummy.vars, baseline.level)
   datashield.assign(datasources, newobj.name, calltext2)
-  print(9)
+
 ##########################################################################################################
 #MODULE 5: CHECK KEY DATA OBJECTS SUCCESSFULLY CREATED                                                   #
 																										 #
 #SET APPROPRIATE PARAMETERS FOR THIS PARTICULAR FUNCTION                                                 #
-test.obj.name<-newobj.name  
+test.obj.name<-newobj.name                                                                               #
                                                                                                          #
 # CALL SEVERSIDE FUNCTION                                                                                #
-calltext <- call("testObjExistsDS.o", test.obj.name)	
-print(calltext)
-#
+calltext <- call("testObjExistsDS.o", test.obj.name)													 #
 object.info<-datashield.aggregate(datasources, calltext)												 #
+																										 #
 # CHECK IN EACH SOURCE WHETHER OBJECT NAME EXISTS														 #
 # AND WHETHER OBJECT PHYSICALLY EXISTS WITH A NON-NULL CLASS											 #
 num.datasources<-length(object.info)																	 #

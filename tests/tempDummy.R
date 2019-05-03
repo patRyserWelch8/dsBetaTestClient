@@ -1,6 +1,7 @@
 library(opal)
 library(dsBaseClient)
 library(RCurl)
+library(dsBetaTestClient)
 
 load.packages <- function()
 {
@@ -41,9 +42,13 @@ load.packages <- function()
 load.packages()
 
 server <- c("study1", "study2", "study3")
-url <- c("https://192.168.56.100:8443","https://192.168.56.100:8443","https://192.168.56.100:8443")
-user <- c("administrator","administrator","administrator")
-password <- c("datashield_test&","datashield_test&","datashield_test&")
+#url <- c("https://192.168.56.100:8443","https://192.168.56.100:8443","https://192.168.56.100:8443")
+url <- c("https://192.168.56.100:8443")
+
+#user <- c("administrator","administrator","administrator")
+user <- c("administrator")
+
+password <- c("datashield_test&")#,"datashield_test&","datashield_test&")
 table <- c("TESTING.DATASET1", "TESTING.DATASET2", "TESTING.DATASET3")
 login.data <- datashield.build.login.data.frame.o(server,url,table,user,password)
 
@@ -61,13 +66,18 @@ stats.var <- list('ID','CHARACTER', 'LOGICAL','NA_VALUES','INTEGER','NULL_VALUES
 #stats.var <- list('FACTOR_CHARACTER')
 
 connection.opal <- datashield.login(logins=login.data, assign=TRUE,variables=stats.var)
+sample.size <- ds.length('D$NON_NEGATIVE_INTEGER', type='split')
+s <- ds.rNorm.o(sample.size,5,2,"myResult")
 
-ds.dim('D')
-ds.colnames('D')
-ds.class('D$FACTOR_CHARACTER')
+
+ds.asCharacter("D$FACTOR_CHARACTER","FACTOR_CHAR")
+stat.factor <- ds.asFactor.o('FACTOR_CHAR','FACTOR_CHAR.f', datasources = connection.opal)
+
+
+
 
 ds.asNumeric("D$FACTOR_INTEGER","FACTOR_INT")
-stat.factor <- ds.asFactor.o('FACTOR_INT','FACTOR_INT.f', datasources = connection.opal)
-print(stat.factor)
+stat.factor <- ds.asFactor.o('FACTOR_INT','FACTOR_INTEGER.f', datasources = connection.opal)
+
 
 
