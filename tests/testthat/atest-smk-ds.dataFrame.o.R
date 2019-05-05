@@ -28,16 +28,16 @@ context("dsBetaTestClient::ds.dataFrame.o():smoke create a dataframe")
 test_that("dataframe_exists", {
     myvectors <- c('D$LAB_TSC', 'D$LAB_HDL')
     ds.dataFrame.o(x=myvectors)
-    res <- ds.ls()
+    res <- ds.ls(datasources=ds.test_env$connection.opal)
 
-    expect_equal(ds.ls()$sim1[2], "dframe")
-    expect_equal(ds.ls()$sim2[2], "dframe")
-    expect_equal(ds.ls()$sim3[2], "dframe")
+    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim1[2], "dframe")
+    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim2[2], "dframe")
+    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim3[2], "dframe")
 })
 
 context("dsBetaTestClient::ds.dataFrame.o() errors:smoke")
 test_that("dataframe_errors", {
-    expect_error(ds.dataframe(), "argument is of length zero", fixed=TRUE)
+    expect_error(ds.dataframe.o(), "argument is of length zero", fixed=TRUE)
 })
 
 #

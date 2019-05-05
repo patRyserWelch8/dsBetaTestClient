@@ -32,7 +32,7 @@ output.D<-c(mod.D$coefficients[,1],mod.D$coefficients[,2])
 output.R<-NULL
 
 test_that("glm_gaussian", {
-    expect_equal(ds.ls()$sim1[2],output.D,output.R)
+    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim1[2],output.D,output.R)
 })
 
 #
