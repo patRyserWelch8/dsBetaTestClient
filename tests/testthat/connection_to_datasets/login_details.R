@@ -9,7 +9,6 @@ ds.test_env <- new.env()
   ds.test_env$server_ip_address = "127.0.0.1"
   ds.test_env$context = 'opal'
 
-
   ds.test_env$ip_address_1 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
   ds.test_env$ip_address_2 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
   ds.test_env$ip_address_3 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
