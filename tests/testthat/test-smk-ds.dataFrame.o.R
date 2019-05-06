@@ -30,14 +30,14 @@ test_that("dataframe_exists", {
     ds.dataFrame.o(x=myvectors)
     res <- ds.ls(datasources=ds.test_env$connection.opal)
 
-    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim1[2], "dframe")
-    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim2[2], "dframe")
-    expect_equal(ds.ls(datasources=ds.test_env$connection.opal)$sim3[2], "dframe")
+    expect_equal(res$sim1[2], "df_new")
+    expect_equal(res$sim2[2], "df_new")
+    expect_equal(res$sim3[2], "df_new")
 })
 
 context("dsBetaTestClient::ds.dataFrame.o() errors:smoke")
 test_that("dataframe_errors", {
-    expect_error(ds.dataframe.o(), "argument is of length zero", fixed=TRUE)
+    expect_error(ds.dataFrame.o(), "Please provide the name of the list that holds the input vectors!", fixed=TRUE)
 })
 
 #
