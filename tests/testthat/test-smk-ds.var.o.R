@@ -13,20 +13,20 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.var.o")
+context("dsBetaTestClient::ds.var.o:smoke")
 
-options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
-options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC"))
-source("setup.R")
+source("connection_to_datasets/init_all_datasets.R")
+source("connection_to_datasets/init_smk_datasets.R")
+
+connect.smk.dataset.sim(list("LAB_TSC"))
 
 #
 # Tests
 #
 
-context("dsBetaTestClient::ds.var.o()")
+context("dsBetaTestClient::ds.var.o():smoke")
 test_that("simple var", {
-    var.res <- ds.var.o(x = 'D$LAB_TSC', datasources = opals)
+    var.res <- ds.var.o(x = 'D$LAB_TSC', datasources = ds.test_env$connection.opal)
 
     expect_equal(var.res$Variance.by.Study[1], 1.229163, tolerance = .000001)
     expect_equal(var.res$Variance.by.Study[2], 1.140606, tolerance = .000001)
@@ -34,9 +34,7 @@ test_that("simple var", {
 })
 
 #
-# Tear down
+# Done
 #
 
-source("teardown.R")
-
-context("dsBetaTestClient::ds.var.o done")
+context("dsBetaTestClient::ds.var.o:smoke done")
