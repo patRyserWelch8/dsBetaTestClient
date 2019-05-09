@@ -43,7 +43,7 @@ than the disclosure threshold. The variance is calculated at the client side by 
 $var(X)=\frac{\sum{x_i^2}}{N-1}-\frac{(\sum{x_i})^2}{N(N-1)}$
 }
 \examples{
-{
+\dontrun{
 
   # load that contains the login details
   data(logindata)

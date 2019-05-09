@@ -37,7 +37,8 @@
 #' @seealso \link{ds.lexis} for survival analysis using piecewise exponential regression
 #' @seealso \link{ds.gee} for generalized estimating equation models
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #' # # load the file that contains the login details
 #' # data(glmLoginData)

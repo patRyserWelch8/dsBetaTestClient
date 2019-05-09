@@ -34,7 +34,8 @@
 #' @return a list containing the current settings of the nfilters in each study specified
 #' @author DataSHIELD Team
 #' @export
-#' @examples{
+#' @examples
+#' \dontrun{
 #' #WORKING EXAMPLES NOT PROVIDED (MULTIPLE OPALS AND R SESSIONS MAKE THIS DIFFICULT)
 #' ##Client-side function call to list current disclosure settings in all Opal servers
 #' #ds.listDisclosureSettings.o()

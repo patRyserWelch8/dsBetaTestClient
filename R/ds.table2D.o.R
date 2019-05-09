@@ -33,7 +33,8 @@
 #' @author Amadou Gaye, Paul Burton, Demetris Avraam, for DataSHIELD Development Team
 #' @seealso \link{ds.table1D} for the tabulating one vector.
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load the file that contains the login details
 #'   data(logindata)

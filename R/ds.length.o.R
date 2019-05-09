@@ -17,7 +17,8 @@
 #' @return a numeric, the length of the input vector or list.
 #' @author Amadou Gaye, Demetris Avraam, for DataSHIELD Development Team
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load that contains the login details
 #'   data(logindata)

@@ -189,7 +189,8 @@
 #' @seealso \link{ds.lexis} for survival analysis using piecewise exponential regression
 #' @seealso \link{ds.gee} for generalized estimating equation models
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' #  Example 1:
 #' #The components of the standard output from ds.glm are listed below. Additional
 #' #explanatory material for some

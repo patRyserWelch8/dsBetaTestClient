@@ -26,7 +26,8 @@
 #' threshold for the minimum cell size in a contingency table.
 #' @author Amadou Gaye, Demetris Avraam, for DataSHIELD Development Team
 #' @export
-#' @examples{
+#' @examples
+#' \dontrun{
 #' 
 #'   # load that contains the login details
 #'   data(logindata)

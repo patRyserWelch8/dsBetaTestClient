@@ -33,7 +33,8 @@
 #' the control, then the output matrices are returned and also an error message is returned but it is replaced by NA.
 #' @author Gaye A; Avraam D; Burton PR
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #'
 #' #  # load that contains the login details
 #' #  data(glmLoginData)

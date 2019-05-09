@@ -99,7 +99,7 @@ Converts a numeric vector into a factor type which is represented either as a ve
 or as a matrix of dummy variables dependending on the argument \code{fixed.dummy.vars}.
 }
 \examples{
-{
+\dontrun{
 
 #  # load that contains the login details
 #  logindata.VMs.em <- ds.createLogindata(110,110,110,table=c("SURVIVAL.EXPAND_WITH_MISSING1",

@@ -90,7 +90,8 @@
 #' @seealso \link{ds.subset} to subset by complete cases (i.e. removing missing values), threshold,
 #' columns and rows.
 #' @export
-#' @examples{
+#' @examples
+#' \dontrun{
 #' 
 #' # #load that contains the login details
 #' # data(logindata)

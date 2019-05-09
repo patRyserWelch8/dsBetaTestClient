@@ -46,7 +46,8 @@
 #' @return one or more scatter plots depending on the argument \code{type}
 #' @author Demetris Avraam for DataSHIELD Development Team
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load the file that contains the login details
 #'   data(logindata)

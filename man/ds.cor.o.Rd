@@ -51,7 +51,7 @@ user to make a decision about the 'relevance' of the correlation based on the nu
 cases included in the correlation calculations.
 }
 \examples{
-{
+\dontrun{
 
 #  # load that contains the login details
 #  data(glmLoginData)

@@ -51,7 +51,7 @@ user to make a decision about the 'relevance' of the covariance based on the num
 cases included in the covariance calculations.
 }
 \examples{
-{
+\dontrun{
 
 #  # load that contains the login details
 #  data(glmLoginData)

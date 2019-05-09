@@ -64,7 +64,8 @@
 #' content indicated by a valid class. 
 #' @author DataSHIELD Development Team
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #'
 #' ##EXAMPLE 1
 #' ##CONVERT PROPORTIONS IN prop.rand TO log(odds) IN logodds.rand

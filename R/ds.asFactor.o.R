@@ -78,7 +78,8 @@
 #' for 'opal' objects in the environment and sets this parameter. 
 #' @return all the unique levels of the converted variable and the tracer of the function
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #' #  # load that contains the login details
 #' #  logindata.VMs.em <- ds.createLogindata(110,110,110,table=c("SURVIVAL.EXPAND_WITH_MISSING1",

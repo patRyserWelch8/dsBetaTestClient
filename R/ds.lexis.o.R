@@ -149,7 +149,8 @@
 #' @seealso \code{ds.glm} for genralized linear models
 #' @seealso \code{ds.gee} for generalized estimating equation models
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' #EXAMPLE 1
 #' #In this example, the data to be expanded are held in a dataframe called 'CM'. The survival time
 #' #intervals are to be 0<t<=2.5; 2.5<t<=5.0, 5.0<t<=7.5, up to the final interval of duration 2.5

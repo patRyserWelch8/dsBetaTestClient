@@ -50,7 +50,7 @@ In this way, it is possible to combine total counts across all the data sources 
 identify the cell(s) that had the small counts which render the table invalid.
 }
 \examples{
-{
+\dontrun{
 
   # load the file that contains the login details
   data(logindata)

@@ -64,7 +64,7 @@ specific number generated from the data and therefore the user gets the same fig
 that chooses the probabilistic method in a given set of variables.
 }
 \examples{
-{
+\dontrun{
 
   # load the file that contains the login details
   data(logindata)
