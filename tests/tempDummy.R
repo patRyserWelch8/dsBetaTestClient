@@ -70,14 +70,23 @@ sample.size <- ds.length('D$NON_NEGATIVE_INTEGER', type='split')
 s <- ds.rNorm.o(sample.size,5,2,"myResult")
 
 
-ds.asCharacter("D$FACTOR_CHARACTER","FACTOR_CHAR")
-stat.factor <- ds.asFactor.o('FACTOR_CHAR','FACTOR_CHAR.f', datasources = connection.opal)
-
-
-
-
 ds.asNumeric("D$FACTOR_INTEGER","FACTOR_INT")
 stat.factor <- ds.asFactor.o('FACTOR_INT','FACTOR_INTEGER.f', datasources = connection.opal)
+print(stat.factor)
+
+
+ds.asCharacter("D$CHARACTER","CHAR")
+stat.factor <- ds.asFactor.o('FACTOR_CHAR','FACTOR_CHAR.f', datasources = connection.opal)
+print(stat.factor)
+
+
+ds.asCharacter("D$FACTOR_CHARACTER","FACTOR_CHAR")
+stat.factor <- ds.asFactor.o('FACTOR_CHAR','FACTOR_CHAR.f', datasources = connection.opal)
+print(stat.factor)
+
+
+
+
 
 
 
