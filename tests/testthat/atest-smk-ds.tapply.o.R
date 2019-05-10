@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Copyright (c) 2014 OBiBa,
-#               2018 University of Newcastle upon Tyne. All rights reserved.
+#               2019 University of Newcastle upon Tyne. All rights reserved.
 #
 # This program and the accompanying materials
 # are made available under the terms of the GNU Public License v3.0.
@@ -13,26 +13,22 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.glm.o 2")
+context("dsBetaTestClient::ds.tapply.o")
 
 options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
 options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC", "LAB_TRIG"))
+options(datashield.variables=list("LAB_TSC","GENDER"))
 source("setup.R")
 
 #
 # Tests
 #
 
-context("dsBetaTestClient::ds.glm.o(): Standard Gaussian regression model for piecewise exponential regression analysis")
+context("dsBetaTestClient::ds.tapply.o()")
+test_that("simplest 'ds.tapply.o'", {
+    list <- ds.tapply.o('D$LAB_TSC', INDEX.names='D$GENDER', FUN.name='sum', datasources=opals)
 
-mod.D<-ds.glm.o('D$LAB_TSC~D$LAB_TRIG',family="gaussian")
-output.D<-c(mod.D$coefficients[,1],mod.D$coefficients[,2])
-
-output.R<-NULL
-
-test_that("glm_gaussian", {
-    expect_equal(ds.ls()$sim1[2],output.D,output.R)
+    expect_true(length(list) == 0)
 })
 
 #
@@ -40,3 +36,5 @@ test_that("glm_gaussian", {
 #
 
 source("teardown.R")
+
+context("dsBetaTestClient::ds.tapply.o done")

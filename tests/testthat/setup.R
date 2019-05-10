@@ -19,7 +19,7 @@ library(RCurl)
 
 source("connection_to_datasets/login_details.R")
 source("connection_to_datasets/init_all_datasets.R")
-source("libraries/load_libraries.R")
+#source("libraries/load_libraries.R")
 
 
 init.all.datasets()
@@ -36,15 +36,15 @@ test_that("The virtual machine is loaded. ",
 #define test_environment variables - connection to data shield and read from local files
 
 
-load.libraries()
+#load.libraries()
 #load the packages required for datashield to work
-test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
-{
-  expect_true(require('dsBase'))
-  expect_true(require('dsGraphics'))
-  expect_true(require('dsStats'))
-  expect_true(require('dsModelling'))
-})
+#test_that(" The packages dsBase, dsModelling, dsGraphics, dsStats are installed and loaded.",
+#{
+#  expect_true(require('dsBase'))
+#  expect_true(require('dsGraphics'))
+#  expect_true(require('dsStats'))
+#  expect_true(require('dsModelling'))
+#})
 
 
 print ("connect to server")
