@@ -139,7 +139,7 @@ ds.table2D.o <- function(x=NULL, y=NULL, type='both', warningMessage=TRUE, datas
   
   # call the server side function that produces a 1-dimensional table for each study
   cally <- paste0("table2DDS.o(", x, ",", y, ")")
-  output <- datashield.aggregate(datasources, as.symbol(cally))
+  output <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   # extract contingency (count) tables and validity information for each study
   countTables <- vector("list", length(stdnames))
@@ -173,7 +173,7 @@ ds.table2D.o <- function(x=NULL, y=NULL, type='both', warningMessage=TRUE, datas
     pooledChi2test <- "Error: all entries of the table must be non-negative and finite"
   }else{
     pooledContingencyTable <- pooledCounts[1:(dim(pooledCounts)[1]-1), 1:(dim(pooledCounts)[2]-1)]
-    pooledChi2test <- chisq.test(pooledContingencyTable)
+    pooledChi2test <- stats::chisq.test(pooledContingencyTable)
   }
   
   # study specific row and column percentage tables (one for each study)
@@ -194,7 +194,7 @@ ds.table2D.o <- function(x=NULL, y=NULL, type='both', warningMessage=TRUE, datas
     }else{
       contingencyTable <- countTables[[i]][1:(dim(countTables[[i]])[1]-1), 1:(dim(countTables[[i]])[2]-1)]
       options(warn = -1) # suppress warning temporarily to avoid 'nuisance' message, analyst will found out chi2 results anyway.
-      chi2Tests[[i]] <- chisq.test(contingencyTable )
+      chi2Tests[[i]] <- stats::chisq.test(contingencyTable )
       options(warn = 0)  # put warning back
     }
   }

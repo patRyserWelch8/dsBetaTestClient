@@ -177,7 +177,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
   if(type=="combine"){
     numr <- 1
     numc <- 1
-    par(mfrow=c(numr,numc))
+    graphics::par(mfrow=c(numr,numc))
     graphics::plot(pooled.points.x, pooled.points.y, xlab=x.lab, ylab=y.lab, main=paste0("Combined scatter plot"))
     return.message<-"Combined plot created"
     return(return.message)
@@ -187,7 +187,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
       if(num.sources > 1){
         if((num.sources %% 2) == 0){ numr <- num.sources/2 }else{ numr <- (num.sources+1)/2}
           numc <- 2
-      	  par(mfrow=c(numr,numc))
+          graphics::par(mfrow=c(numr,numc))
           scatter <- list()
 		    }
 		    for(i in 1:num.sources){

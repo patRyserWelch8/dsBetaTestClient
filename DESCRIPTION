@@ -8,8 +8,9 @@ Description: Beta versions of new DataSHIELD client functions. Collected in this
 License: GPL-3
 Depends: R (>= 3.4.0)
 Imports:
-    opal,
     metafor,
+    opal,
+    opaladmin,
     dsBaseClient,
     dsStatsClient,
     dsModellingClient

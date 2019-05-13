@@ -224,9 +224,9 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
       message("Convergence criterion ",converge.state," (", converge.value,")")
       message("\nbeta: ", paste(as.vector(beta.vect.next), collapse=" "))
       message("\nInformation matrix overall:")
-      message(paste(capture.output(info.matrix.total), collapse="\n"))
+      message(paste(utils::capture.output(info.matrix.total), collapse="\n"))
       message("\nScore vector overall:")
-      message(paste(capture.output(score.vect.total), collapse="\n"))
+      message(paste(utils::capture.output(score.vect.total), collapse="\n"))
       message("\nCurrent deviance: ", dev.total, "\n")
     }
   }
@@ -237,9 +237,9 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
     message("Convergence criterion ",converge.state," (", converge.value,")")
     message("\nbeta: ", paste(as.vector(beta.vect.next), collapse=" "))
     message("\nInformation matrix overall:")
-    message(paste(capture.output(info.matrix.total), collapse="\n"))
+    message(paste(utils::capture.output(info.matrix.total), collapse="\n"))
     message("\nScore vector overall:")
-    message(paste(capture.output(score.vect.total), collapse="\n"))
+    message(paste(utils::capture.output(score.vect.total), collapse="\n"))
     message("\nCurrent deviance: ", dev.total, "\n")
   }
   
@@ -261,7 +261,7 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
     family.identified <- 1
     se.vect.final <- sqrt(diag(variance.covariance.matrix.total)) * sqrt(scale.par)
     z.vect.final <- beta.vect.final/se.vect.final
-    pval.vect.final <- 2*pnorm(-abs(z.vect.final))
+    pval.vect.final <- 2*stats::pnorm(-abs(z.vect.final))
     parameter.names <- names(score.vect.total[,1])
     model.parameters <- cbind(beta.vect.final,se.vect.final,z.vect.final,pval.vect.final)
     dimnames(model.parameters) <- list(parameter.names,c("Estimate","Std. Error","z-value","p-value"))
@@ -270,20 +270,20 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
       se.vect.final <- sqrt(diag(variance.covariance.matrix.total)) * sqrt(scale.par)
       t.vect.final <- beta.vect.final/se.vect.final
       df.t <- (nsubs.total-length(beta.vect.next))
-      pval.vect.final <- 2*pt(-abs(t.vect.final),df.t)
+      pval.vect.final <- 2*stats::pt(-abs(t.vect.final),df.t)
       parameter.names <- names(score.vect.total[,1])
       model.parameters <- cbind(beta.vect.final,se.vect.final,z.vect.final,pval.vect.final)
       dimnames(model.parameters)<-list(parameter.names,c("Estimate","Std. Error","t-value","p-value"))
     }
    
     if(CI > 0){
-      ci.mult <- qnorm(1-(1-CI)/2)
+      ci.mult <- stats::qnorm(1-(1-CI)/2)
       low.ci.lp <- model.parameters[,1]-ci.mult*model.parameters[,2]
       hi.ci.lp <- model.parameters[,1]+ci.mult*model.parameters[,2]
       estimate.lp <- model.parameters[,1]
       
       if(family=="gaussian"){
-        ci.mult <- qt((1-(1-CI)/2),df.t)
+        ci.mult <- stats::qt((1-(1-CI)/2),df.t)
         low.ci.lp <- model.parameters[,1]-ci.mult*model.parameters[,2]
         hi.ci.lp <- model.parameters[,1]+ci.mult*model.parameters[,2]
         estimate.lp <- model.parameters[,1]

@@ -719,10 +719,10 @@ if(sum.y.invalid>0||sum.Xpar.invalid>0||sum.w.invalid>0||sum.glm.saturation.inva
       message("\nbeta: ", paste(as.vector(beta.vect.next), collapse=" "))
       
       message("\nInformation matrix overall:")
-      message(paste(capture.output(info.matrix.total), collapse="\n"))
+      message(paste(utils::capture.output(info.matrix.total), collapse="\n"))
       
       message("\nScore vector overall:")
-      message(paste(capture.output(score.vect.total), collapse="\n"))
+      message(paste(utils::capture.output(score.vect.total), collapse="\n"))
       
       message("\nCurrent deviance: ", dev.total, "\n")
     }
@@ -736,10 +736,10 @@ if(sum.y.invalid>0||sum.Xpar.invalid>0||sum.w.invalid>0||sum.glm.saturation.inva
     message("\nbeta: ", paste(as.vector(beta.vect.next), collapse=" "))
     
     message("\nInformation matrix overall:")
-    message(paste(capture.output(info.matrix.total), collapse="\n"))
+    message(paste(utils::capture.output(info.matrix.total), collapse="\n"))
     
     message("\nScore vector overall:")
-    message(paste(capture.output(score.vect.total), collapse="\n"))
+    message(paste(utils::capture.output(score.vect.total), collapse="\n"))
     
     message("\nCurrent deviance: ", dev.total, "\n")
   }
@@ -762,14 +762,14 @@ if(sum.y.invalid>0||sum.Xpar.invalid>0||sum.w.invalid>0||sum.glm.saturation.inva
     family.identified<-1
     se.vect.final <- sqrt(diag(variance.covariance.matrix.total)) * sqrt(scale.par)
     z.vect.final<-beta.vect.final/se.vect.final
-    pval.vect.final<-2*pnorm(-abs(z.vect.final))
+    pval.vect.final<-2*stats::pnorm(-abs(z.vect.final))
     parameter.names<-names(score.vect.total[,1])
     model.parameters<-cbind(beta.vect.final,se.vect.final,z.vect.final,pval.vect.final)
     dimnames(model.parameters)<-list(parameter.names,c("Estimate","Std. Error","z-value","p-value"))
     
     if(CI > 0)
     {
-      ci.mult <- qnorm(1-(1-CI)/2)
+      ci.mult <- stats::qnorm(1-(1-CI)/2)
       low.ci.lp <- model.parameters[,1]-ci.mult*model.parameters[,2]
       hi.ci.lp <- model.parameters[,1]+ci.mult*model.parameters[,2]
       estimate.lp <- model.parameters[,1]
