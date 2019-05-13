@@ -465,9 +465,9 @@ if(combine.with.metafor){
                                           c("pooled.ML","se.ML","pooled.REML","se.REML","pooled.FE","se.FE"))
   
   for(p in 1:numcoefficients){
-    rma.ML<-rma(yi=betamatrix[p,], sei=sematrix[p,], method="ML")
-    rma.REML<-rma(yi=betamatrix[p,], sei=sematrix[p,], method="REML")
-    rma.FE<-rma(yi=betamatrix[p,], sei=sematrix[p,], method="FE")
+    rma.ML<-metafor::rma(yi=betamatrix[p,], sei=sematrix[p,], method="ML")
+    rma.REML<-metafor::rma(yi=betamatrix[p,], sei=sematrix[p,], method="REML")
+    rma.FE<-metafor::rma(yi=betamatrix[p,], sei=sematrix[p,], method="FE")
 
     SLMA.pooled.ests.matrix[p,1]<-rma.ML$beta
     SLMA.pooled.ests.matrix[p,2]<-rma.ML$se
