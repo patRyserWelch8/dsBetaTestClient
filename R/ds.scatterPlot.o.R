@@ -162,7 +162,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
 
   # call the server-side function that generates the x and y coordinates of the centroids
   call <- paste0("scatterPlotDS.o(", x, ",", y, ",", k, ",", method.indicator, ")")
-  output <- datashield.aggregate(datasources, call)
+  output <- opal::datashield.aggregate(datasources, call)
 
   pooled.points.x <- c()
   pooled.points.y <- c()
@@ -178,7 +178,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
     numr <- 1
     numc <- 1
     par(mfrow=c(numr,numc))
-    plot(pooled.points.x, pooled.points.y, xlab=x.lab, ylab=y.lab, main=paste0("Combined scatter plot"))
+    graphics::plot(pooled.points.x, pooled.points.y, xlab=x.lab, ylab=y.lab, main=paste0("Combined scatter plot"))
     return.message<-"Combined plot created"
     return(return.message)
   }else{
@@ -194,7 +194,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
           title <- paste0("Scatter plot of ", stdnames[i])
 	        x <- output[[i]][[1]]
           y <- output[[i]][[2]]
-          plot(x, y, xlab=x.lab, ylab=y.lab, main=title)			
+          graphics::plot(x, y, xlab=x.lab, ylab=y.lab, main=title)			
         }
 	    	return.message<-"Split plot created"
 		    return(return.message)

@@ -212,7 +212,7 @@ ds.meanSdGp <- function(x=NULL, y=NULL, type='both', do.checks=FALSE, datasource
   # call the server side function that calculates mean and DS by group in each study
 
   calltext <- paste0("meanSdGpDS(", x, ",", y, ")")
-  output <- datashield.aggregate(datasources, as.symbol(calltext))
+  output <- opal::datashield.aggregate(datasources, as.symbol(calltext))
 
   numsources <- length(output)
 

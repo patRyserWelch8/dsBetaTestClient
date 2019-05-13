@@ -98,7 +98,7 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
     cat("\n using the offset or weights argument.\n\n")
   }
 
-  formula <- as.formula(formula)
+  formula <- stats::as.formula(formula)
 
   # check that 'family' was set
   if(is.null(family)){
@@ -134,7 +134,7 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
   # IDENTIFY THE CORRECT DIMENSION FOR START BETAs VIA CALLING FIRST COMPONENT OF glmDS
   cally1 <- call('glmDS1', formula, family, data)
    
-  study.summary <- datashield.aggregate(datasources, cally1)
+  study.summary <- opal::datashield.aggregate(datasources, cally1)
   #num.par.glm<-study.summary$study1$dimX[2]
   num.par.glm<-study.summary[[1]][[1]][[2]]
 
@@ -166,7 +166,7 @@ ds.tTestF <- function(formula=NULL, data=NULL, family="gaussian", offset=NULL, w
     # NOW CALL SECOND COMPONENT OF glmDS TO GENERATE SCORE VECTORS AND INFORMATION MATRICES
     cally2 <- call('tTestFDS2', formula, family, beta.vect=beta.vect.temp, offset, weights, data)
 
-    study.summary <- datashield.aggregate(datasources, cally2)
+    study.summary <- opal::datashield.aggregate(datasources, cally2)
   
     .select <- function(l, field){
       lapply(l, function(obj) {obj[[field]]})

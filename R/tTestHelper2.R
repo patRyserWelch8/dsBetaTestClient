@@ -38,7 +38,7 @@ tTestHelper2 <- function(formula, CI, datasources) {
   }
   
   # turn the formula provided as a character into a formula object
-  formula <- as.formula(formula)
+  formula <- stats::as.formula(formula)
   family <- 'gaussian'
   
   # number of 'valid' studies (those that passed the checks) and vector of beta values

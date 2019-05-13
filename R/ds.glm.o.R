@@ -476,7 +476,7 @@ ds.glm.o <- function(formula=NULL, data=NULL, family=NULL, offset=NULL, weights=
        cat("\n using the offset or weights argument.\n\n")
 	}
 
-  formula <- as.formula(formula)
+  formula <- stats::as.formula(formula)
 
   
   # check that 'family' was set

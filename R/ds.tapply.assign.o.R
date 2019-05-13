@@ -106,7 +106,7 @@ ds.tapply.assign.o <- function(X.name=NULL, INDEX.names=NULL, FUN.name=NULL, new
   # CALL THE PRIMARY SERVER SIDE FUNCTION
   calltext <- call("tapplyDS.assign.o", X.name, INDEX.names.transmit, FUN.name)
  
-  datashield.assign(datasources, newobj, calltext)
+  opal::datashield.assign(datasources, newobj, calltext)
 
   #############################################################################################################
 #DataSHIELD CLIENTSIDE MODULE: CHECK KEY DATA OBJECTS SUCCESSFULLY CREATED                                  #

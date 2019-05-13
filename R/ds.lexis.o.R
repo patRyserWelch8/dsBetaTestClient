@@ -260,7 +260,7 @@ ds.lexis.o<-function(data=NULL, intervalWidth=NULL, idCol=NULL, entryCol=NULL, e
 #SOURCE. THE MAXIMUM I EACH SOURCE IS MASKED BY A RANDOM POSITIVE INCREMENT
   calltext1 <- call("lexisDS1.o", exitCol)
 
-  maxtime<-datashield.aggregate(datasources, calltext1)
+  maxtime<-opal::datashield.aggregate(datasources, calltext1)
   
   num.studies<-length(datasources)
 
@@ -289,12 +289,12 @@ intervalWidth.transmit<-paste0(as.character(intervalWidth),collapse=",")
 #FOLLOW-UP TIME BREAKS IN EACH STUDY (ALL THE SAME)
   # call the main server side function
   calltext2 <- call("lexisDS2.o", data, intervalWidth=intervalWidth.transmit, maxmaxtime, idCol, entryCol, exitCol, statusCol, variables)
-  	datashield.assign(datasources, "messageobj", calltext2)
+  	opal::datashield.assign(datasources, "messageobj", calltext2)
 
 	
 	
   calltext3<- call("lexisDS3.o")
-  	datashield.assign(datasources, expandDF, calltext3)
+  	opal::datashield.assign(datasources, expandDF, calltext3)
 
 
 #RETURN COMPLETION INFORMATION TO CLIENT SIDE

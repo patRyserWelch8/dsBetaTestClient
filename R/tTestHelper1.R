@@ -257,11 +257,11 @@ tTestHelper1 <- function(x, y, type, alternative, mu, paired, var.equal, conf.le
     class(rval) <- "htest"
     
     # delete files that are no more required
-    datashield.rm(datasources, 'pair.compl.obs')
-    datashield.rm(datasources, 'xok')
-    datashield.rm(datasources, 'yok')
-    datashield.rm(datasources, 'not.na.x')
-    datashield.rm(datasources, 'minus_y')  
+    opal::datashield.rm(datasources, 'pair.compl.obs')
+    opal::datashield.rm(datasources, 'xok')
+    opal::datashield.rm(datasources, 'yok')
+    opal::datashield.rm(datasources, 'not.na.x')
+    opal::datashield.rm(datasources, 'minus_y')  
     
     return(rval)
     

@@ -64,7 +64,7 @@ ds.listDisclosureSettings.o <- function(datasources=NULL){
   
   # CALL THE MAIN SERVER SIDE FUNCTION
   calltext <- call("listDisclosureSettingsDS.o")
-  Opal.disclosure.settings <- datashield.aggregate(datasources, calltext)
+  Opal.disclosure.settings <- opal::datashield.aggregate(datasources, calltext)
   
   # RETURN COMPLETION INFORMATION TO .GlobalEnv
   return(list(Opal.disclosure.settings=Opal.disclosure.settings))

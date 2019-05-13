@@ -102,7 +102,7 @@ ds.length.o = function(x=NULL, type='both', checks='FALSE', datasources=NULL){
   ###################################################################################################
   
   cally <- paste0("lengthDS.o(", x, ")")
-  lengths <- datashield.aggregate(datasources, as.symbol(cally))
+  lengths <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   # names of the studies to be used in the output
   stdnames <- names(datasources)

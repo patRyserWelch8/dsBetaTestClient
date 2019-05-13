@@ -217,7 +217,7 @@ checks=FALSE, maxit=15, datasources=NULL) {
        cat("\n using the offset or weights argument.\n\n")
 }
 
-  formula <- as.formula(formula)
+  formula <- stats::as.formula(formula)
 
   
   # check that 'family' was set
