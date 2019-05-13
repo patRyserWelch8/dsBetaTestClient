@@ -105,7 +105,7 @@ or as a matrix of dummy variables dependending on the argument \code{fixed.dummy
 #  logindata.VMs.em <- ds.createLogindata(110,110,110,table=c("SURVIVAL.EXPAND_WITH_MISSING1",
 #                            "SURVIVAL.EXPAND_WITH_MISSING2","SURVIVAL.EXPAND_WITH_MISSING3"))
 #  logindata.VMs.em <- logindata.VMs.em[1:3,]
-#  opals.em <- datashield.login(logins=logindata.VMs.em,assign=TRUE,symbol="EM")
+#  opals.em <- opal::datashield.login(logins=logindata.VMs.em,assign=TRUE,symbol="EM")
 #
 #  ds.asNumeric("EM$time.id","TID")
 #

@@ -53,7 +53,7 @@ if(checks==TRUE){                                                               
 
 
   # now do the business
-  output<-datashield.aggregate(datasources, as.symbol(toAggregate))
+  output<-opal::datashield.aggregate(datasources, as.symbol(toAggregate))
   return(list(output=output))
   }
   

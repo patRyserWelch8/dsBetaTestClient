@@ -118,7 +118,7 @@ if(is.null(LENGTH.OUT.value.char)&&is.null(ALONG.WITH.name)){
 
 # CALL THE PRIMARY SERVER SIDE FUNCTION
   calltext <- call("seqDS.o", FROM.value.char,BY.value.char,LENGTH.OUT.value.char,ALONG.WITH.name)
- datashield.assign(datasources, newobj, calltext)
+ opal::datashield.assign(datasources, newobj, calltext)
  
 
  
@@ -133,7 +133,7 @@ test.obj.name<-newobj																					 	#
 # CALL SEVERSIDE FUNCTION                                                                                	#
 calltext <- call("testObjExistsDS.o", test.obj.name)													 	#
 																											#
-object.info<-datashield.aggregate(datasources, calltext)												 	#
+object.info<-opal::datashield.aggregate(datasources, calltext)												 	#
 																											#
 # CHECK IN EACH SOURCE WHETHER OBJECT NAME EXISTS														 	#
 # AND WHETHER OBJECT PHYSICALLY EXISTS WITH A NON-NULL CLASS											 	#
@@ -175,7 +175,7 @@ if(obj.name.exists.in.all.sources && obj.non.null.in.all.sources){										 	#
 	}																										#
 																											#
 	calltext <- call("messageDS.o", test.obj.name)															#
-    studyside.message<-datashield.aggregate(datasources, calltext)											#
+    studyside.message<-opal::datashield.aggregate(datasources, calltext)											#
 																											#	
 	no.errors<-TRUE																							#
 	for(nd in 1:num.datasources){																			#

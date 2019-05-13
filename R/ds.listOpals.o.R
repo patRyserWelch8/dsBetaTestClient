@@ -1,6 +1,8 @@
 #'
 #' @title ds.listOpals list all Opal objects in the analytic environment
 #' @description ds.listOpals calls the internal DataSHIELD function getOpals() which identifies
+#' all Opal objects in the analytic environment.
+#' @details ds.listOpals calls the internal DataSHIELD function getOpals() which identifies
 #' all Opal objects in the analytic environment. If there are no Opal servers in the analytic
 #' environment ds.listOpalsIreminds the user that they have to login to a valid set of Opal
 #' login objects, if they wish to use DataSHIELD. If there is only one set of Opals, ds.listOpals

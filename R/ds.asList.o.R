@@ -50,7 +50,7 @@ ds.asList.o = function(x.name=NULL, newobj=NULL, datasources=NULL){
 
 	calltext <- call("asListDS.o", x.name, newobj)
 
-	out.message<-datashield.aggregate(datasources, calltext)
+	out.message<-opal::datashield.aggregate(datasources, calltext)
 	print(out.message)
 
 #Don't include assign function completion module as it can print out an unhelpful

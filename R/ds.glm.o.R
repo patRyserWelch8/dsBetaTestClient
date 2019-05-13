@@ -517,7 +517,7 @@ ds.glm.o <- function(formula=NULL, data=NULL, family=NULL, offset=NULL, weights=
  
    cally1 <- call('glmDS1.o', formula, family, weights, data)
    
-   study.summary.0 <- datashield.aggregate(datasources, cally1)
+   study.summary.0 <- opal::datashield.aggregate(datasources, cally1)
 
 at.least.one.study.data.error<-0
 
@@ -626,7 +626,7 @@ if(sum.y.invalid>0||sum.Xpar.invalid>0||sum.w.invalid>0||sum.glm.saturation.inva
 #NOW CALL SECOND COMPONENT OF glmDS TO GENERATE SCORE VECTORS AND INFORMATION MATRICES
     cally2 <- call('glmDS2.o', formula, family, beta.vect=beta.vect.temp, offset, weights, data)
 
-      study.summary <- datashield.aggregate(datasources, cally2)
+      study.summary <- opal::datashield.aggregate(datasources, cally2)
 
   
 

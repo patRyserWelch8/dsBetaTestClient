@@ -96,7 +96,7 @@ ds.dim.o <- function(x=NULL, type='both', checks=FALSE, datasources=NULL) {
   ###################################################################################################
   
   cally <- paste0("dimDS.o(", x, ")")
-  dimensions <- datashield.aggregate(datasources, as.symbol(cally))
+  dimensions <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   # names of the studies to be used in the output
   stdnames <- names(datasources)
