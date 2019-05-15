@@ -13,18 +13,18 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.dim.o")
+context("dsBetaTestClient::ds.dim.o:smoke")
 
-options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
-options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC"))
-source("setup.R")
+source("connection_to_datasets/init_all_datasets.R")
+source("connection_to_datasets/init_smk_datasets.R")
+
+connect.smk.dataset.sim(list("LAB_TSC"))
 
 #
 # Tests
 #
 
-context("dsBetaTestClient::ds.dim.o()")
+context("dsBetaTestClient::ds.dim.o():smoke")
 test_that("simple dim", {
     dim.res <- ds.dim.o('D')
 
@@ -35,9 +35,7 @@ test_that("simple dim", {
 })
 
 #
-# Tear down
+# Done
 #
 
-source("teardown.R")
-
-context("dsBetaTestClient::ds.dim.o done")
+context("dsBetaTestClient::ds.dim.o:smoke done")

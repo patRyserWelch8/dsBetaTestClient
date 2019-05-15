@@ -11,6 +11,7 @@ Depends:
     dsStatsClient,
     dsGraphicsClient,
     dsModellingClient,
+    metafor,
     opal
 RoxygenNote: 6.1.1
 Encoding: UTF-8
