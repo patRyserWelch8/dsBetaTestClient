@@ -3,9 +3,6 @@ pool:
 
 steps:
 - bash: |
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-    sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/'
-
     sudo service mysql stop
     sudo apt-get update
     sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
@@ -33,37 +30,30 @@ steps:
     /opt/puppetlabs/bin/puppet --version
     /opt/puppetlabs/puppet/bin/r10k version
 
-    R --version
-    git clone -b ubuntu16 https://github.com/StuartWheater/datashield-infrastructure.git ../datashield-infrastructure
+    git clone -b ubuntu16 https://github.com/datashield/datashield-infrastructure.git ../datashield-infrastructure
     pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install && popd
-    sudo /opt/puppetlabs/bin/puppet apply --debug --verbose azure-pipelines_site.pp --environment datashield_azurepipelines --environmentpath ../datashield-infrastructure/puppet/environments
-    R --version
+    sudo /opt/puppetlabs/bin/puppet apply azure-pipelines_site.pp --environment datashield_azurepipelines --environmentpath ../datashield-infrastructure/puppet/environments
   displayName: 'Install DataSHIELD server'
 
 - bash: |
-    R --version
-    sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
     sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/'
     sudo apt-get update
     sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev -y
     sudo apt-get install -qq r-base -y
-    R --version
     sudo R -e "install.packages('devtools', dependencies=TRUE)"
     sudo R -e "install.packages('metafor', dependencies=TRUE)"
     sudo R -e "devtools::install_github(repo='datashield/opal', ref='master')"
     sudo R -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='password', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
-    R --version
   displayName: 'Install R client'
 
 - bash: |
-    R --version
     R -e "library('devtools'); devtools::check(args = c('--no-examples'))" | tee azure-pipelines_check.Rout
     grep --quiet "0 error" azure-pipelines_check.Rout
   displayName: 'Devtools checks'
   condition: always()
 
 - bash: |
-    R --version
     R -e "library('devtools'); devtools::test()" | tee azure-pipelines_test.Rout
     grep --quiet "Failed:   0" azure-pipelines_test.Rout
   displayName: 'Devtools tests'
