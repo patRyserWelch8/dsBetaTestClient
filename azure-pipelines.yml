@@ -76,6 +76,7 @@ steps:
     #cd testStatus/docs/latest/
     git add testStatus/logs/test_results.xml
     git add testStatus/docs/latest/index.html
+    cd testStatus
     git commit -m "adding new test_results file"
     git push
   displayName: 'Parse test results'
