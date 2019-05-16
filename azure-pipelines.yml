@@ -70,10 +70,10 @@ steps:
     git config --global user.name "Azure pipeline"
     git clone https://datashield:$(GHPAT)@github.com/datashield/dsBetaTestClient.git dsBetaTestClient
     git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
+    cp test_results.xml testStatus/logs/
+    testStatus/source/status.py
     cd testStatus
-    cp ../test_results.xml logs/
-    source/status.py
-    cp status.html docs/latest/index.html
+    cp ../status.html docs/latest/index.html
     git add logs/test_results.xml
     git add docs/latest/index.html
     git commit -m "adding new test_results file"
