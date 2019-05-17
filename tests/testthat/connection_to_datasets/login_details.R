@@ -15,7 +15,6 @@ ds.test_env <- new.env()
 
   #This TCP/IP address is required to test a connect to the server. 
   ds.test_env$ping_address <- paste("http://", ds.test_env$server_ip_address, ":8080", sep="" )
-  print(ds.test_env$ping_address)
 
   ds.test_env$user_1 <- "administrator"
   ds.test_env$user_2 <- "administrator"
