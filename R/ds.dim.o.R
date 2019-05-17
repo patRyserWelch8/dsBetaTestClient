@@ -23,7 +23,8 @@
 #' @seealso \link{ds.asMatrix} to coerce an object into a matrix type.
 #' @seealso \link{ds.length} to obtain the size of a vector.
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load that contains the login details
 #'   data(logindata)
@@ -93,7 +94,7 @@ ds.dim.o <- function(x=NULL, type='both', checks=FALSE, datasources=NULL) {
   ###################################################################################################
   
   cally <- paste0("dimDS.o(", x, ")")
-  dimensions <- datashield.aggregate(datasources, as.symbol(cally))
+  dimensions <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   # names of the studies to be used in the output
   stdnames <- names(datasources)

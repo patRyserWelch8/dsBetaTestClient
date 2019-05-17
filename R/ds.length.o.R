@@ -17,7 +17,8 @@
 #' @return a numeric, the length of the input vector or list.
 #' @author Amadou Gaye, Demetris Avraam, for DataSHIELD Development Team
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load that contains the login details
 #'   data(logindata)
@@ -101,7 +102,7 @@ ds.length.o = function(x=NULL, type='both', checks='FALSE', datasources=NULL){
   ###################################################################################################
   
   cally <- paste0("lengthDS.o(", x, ")")
-  lengths <- datashield.aggregate(datasources, as.symbol(cally))
+  lengths <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   # names of the studies to be used in the output
   stdnames <- names(datasources)

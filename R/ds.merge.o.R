@@ -126,7 +126,7 @@ ds.merge.o = function(x.name=NULL,y.name=NULL, by.x.names=NULL, by.y.names=NULL,
 	calltext <- call("mergeDS.o", x.name, y.name, by.x.names.transmit, by.y.names.transmit, all.x, all.y,
 			 sort, suffixes.transmit, no.dups, incomparables)
 
-	datashield.assign(datasources, newobj, calltext)
+	opal::datashield.assign(datasources, newobj, calltext)
 
 
 #############################################################################################################
@@ -139,7 +139,7 @@ test.obj.name<-newobj																					 	#
 # CALL SEVERSIDE FUNCTION                                                                                	#
 calltext <- call("testObjExistsDS.o", test.obj.name)													 	#
 																											#
-object.info<-datashield.aggregate(datasources, calltext)												 	#
+object.info<-opal::datashield.aggregate(datasources, calltext)												 	#
 																											#
 # CHECK IN EACH SOURCE WHETHER OBJECT NAME EXISTS														 	#
 # AND WHETHER OBJECT PHYSICALLY EXISTS WITH A NON-NULL CLASS											 	#
@@ -181,7 +181,7 @@ if(obj.name.exists.in.all.sources && obj.non.null.in.all.sources){										 	#
 	}																										#
 																											#
 	calltext <- call("messageDS.o", test.obj.name)															#
-    studyside.message<-datashield.aggregate(datasources, calltext)											#
+    studyside.message<-opal::datashield.aggregate(datasources, calltext)											#
 																											#	
 	no.errors<-TRUE																							#
 	for(nd in 1:num.datasources){																			#

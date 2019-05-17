@@ -28,8 +28,9 @@ can be user specified using <force.colnames>}
 \item{DataSHIELD.checks}{logical, if TRUE checks are made that all
 input objects exist and are of an appropriate class. These checks
 are relatively slow and so the <DataSHIELD.checks> argument is
-defaulted to FALSE
-param force.colnames NULL or a vector of character strings representing
+defaulted to FALSE}
+
+\item{force.colnames}{NULL or a vector of character strings representing
 the required column names of the output object. For example:
 force.colnames=c("colname1","name.of.second.column", "lastcol") for an
 output object with three columns. If <force.colnames> is NULL
