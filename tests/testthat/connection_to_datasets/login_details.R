@@ -6,7 +6,7 @@ ds.test_env <- new.env()
 
   ds.test_env$contexts <- c('opal','dsi','dslite','continuous','coverage')  
   #set here your TCP/IP address of your virtual machine.
-  ds.test_env$server_ip_address = "127.0.0.1"
+  ds.test_env$server_ip_address = "192.168.56.100"
   ds.test_env$context = 'opal'
 
   ds.test_env$ip_address_1 <- paste("https://", ds.test_env$server_ip_address, ":8443", sep="")
@@ -21,9 +21,9 @@ ds.test_env <- new.env()
   ds.test_env$user_2 <- "administrator"
   ds.test_env$user_3 <- "administrator"
 
-  ds.test_env$password_1 <- "password"
-  ds.test_env$password_2 <- "password"
-  ds.test_env$password_3 <- "password"
+  ds.test_env$password_1 <- "datashield_test&"
+  ds.test_env$password_2 <- "datashield_test&"
+  ds.test_env$password_3 <- "datashield_test&"
   ds.test_env$secure_login_details = TRUE
 
 
