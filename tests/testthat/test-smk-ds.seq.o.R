@@ -13,12 +13,12 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.seq.o")
+context("dsBetaTestClient::ds.seq.o:smoke")
 
-options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
-options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC"))
-source("setup.R")
+source("connection_to_datasets/init_all_datasets.R")
+source("connection_to_datasets/init_smk_datasets.R")
+
+connect.smk.dataset.sim(list("LAB_TSC"))
 
 #
 # Tests
@@ -26,15 +26,15 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.seq.o()")
 test_that("simplest ds.seq.o", {
-    list <- ds.seq.o(1, 1, 10, "test", "obj")
+    seq.res <- ds.seq.o("1", "1", "10", "D$LAB_TSC", "obj")
 
-    expect_true(length(list) != 0)
+    expect_true(length(seq.res) == 2)
+    expect_equal(seq.res[[1]], "A data object <obj> has been created in all specified data sources")
+    expect_equal(seq.res[[2]], "<obj> appears valid in all sources")
 })
 
 #
 # Tear down
 #
 
-source("teardown.R")
-
-context("dsBetaTestClient::ds.seq.o done")
+context("dsBetaTestClient::ds.seq.o:smoke done")
