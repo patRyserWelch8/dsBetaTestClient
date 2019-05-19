@@ -47,7 +47,7 @@ with the k nearest neighbours of each point. nfilter.kNN specifies the minimum
 allowable value for the number of nearest neighbours used, typically defaulted to 3
 }
 \examples{
-{
+\dontrun{
 #WORKING EXAMPLES NOT PROVIDED (MULTIPLE OPALS AND R SESSIONS MAKE THIS DIFFICULT)
 ##Client-side function call to list current disclosure settings in all Opal servers
 #ds.listDisclosureSettings.o()

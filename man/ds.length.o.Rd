@@ -34,7 +34,7 @@ The function returns the pooled length of the a vector or a list,
 or the length of the a vector or a list for each study separately.
 }
 \examples{
-{
+\dontrun{
 
   # load that contains the login details
   data(logindata)
