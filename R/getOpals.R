@@ -10,29 +10,28 @@
 #'
 getOpals <- function()
 {
-  flag        <- 0;
-  opal.list   <- NULL
-  return.list <- list("flag"=flag, "opals"=NULL, "opals.list"=NULL)
-  objs        <- ls(.GlobalEnv)
-  test_index  <- length(objs[objs %in% c("ds.test_env")])
-  
-  if (test_index >= 1) 
+  flag         <- 0;
+  opal.list    <- NULL
+  return.list  <- list("flag"=flag, "opals"=NULL, "opals.list"=NULL)
+  obj.test_env <- NULL
+  try(obj.test_env <- get("ds.test_env", envir=.GlobalEnv), silent=TRUE)
+
+  if (obj.test_env != NULL)
   {
-    #opal.list[[1]] <- "ds.test_env$connection.opal"
-    opal.list <- init.object.list.testing.environment(ls(ds.test_env))
+    opal.list <- init.object.list.testing.environment(ls(obj.test_env))
   }
   else
   {
-    opal.list <- init.object.list.global.environment( ls(.GlobalEnv))
+    opal.list <- init.object.list.global.environment(ls(.GlobalEnv))
   }
-  
+
   return.list <- init.opal.list(opal.list)
-  print("return.list")
-  print(return.list)
+#  print("return.list")
+#  print(return.list)
 
   return(return.list)
 }
-  
+
 init.object.list.testing.environment <- function(objs)
 {
   opalist <- vector('list')
@@ -89,5 +88,5 @@ init.opal.list <- function(opal.list)
         flag <- 1
         return(list("flag"=flag, "opals"=eval(parse(text=opal.list[[1]])), "opals.list"=unlist(opal.list)))
      }
- }
+}
 #getOpal
