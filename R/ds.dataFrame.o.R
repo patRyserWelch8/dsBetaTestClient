@@ -121,7 +121,7 @@ for(j in 1:length(x))
 testclass.var<-x[j]
 
 calltext1<-paste0('class(', testclass.var, ')')
-next.class <- datashield.aggregate(datasources, as.symbol(calltext1))
+next.class <- opal::datashield.aggregate(datasources, as.symbol(calltext1))
 class.vector<-c(class.vector,next.class[[1]])
 cat("\n",j," of ", length(x), " elements to combine in step 1 of 2\n\n")
 }
@@ -138,7 +138,7 @@ if(class.vector[j]!="data.frame" && class.vector[j]!="matrix")
 else
 	{
 	calltext2<-paste0('colnames(', test.df, ')')
-    df.names <- datashield.aggregate(datasources, as.symbol(calltext2))
+    df.names <- opal::datashield.aggregate(datasources, as.symbol(calltext2))
 	 colname.vector<-c(colname.vector,df.names[[1]])
 	 cat("\n",j," of ", length(x), " elements to combine in step 2 of 2\n\n")
 	}
@@ -195,7 +195,7 @@ if(num.duplicates[m]!="0")
                      ",list(","'",paste(colname.vector,collapse="','"),"'","),"
                      ,stringsAsFactors,",",completeCases,")") 
   }
-  datashield.assign(datasources, newobj, as.symbol(cally))
+  opal::datashield.assign(datasources, newobj, as.symbol(cally))
   
  
 #############################################################################################################
@@ -212,7 +212,7 @@ test.obj.name<-newobj																					 	#
 # CALL SEVERSIDE FUNCTION                                                                                	#
 calltext <- call("testObjExistsDS.o", test.obj.name)													 	#
 																											#
-object.info<-datashield.aggregate(datasources, calltext)												 	#
+object.info<-opal::datashield.aggregate(datasources, calltext)												 	#
 																											#
 # CHECK IN EACH SOURCE WHETHER OBJECT NAME EXISTS														 	#
 # AND WHETHER OBJECT PHYSICALLY EXISTS WITH A NON-NULL CLASS											 	#
@@ -254,7 +254,7 @@ if(obj.name.exists.in.all.sources && obj.non.null.in.all.sources){										 	#
 	}																										#
 																											#
 	calltext <- call("messageDS.o", test.obj.name)															#
-    studyside.message<-datashield.aggregate(datasources, calltext)											#
+    studyside.message<-opal::datashield.aggregate(datasources, calltext)											#
 																											#	
 	no.errors<-TRUE																							#
 	for(nd in 1:num.datasources){																			#

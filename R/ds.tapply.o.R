@@ -103,7 +103,7 @@ ds.tapply.o <- function(X.name=NULL, INDEX.names=NULL, FUN.name=NULL, datasource
   # CALL THE PRIMARY SERVER SIDE FUNCTION
   calltext <- call("tapplyDS.o", X.name, INDEX.names.transmit, FUN.name)
  
-  output <- datashield.aggregate(datasources, calltext)
+  output <- opal::datashield.aggregate(datasources, calltext)
  
   return(output)
   

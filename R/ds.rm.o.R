@@ -54,7 +54,7 @@ ds.rm.o<-function(x.name=NULL, datasources=NULL){
   
 	calltext <- call("rmDS.o", x.name.transmit)
 
-	output = datashield.aggregate(datasources, calltext)
+	output = opal::datashield.aggregate(datasources, calltext)
   
   return(output)
 }

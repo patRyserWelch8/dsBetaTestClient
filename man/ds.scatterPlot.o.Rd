@@ -64,7 +64,7 @@ specific number generated from the data and therefore the user gets the same fig
 that chooses the probabilistic method in a given set of variables.
 }
 \examples{
-{
+\dontrun{
 
   # load the file that contains the login details
   data(logindata)
@@ -72,33 +72,43 @@ that chooses the probabilistic method in a given set of variables.
   # login to the servers
   opals <- datashield.login(logins=logindata, assign=TRUE)
 
-  # Example 1: generate a combined scatter plot with the deteministic method (the default behaviour)
-  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=3, method='deterministic')
+  # Example 1: generate a combined scatter plot with the deteministic 
+  # method (the default behaviour)
+  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=3,
+                   method='deterministic')
 
-  # Example 2: generate a scatter plot for each study separately with the default deterministic method
+  # Example 2: generate a scatter plot for each study separately with the 
+  # default deterministic method
   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', type="split")
 
   # Example 3: if a variable is of type factor the scatter plot is not created
   ds.scatterPlot.o(x='LD$PM_BMI_CATEGORICAL', y='LD$LAB_GLUC_ADJUSTED')
 
   # Example 4: same as Example 1 but with k=50
-  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=50, method='deterministic')
+  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=50,
+                   method='deterministic')
 
-  # Example 5: same as Example 1 but with k=1740 (here we see that as k increases we have big utility loss)
-  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740, method='deterministic')
+  # Example 5: same as Example 1 but with k=1740 (here we see that as k increases we have big
+  # utility loss)
+  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740,
+                   method='deterministic')
 
   # Example 6: same as Example 5 but for split analysis
-  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740, method='deterministic', type='split')
+  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740,
+                   method='deterministic', type='split')
 
   # Example 7: if k is less than the specified threshold the scatter plot is not created
-  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=2, method='deterministic')
+  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=2,
+                   method='deterministic')
 
   # Example 8: generate a combined scatter plot with the probabilistic method 
   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic')
 
-  # Example 9: generate a combined scatter plot with the probabilistic method for each study separately
-  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic', type='split')
- 
+  # Example 9: generate a combined scatter plot with the probabilistic method for 
+  # each study separately
+  ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic',
+                   type='split')
+
   # clear the Datashield R sessions and logout
   datashield.logout(opals)
 

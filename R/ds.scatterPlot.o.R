@@ -46,7 +46,8 @@
 #' @return one or more scatter plots depending on the argument \code{type}
 #' @author Demetris Avraam for DataSHIELD Development Team
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load the file that contains the login details
 #'   data(logindata)
@@ -54,33 +55,43 @@
 #'   # login to the servers
 #'   opals <- datashield.login(logins=logindata, assign=TRUE)
 #' 
-#'   # Example 1: generate a combined scatter plot with the deteministic method (the default behaviour)
-#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=3, method='deterministic')
+#'   # Example 1: generate a combined scatter plot with the deteministic 
+#'   # method (the default behaviour)
+#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=3,
+#'                    method='deterministic')
 #'
-#'   # Example 2: generate a scatter plot for each study separately with the default deterministic method
+#'   # Example 2: generate a scatter plot for each study separately with the 
+#'   # default deterministic method
 #'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', type="split")
 #'
 #'   # Example 3: if a variable is of type factor the scatter plot is not created
 #'   ds.scatterPlot.o(x='LD$PM_BMI_CATEGORICAL', y='LD$LAB_GLUC_ADJUSTED')
 #'
 #'   # Example 4: same as Example 1 but with k=50
-#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=50, method='deterministic')
+#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=50,
+#'                    method='deterministic')
 #'
-#'   # Example 5: same as Example 1 but with k=1740 (here we see that as k increases we have big utility loss)
-#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740, method='deterministic')
+#'   # Example 5: same as Example 1 but with k=1740 (here we see that as k increases we have big
+#'   # utility loss)
+#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740,
+#'                    method='deterministic')
 #'
 #'   # Example 6: same as Example 5 but for split analysis
-#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740, method='deterministic', type='split')
+#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=1740,
+#'                    method='deterministic', type='split')
 #'
 #'   # Example 7: if k is less than the specified threshold the scatter plot is not created
-#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=2, method='deterministic')
+#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=2,
+#'                    method='deterministic')
 #'
 #'   # Example 8: generate a combined scatter plot with the probabilistic method 
 #'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic')
 #'
-#'   # Example 9: generate a combined scatter plot with the probabilistic method for each study separately
-#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic', type='split')
-#'  
+#'   # Example 9: generate a combined scatter plot with the probabilistic method for 
+#'   # each study separately
+#'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic',
+#'                    type='split')
+#'
 #'   # clear the Datashield R sessions and logout
 #'   datashield.logout(opals)
 #' 
@@ -151,7 +162,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
 
   # call the server-side function that generates the x and y coordinates of the centroids
   call <- paste0("scatterPlotDS.o(", x, ",", y, ",", k, ",", method.indicator, ")")
-  output <- datashield.aggregate(datasources, call)
+  output <- opal::datashield.aggregate(datasources, call)
 
   pooled.points.x <- c()
   pooled.points.y <- c()
@@ -166,8 +177,8 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
   if(type=="combine"){
     numr <- 1
     numc <- 1
-    par(mfrow=c(numr,numc))
-    plot(pooled.points.x, pooled.points.y, xlab=x.lab, ylab=y.lab, main=paste0("Combined scatter plot"))
+    graphics::par(mfrow=c(numr,numc))
+    graphics::plot(pooled.points.x, pooled.points.y, xlab=x.lab, ylab=y.lab, main=paste0("Combined scatter plot"))
     return.message<-"Combined plot created"
     return(return.message)
   }else{
@@ -176,14 +187,14 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, k=3, method='deterministic', type=
       if(num.sources > 1){
         if((num.sources %% 2) == 0){ numr <- num.sources/2 }else{ numr <- (num.sources+1)/2}
           numc <- 2
-      	  par(mfrow=c(numr,numc))
+          graphics::par(mfrow=c(numr,numc))
           scatter <- list()
 		    }
 		    for(i in 1:num.sources){
           title <- paste0("Scatter plot of ", stdnames[i])
 	        x <- output[[i]][[1]]
           y <- output[[i]][[2]]
-          plot(x, y, xlab=x.lab, ylab=y.lab, main=title)			
+          graphics::plot(x, y, xlab=x.lab, ylab=y.lab, main=title)			
         }
 	    	return.message<-"Split plot created"
 		    return(return.message)

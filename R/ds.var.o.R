@@ -7,6 +7,7 @@
 #' of the input variable, the number of missing values, the number of valid values, the number of
 #' total lenght of the variable, and a study message indicating whether the number of valid is less
 #' than the disclosure threshold. The variance is calculated at the client side by the formula 
+#' $\deqn{var(X)}{\frac{\sum{x_i^2}}{N-1}-\frac{(\sum{x_i})^2}{N(N-1)}}$
 #' @param x a character, the name of a numerical vector.
 #' @param type a character which represents the type of analysis to carry out. 
 #' If \code{type} is set to 'combine', 'combined', 'combines' or 'c', a global variance is calculated 
@@ -25,7 +26,8 @@
 #' threshold for the minimum cell size in a contingency table.
 #' @author Amadou Gaye, Demetris Avraam, for DataSHIELD Development Team
 #' @export
-#' @examples{
+#' @examples
+#' \dontrun{
 #' 
 #'   # load that contains the login details
 #'   data(logindata)
@@ -103,7 +105,7 @@ ds.var.o <- function(x=NULL, type='split', checks=FALSE, datasources=NULL){
   ###################################################################################################
   
   cally <- paste0("varDS.o(", x, ")")
-  ss.obj <- datashield.aggregate(datasources, as.symbol(cally))
+  ss.obj <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   Nstudies <- length(datasources)
   EstimatedVar <- c()
