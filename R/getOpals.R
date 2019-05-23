@@ -15,7 +15,7 @@ getOpals <- function()
   return.list <- list("flag"=flag, "opals"=NULL, "opals.list"=NULL)
 
   curr.ds.test_env <- NULL
-  try(curr.ds.test_env <- get("ds.test_env" envir = .GlobalEnv), silent = TRUE)
+  try(curr.ds.test_env <- get("ds.test_env", envir = .GlobalEnv), silent = TRUE)
   
   if (curr.ds.test_env != NULL)
   {
