@@ -24,9 +24,9 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.asCharacter.o():smoke")
+context("dsBetaTestClient::ds.asCharacter.o():smoke simple test")
 
-test_that("with no force.factor.levels", {
+test_that("simple test", {
     res <- ds.asCharacter.o("D$LAB_TSC")
 
     expect_equal(length(res), 2)
