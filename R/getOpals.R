@@ -27,8 +27,8 @@ getOpals <- function()
   }
   
   return.list <- init.opal.list(opal.list)
-  print("return.list")
-  print(return.list)
+#  print("return.list")
+#  print(return.list)
 
   return(return.list)
 }
@@ -73,7 +73,7 @@ init.object.list.global.environment <- function(objs)
       }
     }
   }
-  print(opalist)
+#  print(opalist)
   return(opalist)
 }
 

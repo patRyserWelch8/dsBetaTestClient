@@ -662,7 +662,7 @@ if(sum.y.invalid>0||sum.Xpar.invalid>0||sum.w.invalid>0||sum.glm.saturation.inva
    	return(list(output.blocked.information.1,
 			output.blocked.information.2,
 			output.blocked.information.3,
-			output.blocked.information.4,
+			output.blocked.information.4
 	            ))
 	}
 
