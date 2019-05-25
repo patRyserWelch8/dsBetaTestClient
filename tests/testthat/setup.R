@@ -24,13 +24,13 @@ source("connection_to_datasets/init_all_datasets.R")
 
 init.all.datasets()
 #
-print(ds.test_env$ping_address)
+#print(ds.test_env$ping_address)
 #connect to a server
 context("VM problems")
 test_that("The virtual machine is loaded. ",
 {      
     expect_that(url.exists(ds.test_env$ping_address, timeout=5), is_true())
-    print("A server is available")
+#    print("A server is available")
 })
 
 #define test_environment variables - connection to data shield and read from local files
@@ -52,7 +52,7 @@ if (ds.test_env$context == ds.test_env$contexts[1])
 {
   #ds.test_env$connection.opal <- datashield.login(logins=ds.test_env$login.data, assign=TRUE,variables=ds.test_env$stats.var)
   log.in.data.server()
-  print(class(ds.test_env$connection.opal))
+#  print(class(ds.test_env$connection.opal))
   
 }
 
