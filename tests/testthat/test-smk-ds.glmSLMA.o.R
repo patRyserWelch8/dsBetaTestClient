@@ -26,7 +26,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG"))
 
 context("dsBetaTestClient::ds.glmSLMA.o():smoke")
 test_that("simple glmSLMA", {
-    glmSLMA.res <- ds.glmSLMA.o('D$LAB_TSC~D$LAB_TRIG', check=TRUE, family="gaussian")
+    glmSLMA.res <- ds.glmSLMA.o('D$LAB_TSC~D$LAB_TRIG', family="gaussian")
 
     expect_equal(class(glmSLMA.res$input.beta.matrix.for.SLMA), "matrix")
     expect_equal(class(glmSLMA.res$input.se.matrix.for.SLMA), "matrix")
