@@ -29,8 +29,6 @@ context("dsBetaTestClient::ds.cov.o():smoke")
 test_that("simple test", {
     res <- ds.cov.o(x="D$survtime", y="D$time.id")
 
-    print(res)
-    
     expect_length(res, 3)
     expect_length(res[[1]], 5)
     expect_equal(class(res[[1]]$`Number of missing values in each variable`), "matrix")
