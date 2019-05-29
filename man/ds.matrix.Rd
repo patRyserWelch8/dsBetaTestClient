@@ -103,40 +103,58 @@ ds.matrix(mdata=-13,from="clientside.scalar", nrows.scalar=3,ncols.scalar=8,newo
 ds.matrix(NA,from="clientside.scalar", nrows.scalar=4,ncols.scalar=5,newobj="cs.block.NA")
 
 clientside.input.scalar<-837
-ds.matrix(clientside.input.scalar,from="clientside.scalar", nrows.scalar=7,ncols.scalar=3,newobj="cs.block.input")
+ds.matrix(clientside.input.scalar,from="clientside.scalar", nrows.scalar=7,ncols.scalar=3,
+          newobj="cs.block.input")
 
 clientside.input.nrows.scalar<-11
-ds.matrix(clientside.input.scalar,from="clientside.scalar", nrows.scalar=clientside.input.nrows.scalar,ncols.scalar=3,newobj="cs.block.input.nrows")
+ds.matrix(clientside.input.scalar,from="clientside.scalar",
+          nrows.scalar=clientside.input.nrows.scalar,ncols.scalar=3,
+          newobj="cs.block.input.nrows")
 
-ds.rUnif.o(samp.size=1,min=0.5,max=10.5,newobj="block.scalar",seed.as.integer=761728,force.output.to.k.decimal.places = 0)
+ds.rUnif.o(samp.size=1,min=0.5,max=10.5,newobj="block.scalar",seed.as.integer=761728,
+           force.output.to.k.decimal.places = 0)
 
-ds.matrix("block.scalar",from="serverside.scalar", nrows.scalar=9,ncols.scalar=7,newobj="ss.block")
+ds.matrix("block.scalar",from="serverside.scalar", nrows.scalar=9,ncols.scalar=7,
+          newobj="ss.block")
 
 ds.make.o("log(block.scalar*(-1))","block.scalar.NA")
 
-ds.matrix("block.scalar.NA",from="serverside.scalar", nrows.scalar=9,ncols.scalar=7,newobj="ss.block.NA")
+ds.matrix("block.scalar.NA",from="serverside.scalar", nrows.scalar=9,ncols.scalar=7,
+          newobj="ss.block.NA")
 
-ds.matrix("block.scalar",from="serverside.scalar", nrows.scalar="block.scalar",ncols.scalar="block.scalar",newobj="ss.block.square")
+ds.matrix("block.scalar",from="serverside.scalar", nrows.scalar="block.scalar",
+          ncols.scalar="block.scalar",newobj="ss.block.square")
 
-ds.rUnif.o(samp.size=45,min=-10.5,max=10.5,newobj="ss.vector",seed.as.integer=8321,force.output.to.k.decimal.places = 0)
-ds.matrix("ss.vector",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,newobj="sv.block")
+ds.rUnif.o(samp.size=45,min=-10.5,max=10.5,newobj="ss.vector",seed.as.integer=8321,
+           force.output.to.k.decimal.places = 0)
+ds.matrix("ss.vector",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,
+          newobj="sv.block")
 
-ds.rUnif.o(samp.size=5,min=-10.5,max=10.5,newobj="ss.vector.5",seed.as.integer=551625,force.output.to.k.decimal.places = 0)
-ds.matrix("ss.vector.5",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,newobj="sv.block.5")
+ds.rUnif.o(samp.size=5,min=-10.5,max=10.5,newobj="ss.vector.5",seed.as.integer=551625,
+           force.output.to.k.decimal.places = 0)
+ds.matrix("ss.vector.5",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,
+          newobj="sv.block.5")
 
-ds.rUnif.o(samp.size=9,min=-10.5,max=10.5,newobj="ss.vector.9",seed.as.integer=5575,force.output.to.k.decimal.places = 0)
-ds.matrix("ss.vector.9",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,byrow=TRUE,newobj="sv.block.9")
+ds.rUnif.o(samp.size=9,min=-10.5,max=10.5,newobj="ss.vector.9",seed.as.integer=5575,
+           force.output.to.k.decimal.places = 0)
+ds.matrix("ss.vector.9",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,byrow=TRUE,
+          newobj="sv.block.9")
 
-ds.matrix("ss.vector.9",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,newobj="sv.block.9.ragged")
+ds.matrix("ss.vector.9",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,
+          newobj="sv.block.9.ragged")
 
-ds.rUnif.o(samp.size=12,min=-10.5,max=10.5,newobj="ss.vector.12",seed.as.integer=778172,force.output.to.k.decimal.places = 0)
+ds.rUnif.o(samp.size=12,min=-10.5,max=10.5,newobj="ss.vector.12",seed.as.integer=778172,
+           force.output.to.k.decimal.places = 0)
 
-ds.matrix("ss.vector.12",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,newobj="sv.block.12.ragged")
+ds.matrix("ss.vector.12",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,
+          newobj="sv.block.12.ragged")
 
 ds.recodeValues.o("ss.vector", c(-10),c(NA),newobj="ss.vector.NA")
-ds.matrix("ss.vector.NA",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,newobj="sv.block.NA")
+ds.matrix("ss.vector.NA",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,
+          newobj="sv.block.NA")
 
-ds.matrix("ss.vector.NA",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,byrow=TRUE,newobj="sv.byrow.block")
+ds.matrix("ss.vector.NA",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,
+          byrow=TRUE,newobj="sv.byrow.block")
 
 ds.matrix(NA, nrows.scalar=7,ncols.scalar=6,newobj="empty.matrix")
 
@@ -150,7 +168,7 @@ dimnames=list(c("a","b","c","d","e"),c(10*(9:1))),newobj="sv.block.9.dimnames12"
 ds.matrix("ss.vector.9",from="serverside.vector", nrows.scalar=5,ncols.scalar=9,byrow=TRUE,
 dimnames=list(c("a","b","c","d","e"),c(10*(9:1))))
 }
-	  		  
+
 }
 \author{
 Paul Burton for DataSHIELD Development Team

@@ -67,7 +67,7 @@ ds.matrixDet.report<-function(M1=NULL, logarithm=FALSE, datasources=NULL){
 
   # CALL THE MAIN SERVER SIDE AGGREGATE FUNCTION
   calltext <- call("matrixDetDS1", M1, logarithm)
-  output<-datashield.aggregate(datasources, calltext)
+  output<-opal::datashield.aggregate(datasources, calltext)
 
   return(list(matrix.determinant=output))
 
