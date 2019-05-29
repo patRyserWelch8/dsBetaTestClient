@@ -73,5 +73,3 @@ ds.matrixDet.report<-function(M1=NULL, logarithm=FALSE, datasources=NULL){
 
 }
 #ds.matrixDet.report
-
-
