@@ -28,6 +28,8 @@ context("dsBetaTestClient::ds.listDisclosureSettings.o():smoke check results")
 test_that("check results", {
     res <- ds.listDisclosureSettings.o()
 
+    expect_equal(length(res$Opal.disclosure), 3)
+
     sim1.res <- res$Opal.disclosure.settings$sim1
     sim2.res <- res$Opal.disclosure.settings$sim2
     sim3.res <- res$Opal.disclosure.settings$sim3

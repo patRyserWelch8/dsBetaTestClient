@@ -124,6 +124,7 @@ log.out.data.server <- function()
   test_index  <- length(objs[objs %in% c("ds.test_env")])
   if (test_index >= 1)
   {
+    datashield.logout(ds.test_env$connection.opal)
     rm(list = ls())
     gc()
   }
