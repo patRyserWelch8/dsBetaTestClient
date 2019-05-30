@@ -36,7 +36,7 @@ steps:
     pwd
     echo ":: 2"
     pwd
-    cat -n /opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/util.rb
+    cat -n /opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/environments.rb
     pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install && popd
     pwd
     echo ":: 3"
