@@ -32,7 +32,8 @@ test_that("check results", {
       "asMatrixDS.o", "asNumericDS.o", "attach", "c", "cDS", "cbind",
       "cbindDS.o", "changeRefGroupDS", "complete.cases", "dataFrameDS.o", "dataFrameSortDS.o", "dataFrameSubsetDS2.o",
       "dataframeDS", "exp", "lexisDS", "lexisDS2.o", "lexisDS3.o", "list",
-      "listDS", "log", "mergeDS.o", "rBinomDS.o", "rNormDS.o", "rPoisDS.o",
+      "listDS", "log", "matrixDS", "matrixDetDS2", "matrixDiagDS", "matrixDimnamesDS", "matrixInvertDS", 
+      "matrixMultDS", "matrixTransposeDS", "mergeDS.o", "rBinomDS.o", "rNormDS.o", "rPoisDS.o",
       "rUnifDS.o", "rbindDS.o", "reShapeDS.o", "recodeLevelsDS", "recodeValuesDS2.o", "rep",
       "replaceNaDS", "rowColCalcDS", "seqDS.o", "subsetByClassDS", "subsetDS", "sum",
       "tapplyDS.assign.o", "unlist"
@@ -47,7 +48,7 @@ test_that("check results", {
       "is.factor", "is.list", "is.null", "is.numeric",
       "isNaDS", "isValidDS", "length", "lengthDS.o",
       "levels", "lexisDS1.o", "listDisclosureSettingsDS.o", "ls",
-      "meanDS", "meanDS.o", "meanSdGpDS", "messageDS.o",
+      "matrixDetDS1", "meanDS", "meanDS.o", "meanSdGpDS", "messageDS.o",
       "namesDS", "numNaDS", "quantileMeanDS", "rangeDS",
       "recodeValuesDS1.o", "rilmDS.b", "rmDS.o", "scatterPlotDS.o",
       "scoreVectDS", "setSeedDS.o", "t.test", "tTestFDS2",
@@ -68,17 +69,17 @@ test_that("check results", {
     sim3.assign.res    <- res$serverside.assign.functions$sim3
     sim3.aggregate.res <- res$serverside.aggregate.functions$sim3
 
-    expect_length(sim1.assign.res, 50)
+    expect_length(sim1.assign.res, 57)
     expect_equal(sim1.assign.res, assign.functions)
-    expect_length(sim1.aggregate.res, 59)
+    expect_length(sim1.aggregate.res, 60)
     expect_equal(sim1.aggregate.res, aggregate.functions)
-    expect_length(sim2.assign.res, 50)
+    expect_length(sim2.assign.res, 57)
     expect_equal(sim2.assign.res, assign.functions)
-    expect_length(sim2.aggregate.res, 59)
+    expect_length(sim2.aggregate.res, 60)
     expect_equal(sim2.aggregate.res, aggregate.functions)
-    expect_length(sim3.assign.res, 50)
+    expect_length(sim3.assign.res, 57)
     expect_equal(sim3.assign.res, assign.functions)
-    expect_length(sim3.aggregate.res, 59)
+    expect_length(sim3.aggregate.res, 60)
     expect_equal(sim3.aggregate.res, aggregate.functions)
 })
 
