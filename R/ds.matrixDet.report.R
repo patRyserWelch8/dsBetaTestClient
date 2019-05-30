@@ -59,12 +59,6 @@ ds.matrixDet.report<-function(M1=NULL, logarithm=FALSE, datasources=NULL){
   logarithm<-FALSE
   }
   
-  
-  # if no value specified for output object, then specify a default
-  if(is.null(newobj)){
-    newobj <- paste0(M1,"_det")
-  }
-
   # CALL THE MAIN SERVER SIDE AGGREGATE FUNCTION
   calltext <- call("matrixDetDS1", M1, logarithm)
   output<-opal::datashield.aggregate(datasources, calltext)

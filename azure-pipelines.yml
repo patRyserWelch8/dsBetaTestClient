@@ -31,11 +31,18 @@ steps:
     /opt/puppetlabs/puppet/bin/r10k version
 
     echo ":: 1"
+    pwd
     git clone -b ubuntu16 https://github.com/datashield/datashield-infrastructure.git ../datashield-infrastructure
+    pwd
     echo ":: 2"
+    pwd
+    ls -lR ../datashield-infrastructure/puppet/environments/datashield_azurepipelines
     pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install && popd
+    pwd
     echo ":: 3"
+    pwd
     sudo /opt/puppetlabs/bin/puppet apply azure-pipelines_site.pp --environment datashield_azurepipelines --environmentpath ../datashield-infrastructure/puppet/environments
+    pwd
     echo ":: 4"
   displayName: 'Install DataSHIELD server'
 
