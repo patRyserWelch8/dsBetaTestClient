@@ -11,11 +11,11 @@ steps:
     sudo apt-get autoclean -y
     sudo rm -rf /var/lib/mysql/
 
-    wget -nv https://apt.puppetlabs.com/puppet5-release-xenial.deb
+    wget -nv https://apt.puppetlabs.com/puppet6-release-xenial.deb
     sudo dpkg -i puppet5-release-xenial.deb
     sudo apt-get install -qq -f
     sudo apt-get update
-    sudo rm -f puppet5-release-xenial.deb
+    sudo rm -f puppet6-release-xenial.deb
 
     sudo apt-get install puppet-agent -y
 
