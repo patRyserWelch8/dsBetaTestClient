@@ -17,6 +17,7 @@ steps:
     sudo apt-get update
     sudo rm -f puppet6-release-xenial.deb
 
+    sudo apt-get install ruby -y
     sudo apt-get install puppet-agent -y
 
     sudo apt-get clean all
