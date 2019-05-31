@@ -30,20 +30,9 @@ steps:
     /opt/puppetlabs/bin/puppet --version
     /opt/puppetlabs/puppet/bin/r10k version
 
-    echo ":: 1"
-    pwd
     git clone -b ubuntu16 https://github.com/datashield/datashield-infrastructure.git ../datashield-infrastructure
-    pwd
-    echo ":: 2"
-    pwd
-    cat -n /opt/puppetlabs/puppet/lib/ruby/vendor_ruby/puppet/environments.rb
-    pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k -v info puppetfile install && popd
-    pwd
-    echo ":: 3"
-    pwd
+    pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k -v debug puppetfile install && popd
     sudo /opt/puppetlabs/bin/puppet apply azure-pipelines_site.pp --environment datashield_azurepipelines --environmentpath ../datashield-infrastructure/puppet/environments
-    pwd
-    echo ":: 4"
   displayName: 'Install DataSHIELD server'
 
 - bash: |
