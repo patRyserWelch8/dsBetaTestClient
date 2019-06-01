@@ -18,7 +18,7 @@ context("dsBetaTestClient::ds.reShape.o:smoke")
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
 
-connect.smk.dataset.sim(list("LAB_TSC"))
+connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 
 #
 # Tests
@@ -26,7 +26,10 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 
 context("dsBetaTestClient::ds.reShape.o()")
 test_that("simplest ds.reShape.o", {
-    reshape.res <- ds.reShape.o('D$LAB_TSC', direction='wide', datasources=ds.test_env$connection.opal)
+    myvectors <- c("D$LAB_TSC", "D$LAB_HDL")
+    ds.dataFrame.o(x=myvectors, newobj = "orig_df")
+
+    reshape.res <- ds.reShape.o("orig_df", varying=c("A"), v.names=c("B"), direction='wide')
 
     print(paste0("[" + reshape.res + "]"))
 
