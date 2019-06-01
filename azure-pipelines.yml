@@ -25,6 +25,8 @@ steps:
     sudo apt-get clean all
 
     sudo /opt/puppetlabs/puppet/bin/gem install r10k
+    sudo /opt/puppetlabs/puppet/bin/gem uninstall cri -I --version 2.15.7
+    sudo /opt/puppetlabs/puppet/bin/gem install cri --version 2.15.6
 
     echo -n "Puppet version: "
     /opt/puppetlabs/bin/puppet --version
