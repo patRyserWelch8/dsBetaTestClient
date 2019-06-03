@@ -35,7 +35,7 @@ test_that("check results", {
       "listDS", "log", "matrixDS", "matrixDetDS2", "matrixDiagDS", "matrixDimnamesDS", "matrixInvertDS", 
       "matrixMultDS", "matrixTransposeDS", "mergeDS.o", "rBinomDS.o", "rNormDS.o", "rPoisDS.o",
       "rUnifDS.o", "rbindDS.o", "reShapeDS.o", "recodeLevelsDS", "recodeValuesDS2.o", "rep",
-      "replaceNaDS", "rowColCalcDS", "seqDS.o", "subsetByClassDS", "subsetDS", "sum",
+      "replaceNaDS", "rowColCalcDS", "seedDS.o", "seqDS.o", "subsetByClassDS", "subsetDS", "sum",
       "tapplyDS.assign.o", "unlist"
     ))
     aggregate.functions <- factor(c(
@@ -69,15 +69,15 @@ test_that("check results", {
     sim3.assign.res    <- res$serverside.assign.functions$sim3
     sim3.aggregate.res <- res$serverside.aggregate.functions$sim3
 
-    expect_length(sim1.assign.res, 57)
+    expect_length(sim1.assign.res, 58)
     expect_equal(sim1.assign.res, assign.functions)
     expect_length(sim1.aggregate.res, 60)
     expect_equal(sim1.aggregate.res, aggregate.functions)
-    expect_length(sim2.assign.res, 57)
+    expect_length(sim2.assign.res, 58)
     expect_equal(sim2.assign.res, assign.functions)
     expect_length(sim2.aggregate.res, 60)
     expect_equal(sim2.aggregate.res, aggregate.functions)
-    expect_length(sim3.assign.res, 57)
+    expect_length(sim3.assign.res, 58)
     expect_equal(sim3.assign.res, assign.functions)
     expect_length(sim3.aggregate.res, 60)
     expect_equal(sim3.aggregate.res, aggregate.functions)
