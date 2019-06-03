@@ -42,7 +42,7 @@ ds.matrixDet.report<-function(M1=NULL, logarithm=FALSE, datasources=NULL){
   if(is.null(datasources)){
     datasources <- findLoginObjects()
   }
-  
+
   # check if user has provided the name of matrix representing M1
   if(is.null(M1)){
     return("Error: Please provide the name of the matrix representing M1")
@@ -53,17 +53,16 @@ ds.matrixDet.report<-function(M1=NULL, logarithm=FALSE, datasources=NULL){
   {
   logarithm<-FALSE
   }
-  
+
   if(logarithm!=TRUE)
   {
   logarithm<-FALSE
   }
-  
+
   # CALL THE MAIN SERVER SIDE AGGREGATE FUNCTION
   calltext <- call("matrixDetDS1", M1, logarithm)
   output<-opal::datashield.aggregate(datasources, calltext)
 
   return(list(matrix.determinant=output))
-
 }
 #ds.matrixDet.report

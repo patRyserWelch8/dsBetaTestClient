@@ -16,7 +16,7 @@ getOpals <- function()
 
   curr.ds.test_env <- NULL
   try(curr.ds.test_env <- get("ds.test_env", envir = .GlobalEnv), silent = TRUE)
-  
+
   if (! is.null(curr.ds.test_env))
   {
     opal.list <- init.object.list.testing.environment(ls(curr.ds.test_env))

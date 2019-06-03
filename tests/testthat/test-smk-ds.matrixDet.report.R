@@ -31,16 +31,20 @@ test_that("simplest ds.matrixDet.report", {
     ds.matrix(mdata=matrix, nrows.scalar=3, ncols.scalar=3)
     res <- ds.matrixDet.report("new_matrix")
 
-    expect_length(res, 2)
-    expect_equal(res$is.object.created, "A data object <new_matrix_Det.report> has been created in all specified data sources")
-    expect_equal(res$validity.check, "<new_matrix_Det.report> appears valid in all sources")
-
-    check.class<-ds.class("new_matrix_Det.report",datasources=ds.test_env$connection.opal)
-
-    expect_length(check.class, 3)
-    expect_equal(check.class$sim1, "det")
-    expect_equal(check.class$sim2, "det")
-    expect_equal(check.class$sim3, "det")
+    expect_length(res, 1)
+    expect_length(res$matrix.determinant, 3)
+    expect_length(res$matrix.determinant$sim1, 1)
+    expect_length(res$matrix.determinant$sim1$matrix.determinant, 2)
+    expect_equal(class(res$matrix.determinant$sim1$matrix.determinant$modulus), "numeric")
+    expect_equal(res$matrix.determinant$sim1$matrix.determinant$sign, 1)
+    expect_length(res$matrix.determinant$sim2, 1)
+    expect_length(res$matrix.determinant$sim2$matrix.determinant, 2)
+    expect_equal(class(res$matrix.determinant$sim2$matrix.determinant$modulus), "numeric")
+    expect_equal(res$matrix.determinant$sim2$matrix.determinant$sign, 1)
+    expect_length(res$matrix.determinant$sim3, 1)
+    expect_length(res$matrix.determinant$sim3$matrix.determinant, 2)
+    expect_equal(class(res$matrix.determinant$sim3$matrix.determinant$modulus), "numeric")
+    expect_equal(res$matrix.determinant$sim3$matrix.determinant$sign, 1)
 })
 
 #
