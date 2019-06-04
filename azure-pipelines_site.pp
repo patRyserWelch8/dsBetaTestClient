@@ -5,8 +5,8 @@
 #
 
 class { ::datashield:
-  opal_password      => 'datashield_test&'
-  opal_password_hash => '$shiro1$SHA-256$500000$gcnVxdEmOjaN+NfsK/1NsA==$UOobbhJsBBojnbsfzIBX9GTWjWQFi8aJZxFvFKmOiSE='
+  opal_password      => 'datashield_test&',
+  opal_password_hash => '$shiro1$SHA-256$500000$gcnVxdEmOjaN+NfsK/1NsA==$UOobbhJsBBojnbsfzIBX9GTWjWQFi8aJZxFvFKmOiSE=',
 
   test_data      => true,         # Install the test data
   firewall       => false,        # Do not install the firewall
