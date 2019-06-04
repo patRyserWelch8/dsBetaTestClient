@@ -28,7 +28,15 @@ context("dsBetaTestClient::ds.setSeed.o():smoke")
 test_that("basic setSeed", {
     res.setSeed <- ds.setSeed.o(1234)
 
-    expect_length(res, 2)
+    expect_length(res.setSeed, 2)
+    expect_equal(res.setSeed$status.message, "Trigger integer to prime random seed = 1234")
+    expect_length(res.setSeed$seed.as.set, 3)
+    expect_length(res.setSeed$seed.as.set$sim1, 1)
+    expect_length(res.setSeed$seed.as.set$sim1$seed.as.set, 626)
+    expect_length(res.setSeed$seed.as.set$sim2, 1)
+    expect_length(res.setSeed$seed.as.set$sim2$seed.as.set, 626)
+    expect_length(res.setSeed$seed.as.set$sim3, 1)
+    expect_length(res.setSeed$seed.as.set$sim3$seed.as.set, 626)
 })
 
 #
