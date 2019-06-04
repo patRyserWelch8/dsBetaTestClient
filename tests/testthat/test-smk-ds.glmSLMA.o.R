@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.glmSLMA.o:smoke")
+# context("dsBetaTestClient::ds.glmSLMA.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.glmSLMA.o():smoke")
+context("ds.glmSLMA.o()::smoke")
 test_that("simple glmSLMA", {
     glmSLMA.res <- ds.glmSLMA.o('D$LAB_TSC~D$LAB_TRIG', family="gaussian")
 
@@ -67,4 +67,4 @@ test_that("simple glmSLMA", {
 # Done
 #
 
-context("dsBetaTestClient::ds.glmSLMA.o:smoke done")
+# context("dsBetaTestClient::ds.glmSLMA.o:smoke done")

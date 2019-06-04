@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.rPois.o:smoke")
+# context("dsBetaTestClient::ds.rPois.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.rPois.o():smoke simple test")
+# context("dsBetaTestClient::ds.rPois.o():smoke simple test")
+context("ds.rPois.o()::smoke::simple test")
 
 test_that("simple test", {
     res <- ds.rPois.o(samp.size = 50, lambda = 1, newobj = "pois_dist", seed.as.integer = 27)
@@ -46,4 +47,4 @@ test_that("simple test", {
 # Done
 #
 
-context("dsBetaTestClient::ds.rPois.o:smoke done")
+# context("dsBetaTestClient::ds.rPois.o:smoke done")

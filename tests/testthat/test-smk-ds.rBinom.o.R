@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.rBinom.o:smoke")
+# context("dsBetaTestClient::ds.rBinom.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.rBinom.o():smoke simple test")
+# context("dsBetaTestClient::ds.rBinom.o():smoke simple test")
+context("ds.rBinom.o()::smoke::simple test")
 
 test_that("simple test", {
     res <- ds.rBinom.o(samp.size = 50, size = 50, prob = 0.25, newobj = "binom_dist", seed.as.integer = 27)
@@ -46,4 +47,4 @@ test_that("simple test", {
 # Done
 #
 
-context("dsBetaTestClient::ds.rBinom.o:smoke done")
+# context("dsBetaTestClient::ds.rBinom.o:smoke done")
