@@ -216,7 +216,109 @@ test_that("variance >=0",
     expect_true(var.from.servers[[1]][1] >= 0)   
     expect_true(var.from.servers[[1]][2] >= 0)   
     expect_true(var.from.servers[[1]][3] >= 0)   
-    
+})
+
+test_that("The variance is  the standard deviation to the power of 2",
+{
+  var.from.servers <- ds.var.o(x='D$INTEGER',type='combine', datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,6]) 
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$POSITIVE_INTEGER',type='combine',   datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,8])
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$NEGATIVE_INTEGER',type='combine',   datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,9])
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$NON_NEGATIVE_INTEGER',type='combine',   datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,7])
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$NUMERIC',type='combine', datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,10]) 
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$POSITIVE_NUMERIC',type='combine',   datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,12])
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$NEGATIVE_NUMERIC',type='combine',   datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,13])
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$NON_NEGATIVE_NUMERIC',type='combine',   datasources=ds.test_env$connection.opal)
+  std.from.files <- sd(ds.test_env$local.values[,11])
+  expect_equal(sqrt(var.from.servers$Global.Variance[1]),std.from.files, tolerance = 10^-8)
+  
+  var.from.servers <- ds.var.o(x='D$NUMERIC',type='split',   datasources=ds.test_env$connection.opal)
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,10])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,10])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,10])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$POSITIVE_NUMERIC',type='split',   datasources=ds.test_env$connection.opal)    
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,12])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,12])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,12])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$NEGATIVE_NUMERIC',type='split',   datasources=ds.test_env$connection.opal)
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,13])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,13])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,13])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$NON_NEGATIVE_NUMERIC',type='split',   datasources=ds.test_env$connection.opal)
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,11])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,11])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,11])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$INTEGER',type='split',   datasources=ds.test_env$connection.opal)
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,6])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,6])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,6])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$POSITIVE_INTEGER',type='split',   datasources=ds.test_env$connection.opal)    
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,8])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,8])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,8])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$NEGATIVE_INTEGER',type='split',   datasources=ds.test_env$connection.opal)
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,9])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,9])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,9])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  
+  var.from.servers <- ds.var.o(x='D$NON_NEGATIVE_INTEGER',type='split',   datasources=ds.test_env$connection.opal)
+  std.from.files.1 <- sd(ds.test_env$local.values.1[,7])
+  std.from.files.2 <- sd(ds.test_env$local.values.2[,7])
+  std.from.files.3 <- sd(ds.test_env$local.values.3[,7])
+  expect_equal(sqrt(var.from.servers[[1]][1]), std.from.files.1, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][2]), std.from.files.2, tolerance = 10^-8)   
+  expect_equal(sqrt(var.from.servers[[1]][3]), std.from.files.3, tolerance = 10^-8)   
+  #-------
+ 
+  
+  
 })
 
 
