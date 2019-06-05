@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.mean.o:smoke")
+# context("dsBetaTestClient::ds.mean.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.mean.o:(type=combine):smoke")
+# context("dsBetaTestClient::ds.mean.o:(type=combine):smoke")
+context("ds.mean.o()::smoke::type=combine")
 test_that("mean values [combine]", {
     stat.mean <- ds.mean.o(x='D$LAB_TSC',type='combine')
 
@@ -32,7 +33,8 @@ test_that("mean values [combine]", {
     expect_equal(as.numeric(stat.mean$Global.Mean[1]), 5.85192485623003, tolerance = .000000000000001)
 })
 
-context("dsBetaTestClient::ds.mean.o(type=combine) loose:smoke")
+# context("dsBetaTestClient::ds.mean.o(type=combine) loose:smoke")
+context("ds.mean.o::smoke::type=combine loose")
 test_that("mean values [combine] loose", {
     stat.mean <- ds.mean.o(x='D$LAB_TSC',type='combine')
 
@@ -40,7 +42,8 @@ test_that("mean values [combine] loose", {
     expect_equal(as.numeric(stat.mean$Global.Mean[1]), 5.85192485623003, tolerance = .000000000000001)
 })
 
-context("dsBetaTestClient::ds.mean.o(type=split):smoke")
+# context("dsBetaTestClient::ds.mean.o(type=split):smoke")
+context("ds.mean.o::smoke::type=split")
 test_that("mean values [split]", {
     stat.mean <- ds.mean.o(datasources=ds.test_env$connection.opal, x='D$LAB_TSC', type='split')
 
@@ -52,7 +55,8 @@ test_that("mean values [split]", {
     expect_equal(stat.mean$Mean.by.Study[3], 5.84630008623168, tolerance = .000000000000001)
 })
 
-context("dsBetaTestClient::ds.mean.o() test errors:smoke")
+# context("dsBetaTestClient::ds.mean.o() test errors:smoke")
+context("ds.mean.o()::smoke::test errors")
 test_that("mean_erros", {
     ds.asCharacter.o(x='D$LAB_TSC', newobj="not_a_numeric")
 
@@ -65,4 +69,4 @@ test_that("mean_erros", {
 # Done
 #
 
-context("dsBetaTestClient::ds.mean.o:smoke done")
+# context("dsBetaTestClient::ds.mean.o:smoke done")

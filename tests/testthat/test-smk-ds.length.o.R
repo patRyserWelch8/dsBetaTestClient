@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.length.o:smoke")
+# context("dsBetaTestClient::ds.length.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.length.o():smoke")
+context("ds.length.o()::smoke")
 test_that("basic length", {
     res.length <- ds.length.o('D$LAB_TSC')
 
@@ -38,4 +38,4 @@ test_that("basic length", {
 # Done
 #
 
-context("dsBetaTestClient::ds.length.o:smoke done")
+# context("dsBetaTestClient::ds.length.o:smoke done")

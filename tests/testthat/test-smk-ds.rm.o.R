@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.rm.o:smoke")
+# context("dsBetaTestClient::ds.rm.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.rm.o():smoke")
+context("ds.rm.o()::smoke")
 
 test_that("simple test", {
     res1 <- ds.rm.o("nonexistant_object")
@@ -54,4 +54,4 @@ test_that("simple test", {
 # Done
 #
 
-context("dsBetaTestClient::ds.rm.o 1:smoke done")
+# context("dsBetaTestClient::ds.rm.o 1:smoke done")
