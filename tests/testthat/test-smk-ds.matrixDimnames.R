@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.matrixDimnames:smoke")
+# context("dsBetaTestClient::ds.matrixDimnames:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.matrixDimnames()")
+context("ds.matrixDimnames()::smoke")
 test_that("simplest ds.matrixDimnames", {
     matrix <- c(-2, 1, 3, 0, -1, 1, 1, 2, 0)
 
@@ -50,4 +50,4 @@ test_that("simplest ds.matrixDimnames", {
 # Tear down
 #
 
-context("dsBetaTestClient::ds.matrixDimnames:smoke done")
+# context("dsBetaTestClient::ds.matrixDimnames:smoke done")

@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.setSeed.o:smoke")
+# context("dsBetaTestClient::ds.setSeed.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.setSeed.o():smoke")
+context("ds.setSeed.o()::smoke")
 test_that("basic setSeed", {
     res.setSeed <- ds.setSeed.o(1234)
 
@@ -43,4 +43,4 @@ test_that("basic setSeed", {
 # Done
 #
 
-context("dsBetaTestClient::ds.setSeed.o:smoke done")
+# context("dsBetaTestClient::ds.setSeed.o:smoke done")

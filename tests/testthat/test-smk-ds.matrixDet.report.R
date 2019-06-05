@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.matrixDet.report:smoke")
+# context("dsBetaTestClient::ds.matrixDet.report:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.matrixDet.report()")
+context("ds.matrixDet.report()::smoke")
 test_that("simplest ds.matrixDet.report", {
     matrix <- c(-2, 1, 3, 0, -1, 1, 1, 2, 0)
 
@@ -51,4 +51,4 @@ test_that("simplest ds.matrixDet.report", {
 # Tear down
 #
 
-context("dsBetaTestClient::ds.matrixDet.report:smoke done")
+# context("dsBetaTestClient::ds.matrixDet.report:smoke done")

@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.asInteger.o:smoke")
+# context("dsBetaTestClient::ds.asInteger.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("GENDER"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.asInteger.o():smoke simple test")
+context("ds.asInteger.o()::smoke::simple test")
 
 test_that("simple test", {
     res <- ds.asInteger.o("D$GENDER")
@@ -38,4 +38,4 @@ test_that("simple test", {
 # Done
 #
 
-context("dsBetaTestClient::ds.asInteger.o 1:smoke done")
+# context("dsBetaTestClient::ds.asInteger.o 1:smoke done")
