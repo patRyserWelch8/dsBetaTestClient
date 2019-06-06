@@ -63,7 +63,6 @@ init.dataset.2 <- function()
 {
   if (ds.test_env$secure_login_details)
   {
-
     ds.test_env$local.values.2 <- read.csv("data_files/data_set_2.csv", header = TRUE)
     
     
