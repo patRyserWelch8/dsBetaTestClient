@@ -23,7 +23,8 @@
 #' @seealso \link{ds.asMatrix} to coerce an object into a matrix type.
 #' @seealso \link{ds.length} to obtain the size of a vector.
 #' @export
-#' @examples {
+#' @examples
+#' \dontrun{
 #' 
 #'   # load that contains the login details
 #'   data(logindata)
@@ -61,28 +62,26 @@ ds.dim.o <- function(x=NULL, type='both', checks=FALSE, datasources=NULL) {
     stop("Please provide a the name of a data.frame or matrix!", call.=FALSE)
   }
 
-  ###############################################################################################
-  #MODULE 3: GENERIC OPTIONAL CHECKS TO ENSURE CONSISTENT STRUCTURE OF KEY VARIABLES            #
-  #IN DIFFERENT SOURCES                                                                         #
-  # beginning of optional checks - the process stops and reports as soon as one               #
-  #check fails                                                                                #
-  #
-  if(checks){                                                                                 #
-    message(" -- Verifying the variables in the model")                                       #
-    #
-    # check if the input object(s) is(are) defined in all the studies                          #
-    if(is.na(obj2lookfor)){                                                                    #
-      defined <- isDefined(datasources, x)                                                     #
-    }                                                                                          #
-    #
-    # call the internal function that checks the input object is suitable in all studies       #
-    typ <- checkClass(datasources, x)                                                          #
-    # throw a message and stop if input is not table structure
-    if(typ != 'data.frame' & typ!= 'matrix'){
-      stop("The input object must be a table structure!", call.=FALSE)
-    }                     
-  }                                                                                             #
-  ###############################################################################################
+  ########################################################################################################
+  # MODULE: GENERIC OPTIONAL CHECKS TO ENSURE CONSISTENT STRUCTURE OF KEY VARIABLES IN DIFFERENT SOURCES #
+  # beginning of optional checks - the process stops and reports as soon as one check fails              #
+  #                                                                                                      #
+  if(checks){                                                                                            #
+    message(" -- Verifying the variables in the model")                                                  #
+    # check if the input object(s) is(are) defined in all the studies                                    #
+    defined <- isDefined(datasources, x)                                                                 #
+    # throw a message and stop if input is not table structure                                           #
+    if(defined != TRUE){                                                                                 #
+      stop("The input object is not defined in all studies!", call.=FALSE)                               #
+    }                                                                                                    #
+    # call the internal function that checks the input object is suitable in all studies                 #
+    typ <- checkClass(datasources, x)                                                                    #
+    # throw a message and stop if input is not table structure                                           #
+    if(typ != 'data.frame' & typ!= 'matrix'){                                                            #
+      stop("The input object must be a table structure!", call.=FALSE)                                   #
+    }                                                                                                    #
+  }                                                                                                      #
+  ########################################################################################################
   
   
   ###################################################################################################
@@ -95,7 +94,7 @@ ds.dim.o <- function(x=NULL, type='both', checks=FALSE, datasources=NULL) {
   ###################################################################################################
   
   cally <- paste0("dimDS.o(", x, ")")
-  dimensions <- datashield.aggregate(datasources, as.symbol(cally))
+  dimensions <- opal::datashield.aggregate(datasources, as.symbol(cally))
   
   # names of the studies to be used in the output
   stdnames <- names(datasources)

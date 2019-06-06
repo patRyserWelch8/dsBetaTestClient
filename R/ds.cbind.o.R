@@ -28,7 +28,7 @@
 #' input objects exist and are of an appropriate class. These checks
 #' are relatively slow and so the <DataSHIELD.checks> argument is
 #' defaulted to FALSE
-#' param force.colnames NULL or a vector of character strings representing
+#' @param force.colnames NULL or a vector of character strings representing
 #' the required column names of the output object. For example:
 #' force.colnames=c("colname1","name.of.second.column", "lastcol") for an
 #' output object with three columns. If <force.colnames> is NULL
@@ -54,6 +54,8 @@
 #' the argument can be specified as: e.g. datasources=opals.em[2].
 #' If you wish to specify the first and third opal servers in a set you specify:
 #' e.g. datasources=opals.em[c(1,3)]
+#' @param notify.of.progress specifies if console output should be produce to indicate
+#' progress. The default value for notify.of.progress is FALSE.
 #' @return the object specified by the <newobj> argument (or default name <cbind.out>).
 #' which is written to the serverside. Just like the {cbind} function in
 #' native R, the output object is of class matrix unless one or more
@@ -75,7 +77,7 @@
 #' will return the message: "ALL OK: there are no studysideMessage(s) on this datasource".
 #' @author Paul Burton for DataSHIELD Development Team
 #' @export
-ds.cbind.o<-function(x=NULL,DataSHIELD.checks=FALSE,force.colnames=NULL,newobj='cbind.out',datasources=NULL){
+ds.cbind.o<-function(x=NULL,DataSHIELD.checks=FALSE,force.colnames=NULL,newobj='cbind.out',datasources=NULL,notify.of.progress=FALSE){
   
   # if no opal login details are provided look for 'opal' objects in the environment
   if(is.null(datasources)){
@@ -131,9 +133,10 @@ for(j in 1:length(x))
 testclass.var<-x[j]
 
 calltext1<-paste0('class(', testclass.var, ')')
-next.class <- datashield.aggregate(datasources, as.symbol(calltext1))
+next.class <- opal::datashield.aggregate(datasources, as.symbol(calltext1))
 class.vector<-c(class.vector,next.class[[1]])
-cat("\n",j," of ", length(x), " elements to combine in step 1 of 2\n\n")
+if (notify.of.progress)
+    cat("\n",j," of ", length(x), " elements to combine in step 1 of 2\n")
 }
 
 for(j in 1:length(x))
@@ -143,17 +146,20 @@ test.df<-x[j]
 if(class.vector[j]!="data.frame" && class.vector[j]!="matrix")
 	{
 	colname.vector<-c(colname.vector,test.df)
-	cat("\n",j," of ", length(x), " elements to combine in step 2 of 2\n\n")
+        if (notify.of.progress)
+            cat("\n",j," of ", length(x), " elements to combine in step 2 of 2\n")
 	}
 else
 	{
 	calltext2<-paste0('colnames(', test.df, ')')
-    df.names <- datashield.aggregate(datasources, as.symbol(calltext2))
+    df.names <- opal::datashield.aggregate(datasources, as.symbol(calltext2))
 	 colname.vector<-c(colname.vector,df.names[[1]])
-	 cat("\n",j," of ", length(x), " elements to combine in step 2 of 2\n\n")
+         if (notify.of.progress)
+             cat("\n",j," of ", length(x), " elements to combine in step 2 of 2\n")
 	}
 }
-cat("\n\nBoth steps completed\n")
+if (notify.of.progress)
+    cat("\nBoth steps completed\n")
 
 #CHECK FOR DUPLICATE NAMES IN COLUMN NAME VECTOR AND ADD ".k" TO THE kth REPLICATE
 num.duplicates<-rep(0,length(colname.vector))
@@ -202,7 +208,7 @@ if(num.duplicates[m]!="0")
 	calltext <- call("cbindDS.o", x.names.transmit, colnames.transmit)	
 
 
-	datashield.assign(datasources, newobj, calltext)
+	opal::datashield.assign(datasources, newobj, calltext)
   
  
 #############################################################################################################
@@ -216,7 +222,7 @@ test.obj.name<-newobj																					 	#
 # CALL SEVERSIDE FUNCTION                                                                                	#
 calltext <- call("testObjExistsDS.o", test.obj.name)													 	#
 																											#
-object.info<-datashield.aggregate(datasources, calltext)												 	#
+object.info<-opal::datashield.aggregate(datasources, calltext)												 	#
 																											#
 # CHECK IN EACH SOURCE WHETHER OBJECT NAME EXISTS														 	#
 # AND WHETHER OBJECT PHYSICALLY EXISTS WITH A NON-NULL CLASS											 	#
@@ -258,7 +264,7 @@ if(obj.name.exists.in.all.sources && obj.non.null.in.all.sources){										 	#
 	}																										#
 																											#
 	calltext <- call("messageDS.o", test.obj.name)															#
-    studyside.message<-datashield.aggregate(datasources, calltext)											#
+    studyside.message<-opal::datashield.aggregate(datasources, calltext)											#
 																											#	
 	no.errors<-TRUE																							#
 	for(nd in 1:num.datasources){																			#

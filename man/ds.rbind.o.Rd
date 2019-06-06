@@ -5,7 +5,8 @@
 \title{ds.rbind.o calling rbindDS.o}
 \usage{
 ds.rbind.o(x = NULL, DataSHIELD.checks = FALSE,
-  force.colnames = NULL, newobj = "rbind.out", datasources = NULL)
+  force.colnames = NULL, newobj = "rbind.out", datasources = NULL,
+  notify.of.progress = FALSE)
 }
 \arguments{
 \item{x}{This is a vector of character strings representing the names of the elemental
@@ -28,8 +29,9 @@ can be user specified using <force.colnames>}
 \item{DataSHIELD.checks}{logical, if TRUE checks are made that all
 input objects exist and are of an appropriate class. These checks
 are relatively slow and so the <DataSHIELD.checks> argument is
-defaulted to FALSE
-param force.colnames NULL or a vector of character strings representing
+defaulted to FALSE}
+
+\item{force.colnames}{NULL or a vector of character strings representing
 the required column names of the output object. For example:
 force.colnames=c("colname1","name.of.second.column", "lastcol") for an
 output object with three columns. If <force.colnames> is NULL
@@ -59,6 +61,9 @@ apply the function solely to e.g. the second opal server in a set of three,
 the argument can be specified as: e.g. datasources=opals.em[2].
 If you wish to specify the first and third opal servers in a set you specify:
 e.g. datasources=opals.em[c(1,3)]}
+
+\item{notify.of.progress}{specifies if console output should be produce to indicate
+progress. The default value for notify.of.progress is FALSE.}
 }
 \value{
 the object specified by the <newobj> argument (or default name <rbind.out>).

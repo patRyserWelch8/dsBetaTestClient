@@ -13,22 +13,22 @@ getOpals <- function()
   flag        <- 0;
   opal.list   <- NULL
   return.list <- list("flag"=flag, "opals"=NULL, "opals.list"=NULL)
-  objs        <- ls(.GlobalEnv)
-  test_index  <- length(objs[objs %in% c("ds.test_env")])
-  
-  if (test_index >= 1) 
+
+  curr.ds.test_env <- NULL
+  try(curr.ds.test_env <- get("ds.test_env", envir = .GlobalEnv), silent = TRUE)
+
+  if (! is.null(curr.ds.test_env))
   {
-    #opal.list[[1]] <- "ds.test_env$connection.opal"
-    opal.list <- init.object.list.testing.environment(ls(ds.test_env))
+    opal.list <- init.object.list.testing.environment(ls(curr.ds.test_env))
   }
   else
   {
-    opal.list <- init.object.list.global.environment( ls(.GlobalEnv))
+    opal.list <- init.object.list.global.environment(ls(.GlobalEnv))
   }
   
   return.list <- init.opal.list(opal.list)
-  print("return.list")
-  print(return.list)
+#  print("return.list")
+#  print(return.list)
 
   return(return.list)
 }
@@ -73,7 +73,7 @@ init.object.list.global.environment <- function(objs)
       }
     }
   }
-  print(opalist)
+#  print(opalist)
   return(opalist)
 }
 

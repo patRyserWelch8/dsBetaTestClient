@@ -13,12 +13,12 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.reShape.o")
+context("dsBetaTestClient::ds.reShape.o:smoke")
 
-options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
-options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC"))
-source("setup.R")
+source("connection_to_datasets/init_all_datasets.R")
+source("connection_to_datasets/init_smk_datasets.R")
+
+connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 
 #
 # Tests
@@ -26,15 +26,18 @@ source("setup.R")
 
 context("dsBetaTestClient::ds.reShape.o()")
 test_that("simplest ds.reShape.o", {
-    list <- ds.reShape.o('D$LAB_TSC', direction='wide', datasources=opals)
+    myvectors <- c("D$LAB_TSC", "D$LAB_HDL")
+    ds.dataFrame.o(x=myvectors, newobj = "orig_df")
 
-    expect_true(length(list) == 0)
+    reshape.res <- ds.reShape.o("orig_df", varying=c("A"), v.names=c("B"), direction='wide')
+
+    print(paste0("[" + reshape.res + "]"))
+
+    expect_true(length(reshape.res) == 0)
 })
 
 #
-# Tear down
+# Done
 #
 
-source("teardown.R")
-
-context("dsBetaTestClient::ds.reShape.o done")
+context("dsBetaTestClient::ds.reShape.o:smoke done")

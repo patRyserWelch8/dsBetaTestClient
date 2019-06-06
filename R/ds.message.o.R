@@ -59,7 +59,7 @@ ds.message.o<-function(message.obj.name=NULL,datasources=NULL){
 
 # CALL THE MAIN SERVER SIDE FUNCTION
   calltext <- call("messageDS.o", message.obj.name)
-  output.message<-datashield.aggregate(datasources, calltext)
+  output.message<-opal::datashield.aggregate(datasources, calltext)
   
 #RETURN COMPLETION INFORMATION TO .GlobalEnv
     message("\nMESSAGES FROM STUDYSIDE SERVERS ARE:-\n")

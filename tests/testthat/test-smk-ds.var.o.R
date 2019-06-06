@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.var.o:smoke")
+# context("dsBetaTestClient::ds.var.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.var.o():smoke")
+context("ds.var.o()::smoke")
 test_that("simple var", {
     var.res <- ds.var.o(x = 'D$LAB_TSC', datasources = ds.test_env$connection.opal)
 
@@ -37,4 +37,4 @@ test_that("simple var", {
 # Done
 #
 
-context("dsBetaTestClient::ds.var.o:smoke done")
+# context("dsBetaTestClient::ds.var.o:smoke done")

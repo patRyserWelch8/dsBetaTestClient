@@ -26,11 +26,14 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female", "age.60"))
 
 context("dsBetaTestClient::ds.glm.o(): Standard Poisson regression model for piecewise exponential regression analysis:smoke")
 
-mod.D<-ds.glm.o("survtime~1+time.id+female+age.60",family="poisson",offset="log.surv")
-output.D<-c(mod.D$coefficients[,1],mod.D$coefficients[,2])
+# mod.D<-ds.glm.o("D$survtime~D$time.id+D$female+D$age.60",family="poisson")
+mod.D<-ds.glm.o("D$survtime~1+D$time.id+D$female",family="poisson")
 
-mod.R<-glm(SURVTIME~1+TIME.ID+FEMALE+AGE.60,family="poisson",offset=LOG.SURV)
-output.R<-c(summary(mod.R)$coefficients[,1],summary(mod.R)$coefficients[,2])
+print("----")
+print(mod.D)
+print("----")
+
+output.D<-c(mod.D$coefficients[,1],mod.D$coefficients[,2])
 
 test_that("glm_poisson", {
     expect_equal(ds.ls()$sim1[2],output.D,output.R)

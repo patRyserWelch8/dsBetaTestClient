@@ -11,6 +11,9 @@ Copies a specified set of Opals (on the client-side server)
 and calls the copy 'default.opals'
 }
 \description{
+creates a default set of Opal objects called 'default.opals
+}
+\details{
 By default if there is only one set of opals that is available for
 analysis, all DataSHIELD client-side functions will
 use that full set of Opals unless the 'datasources=' argument has been set and specifies that

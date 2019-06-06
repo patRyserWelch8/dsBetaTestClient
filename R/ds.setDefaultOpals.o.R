@@ -1,6 +1,7 @@
 #'
 #' @title ds.setDefaultOpals creates a default set of Opal objects called 'default.opals'
-#' @description By default if there is only one set of opals that is available for
+#' @description creates a default set of Opal objects called 'default.opals
+#' @details By default if there is only one set of opals that is available for
 #' analysis, all DataSHIELD client-side functions will
 #' use that full set of Opals unless the 'datasources=' argument has been set and specifies that
 #' a particular subset of those Opals should be used instead. The correct identification of the full
@@ -43,7 +44,7 @@ ds.setDefaultOpals.o<-function(opal.name){
     message(paste0("\n\nThere is more than one set of opals available, these are:\n'", paste(findLogin$opals.list,collapse="', '"), "'!!\n\n"))
  
     message(paste0("KEY SUMMARY: THE OBJECT 'default.opals' HAS BEEN CREATED \nAS A COPY OF '", opal.name,"' AND CONSISTS OF:\n"))
-	print(default.opals)
+#	print(default.opals)
     message(paste0("This opal object 'default.opals' will now be used by default by \nall DataSHIELD client-side functions unless a particular opal object\nis specified via the datasources= argument\n"))	
 
     message(" \n\nIf you wish to change the set of opals selected as default\nplease run the ds.setDefaultOpals() function again using the call syntax: \nds.setDefaultOpals(opal.name='name of opal in inverted commas')\n\n")
