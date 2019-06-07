@@ -79,6 +79,7 @@ steps:
     cd testStatus
     cp ../status.html docs/latest/index.html
     git add logs/test_results.xml
+    git add logs/$(datetime).xml
     git add docs/latest/index.html
     git commit -m "adding new test_results file"
     git push
