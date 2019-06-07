@@ -2,12 +2,12 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-    date_stamp=`date "+%Y-%m-%d_%H:%M:%S"`
-
+    a: $[format('{0:yyyyMMdd}', pipeline.startTime)]
 
 steps:
 - bash: |
     echo $(date_stamp)
+    echo $(pipeline.startTime)
     sudo service mysql stop
     sudo apt-get update
     sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
