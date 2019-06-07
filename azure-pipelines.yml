@@ -3,6 +3,8 @@ pool:
 
 steps:
 - bash: |
+    date_stamp=`date "+%Y-%m-%d_%H:%M:%S"`
+    echo $date_stamp
     sudo service mysql stop
     sudo apt-get update
     sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
@@ -74,6 +76,7 @@ steps:
     testStatus/source/status.py test_results.xml status.html dsBetaTestClient
     cd testStatus
     cp ../status.html docs/latest/index.html
+    date_stamp=`date "+%Y-%m-%d_%H:%M:%S"`
     git add logs/test_results.xml
     git add docs/latest/index.html
     git commit -m "adding new test_results file"
