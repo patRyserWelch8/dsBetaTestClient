@@ -75,7 +75,7 @@ steps:
     git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
     cp test_results.xml testStatus/logs/
     cp test_results.xml testStatus/logs/$(datetime).xml
-    testStatus/source/status.py test_results.xml status.html dsBetaTestClient
+    testStatus/source/status.py testStatus/logs/$(datetime).xml status.html dsBetaTestClient
     cd testStatus
     cp ../status.html docs/latest/index.html
     git add logs/test_results.xml
