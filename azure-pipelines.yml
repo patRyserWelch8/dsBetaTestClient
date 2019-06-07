@@ -48,7 +48,7 @@ steps:
     sudo R -e "install.packages('metafor', dependencies=TRUE)"
     sudo R -e "devtools::install_github(repo='datashield/opal', ref='master')"
     sudo R -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
-    sudo R -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='password', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
+    sudo R -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='datashield_test&', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
   displayName: 'Install R client'
 
 - bash: |
