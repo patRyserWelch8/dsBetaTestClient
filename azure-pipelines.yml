@@ -1,9 +1,12 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
+variables:
+    date_stamp=`date "+%Y-%m-%d_%H:%M:%S"`
+
+
 steps:
 - bash: |
-    date_stamp=`date "+%Y-%m-%d_%H:%M:%S"`
     echo $(date_stamp)
     sudo service mysql stop
     sudo apt-get update
