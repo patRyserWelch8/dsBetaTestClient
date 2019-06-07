@@ -2,16 +2,10 @@ pool:
   vmImage: 'Ubuntu 16.04'
 
 variables:
-    a: $[format('{0:yyyyMMdd}', pipeline.startTime)]
-    b: $[pipeline.startTime]
-    c: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
-    
+    datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
 
 steps:
 - bash: |
-    echo $(a)
-    echo $(b)
-    echo $(c)
     sudo service mysql stop
     sudo apt-get update
     sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
@@ -80,10 +74,10 @@ steps:
     git clone https://datashield:$(GHPAT)@github.com/datashield/dsBetaTestClient.git dsBetaTestClient
     git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
     cp test_results.xml testStatus/logs/
+    cp test_results.xml testStatus/logs/$(datetime).xml
     testStatus/source/status.py test_results.xml status.html dsBetaTestClient
     cd testStatus
     cp ../status.html docs/latest/index.html
-    date_stamp=`date "+%Y-%m-%d_%H:%M:%S"`
     git add logs/test_results.xml
     git add docs/latest/index.html
     git commit -m "adding new test_results file"
