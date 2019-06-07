@@ -6,7 +6,7 @@ variables:
 
 steps:
 - bash: |
-    echo $(date_stamp)
+    echo $(a)
     echo $(pipeline.startTime)
     sudo service mysql stop
     sudo apt-get update
