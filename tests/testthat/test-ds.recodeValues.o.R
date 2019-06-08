@@ -2,14 +2,14 @@ source("connection_to_datasets/init_all_datasets.R")
 
 
 
-context("<START>ds.recodeValues.o</START>")
-context("Returns expected numerical value")
+#context("<START>ds.recodeValues.o</START>")
+context("ds.recodeValues.o()::mathematical::Returns expected numerical value")
 test_that("combined data set",
 {
    connect.all.datasets()
    #change value locally start
-   row <- sample(nrow(ds.test_env$local.values),1) 
-   value <- ds.test_env$local.values[row,6] 
+   row <- sample(nrow(ds.test_env$local.values),1)
+   value <- ds.test_env$local.values[row,6]
    print(ds.test_env$local.values[row,6])
    print(value)
    ds.test_env$local.values[row,6] <- 0
@@ -22,11 +22,11 @@ test_that("combined data set",
    factor.from.server <- ds.asFactor.o('INTEGER_recoded','INT.f', datasources = ds.test_env$connection.opal)
    factors <- factor.from.server[[1]]
    print(factors)
-   
+
    print(length(factors[factors == "0"])> 0)
    expect_true(length(factors[factors == "0"])> 0)
-   
+
 })
 
 
-context("<END>ds.recodeValues.o</END>")
+# context("<END>ds.recodeValues.o</END>")
