@@ -2,7 +2,7 @@ source("connection_to_datasets/init_all_datasets.R")
 
 #context("<START>ds.as_factor.o</START>")
 #context("Returns expected numerical value")
-context("ds.as.factor()::mathematical::Returns expected numerical value")
+context("ds.asFactor()::mathematical::Returns expected numerical value")
 test_that("combined data set",
 {
     connect.all.datasets()
