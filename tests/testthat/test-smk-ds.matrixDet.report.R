@@ -29,7 +29,7 @@ test_that("simplest ds.matrixDet.report", {
     matrix <- c(-2, 1, 3, 0, -1, 1, 1, 2, 0)
 
     ds.matrix(mdata=matrix, nrows.scalar=3, ncols.scalar=3)
-    res <- ds.matrixDet.report("new_matrix")
+    res <- ds.matrixDet.report("new_matrix", logarithm=NULL)
 
     expect_length(res, 1)
     expect_length(res$matrix.determinant, 3)
@@ -45,6 +45,12 @@ test_that("simplest ds.matrixDet.report", {
     expect_length(res$matrix.determinant$sim3$matrix.determinant, 2)
     expect_equal(class(res$matrix.determinant$sim3$matrix.determinant$modulus), "numeric")
     expect_equal(res$matrix.determinant$sim3$matrix.determinant$sign, 1)
+})
+
+context("ds.matrixDet.report()::smoke::test errors")
+
+test_that("ds.matixDet.report erros", {
+    expect_error(ds.matrixDet.report(), "Error: Please provide the name of the matrix representing M1", fixed=TRUE)
 })
 
 #
