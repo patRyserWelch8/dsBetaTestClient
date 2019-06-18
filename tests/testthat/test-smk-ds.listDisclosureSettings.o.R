@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.listDisclosureSettings.o:smoke")
+# context("dsBetaTestClient::ds.listDisclosureSettings.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.listDisclosureSettings.o():smoke check results")
+context("ds.listDisclosureSettings.o()::smoke::check results")
 test_that("check results", {
     res <- ds.listDisclosureSettings.o()
 
@@ -72,4 +72,4 @@ test_that("check results", {
 # Done
 #
 
-context("dsBetaTestClient::ds.listDisclosureSettings.o:smoke done")
+# context("dsBetaTestClient::ds.listDisclosureSettings.o:smoke done")

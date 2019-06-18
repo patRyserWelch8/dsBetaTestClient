@@ -50,8 +50,14 @@ test_that("simple test", {
     expect_equal(res2$survival3$return.message, "Object <existing_object> successfully deleted")
 })
 
+context("ds.rm.o()::smoke::test errors")
+
+test_that("ds.rm.o erros", {
+    expect_error(ds.rm.o(), "Please provide the name of the object to be deleted (eg 'object.name') as the x.name argument", fixed=TRUE)
+})
+
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.rm.o 1:smoke done")
+# context("dsBetaTestClient::ds.rm.o:smoke done")
