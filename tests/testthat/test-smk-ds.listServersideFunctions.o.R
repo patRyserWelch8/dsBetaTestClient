@@ -52,7 +52,7 @@ test_that("check results", {
       "namesDS", "numNaDS", "quantileMeanDS", "rangeDS",
       "recodeValuesDS1.o", "rilmDS.b", "rmDS.o", "scatterPlotDS.o",
       "scoreVectDS", "setSeedDS.o", "t.test", "tTestFDS2",
-      "table1dDS", "table2dDS", "tapplyDS.o", "testObjExistsDS.o",
+      "table1dDS", "table2DDS.o", "table2dDS", "tapplyDS.o", "testObjExistsDS.o",
       "unListDS.o", "varDS", "varDS.o"
     ))
 
@@ -71,15 +71,15 @@ test_that("check results", {
 
     expect_length(sim1.assign.res, 58)
     expect_equal(sim1.assign.res, assign.functions)
-    expect_length(sim1.aggregate.res, 60)
+    expect_length(sim1.aggregate.res, 61)
     expect_equal(sim1.aggregate.res, aggregate.functions)
     expect_length(sim2.assign.res, 58)
     expect_equal(sim2.assign.res, assign.functions)
-    expect_length(sim2.aggregate.res, 60)
+    expect_length(sim2.aggregate.res, 61)
     expect_equal(sim2.aggregate.res, aggregate.functions)
     expect_length(sim3.assign.res, 58)
     expect_equal(sim3.assign.res, assign.functions)
-    expect_length(sim3.aggregate.res, 60)
+    expect_length(sim3.aggregate.res, 61)
     expect_equal(sim3.aggregate.res, aggregate.functions)
 })
 
