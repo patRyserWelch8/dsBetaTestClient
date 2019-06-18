@@ -1,8 +1,8 @@
 source("connection_to_datasets/init_all_datasets.R")
 connect.all.datasets()
 
-# context("<START>ds.mean.o</START>")
-# context("Returns expected numerical value")
+
+
 context("ds.mean.o()::mathematical::Returns expected numerical value")
 test_that("combined data set",
 {
@@ -171,10 +171,4 @@ test_that("residual deviation tends to 0",
 })
 
 
-#context("<END>ds.mean.o</END>")
-#context("incorrect arguments")
-#test_that("A suitable value is returned with some incorrect arugements",
-#{
-#    print(class(ds.test_env$connection.opal))
-#    print(ds.mean.o())
-#})
+s
