@@ -2,7 +2,7 @@ source("connection_to_datasets/init_all_datasets.R")
 connect.all.datasets()
 
 context("<START>ds.mean.o</START>")
-context("Returns expected numerical value")
+context("Returns expected numerical values")
 test_that("combined data set",
 {
   #  print("positive and negative integers value")
