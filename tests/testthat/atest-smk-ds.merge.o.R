@@ -32,6 +32,10 @@ test_that("simple test", {
     ds.dataFrame.o(x=spec_vectors_1, newobj="test_1_df")
     ds.dataFrame.o(x=spec_vectors_2, newobj="test_2_df")
 
+    print("====")
+    print(ds.ls(datasources=ds.test_env$connection.opal))
+    print("====") 
+
     res <- ds.merge.o(x.name="test_1_df", y.name="test_2_df", by.x.names="LAB_TSC", by.y.names="LAB_TRIG", newobj="merge_newobj")
 
     print("====")
