@@ -81,6 +81,7 @@ steps:
     #
     sudo R -e "install.packages('covr', dependencies=TRUE)"
     # sudo R -e 'library(covr);write.csv(coverage_to_list(),file="coveragelist.csv")'
+    cd dsBetaTestClient
     sudo R -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c("testthat::test_package('dsBetaTestClient', reporter = 'silent', stop_on_failure = FALSE)"))),file="coveragelist.csv")'
 
     git add coveragelist.csv
