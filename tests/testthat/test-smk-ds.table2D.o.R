@@ -28,10 +28,6 @@ context("ds.table2D.o()::smoke")
 test_that("simple table2D", {
     table2D.res <- ds.table2D.o(x='D$DIS_DIAB', y='D$GENDER')
 
-    print("====")
-    print(table2D.res)
-    print("====")
-
     expect_length(table2D.res, 9)
     expect_length(table2D.res$colPercent, 3)
     expect_length(table2D.res$colPercent$`sim1-D`, 3)
