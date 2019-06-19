@@ -31,7 +31,7 @@ test_that("check results", {
     print("======")
 
     output <-      paste(
-'### dsBetaTestClient functions',
+'\n### dsBetaTestClient functions',
 ' [1] "checkClass"',
 ' [2] "colPercent"',
 ' [3] "ds.asCharacter.o"',
