@@ -24,90 +24,109 @@ source("connection_to_datasets/init_all_datasets.R")
 
 .apply.changes.locally <- function(some.local.values, a.value.to.replace, column) 
 {
-  row <- sample(nrow(some.local.values),1) 
-  value <- some.local.values[row,column] 
-  some.local.values[row,column] <- a.value.to.replace
-  return(value)
+ if (!is.null(a.value.to.replace))
+  {
+    row <- sample(nrow(some.local.values),1) 
+    value <- some.local.values[row,column] 
+    some.local.values[row,column] <- a.value.to.replace
+ }
+ else
+ {
+    value <- NULL
+ }
+ return(value)
 }
 
-.apply.changes.server <- function(name.variable,name.variable.recoded,values,values.to.replace)
-{
-  recode.from.server <- ds.recodeValues.o(name.variable,values,values.to.replace,newobj = name.variable.recoded,datasources = ds.test_env$connection.opal)
-
-}
-
-.complete.expected.value.test <- function(variable.name, variable.recoded, some.values, column,value.to.replace)
+.complete.expected.value.test <- function(variable.name, 
+                                          variable.recoded, 
+                                          some.values, 
+                                          column,
+                                          values.to.replace)
 {
   dist.local.original <- .calc.distribution.locally(some.values,column)
   dist.server.original <- .calc.distribution.server(variable.name)
-  value <- .apply.changes.locally(some.values,value.to.replace,column)   #change value locally start by randomly selecting a value locally
-  .apply.changes.server(variable.name,variable.recoded, value, value.to.replace)
-  dist.local.recoded <- .calc.distribution.locally(some.values,column)
-  dist.server.recoded <- .calc.distribution.server(variable.name)
+  values <- c()
+  if (!is.null(values.to.replace))
+  {
+      for (i in 1:length(values.to.replace))
+      {
+          value <- .apply.changes.locally(some.values,values.to.replace[i],column)   #change value locally start by randomly selecting a value locally
+          values[i] <- value
+      }
+   
+      recode.from.server <- ds.recodeValues.o(variable.name,values,values.to.replace,newobj = variable.recoded,datasources = ds.test_env$connection.opal)
+      dist.local.recoded <- .calc.distribution.locally(some.values,column)
+      dist.server.recoded <- .calc.distribution.server(variable.name)
   
-  expect_equal(dist.local.original[0],dist.server.original[0], tolerance = ds.test_env$tolerance)
-  expect_equal(dist.local.original[1],dist.server.original[1], tolerance = ds.test_env$tolerance)
-  expect_equal(dist.local.recoded[0],dist.server.recoded[0], tolerance = ds.test_env$tolerance)
-  expect_equal(dist.local.recoded[1],dist.server.recoded[1], tolerance = ds.test_env$tolerance)
-  
+      expect_equal(dist.local.original[0],dist.server.original[0], tolerance = ds.test_env$tolerance)
+      expect_equal(dist.local.original[1],dist.server.original[1], tolerance = ds.test_env$tolerance)
+      expect_equal(dist.local.recoded[0],dist.server.recoded[0], tolerance = ds.test_env$tolerance)
+      expect_equal(dist.local.recoded[1],dist.server.recoded[1], tolerance = ds.test_env$tolerance)
+  }
+  else
+  {
+    expect_error(ds.recodeValues.o(variable.names,values,values.to.replace,name.variable.recoded,datasources = ds.test_env$connection.opal))
+  }
 }
+
+
 
 context("<START>ds.recodeValues.o</START>")
 context("Returns expected numerical values")
 test_that("combined data set",
 {
    connect.all.datasets()
-   .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values,15,100)
-   .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values,6,0)
-   .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values,7,-100)
-   .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values,8,0)
-   .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values,9,100)
-   .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values,10,0)
-   .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,11,-100)
-   .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values,12,0)
-   .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,13,100)
+   values.to.replace <- c()
+   .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,13,values.to.replace)
+   .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values,15,values.to.replace)
+   .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values,9,values.to.replace)
+  
+   values.to.replace <- c()
+   .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values,6,values.to.replace)
+   .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values,8,values.to.replace)
+   .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values,10,values.to.replace)
+   .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values,12,values.to.replace)
+  
+   values.to.replace <- c()
+   .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values,7, values.to.replace)
+   .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,11, values.to.replace)
+  
+   values.to.replace <- c(-100)
+   .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,13,values.to.replace)
+   .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values,15,values.to.replace)
+   .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values,9,values.to.replace)
    
+   values.to.replace <- c(0)
+   .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values,6,values.to.replace)
+   .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values,8,values.to.replace)
+   .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values,10,values.to.replace)
+   .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values,12,values.to.replace)
+
+   values.to.replace <- c(100)
+   .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values,7, values.to.replace)
+   .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,11, values.to.replace)
+
+   values.to.replace <- c(-100,-200)
+   .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,13,values.to.replace)
+   .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values,15,values.to.replace)
+   .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values,9,values.to.replace)
    
+   values.to.replace <- c(0,200)
+   .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values,6,values.to.replace)
+   .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values,8,values.to.replace)
+   .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values,10,values.to.replace)
+   .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values,12,values.to.replace)
    
-   
+   values.to.replace <- c(100,200)
+   .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values,7, values.to.replace)
+   .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,11, values.to.replace)
    
 })
+
 test_that("split dataset",
 {
   connect.dataset.1()
-  .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values.1,15,100)
-  .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values.1,6,0)
-  .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values.1,7,-100)
-  .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values.1,8,0)
-  .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values.1,9,100)
-  .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values.1,10,0)
-  .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values.1,11,-100)
-  .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values.1,12,0)
-  .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values.1,13,100)
-  
-  connect.dataset.2()
-  .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values.2,15,100)
-  .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values.2,6,0)
-  .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values.2,7,-100)
-  .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values.2,8,0)
-  .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values.2,9,100)
-  .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values.2,10,0)
-  .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values.2,11,-100)
-  .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values.2,12,0)
-  .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values.2,13,100)
-  
-  connect.dataset.3()
-  .complete.expected.value.test('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values.3,15,100)
-  .complete.expected.value.test('D$INTEGER','INTEGER_recoded',ds.test_env$local.values.3,6,0)
-  .complete.expected.value.test('D$NON_NEGATIVE_INTEGER','NON_NEGATIVE_INTEGER_recoded',ds.test_env$local.values.3,7,-100)
-  .complete.expected.value.test('D$POSITIVE_INTEGER','POSITIVE_INTEGER_recoded',ds.test_env$local.values.3,8,0)
-  .complete.expected.value.test('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values.3,9,100)
-  .complete.expected.value.test('D$NUMERIC','NUMERIC_recoded',ds.test_env$local.values.3,10,0)
-  .complete.expected.value.test('D$NON_NEGATIVE_NUMERIC','NON_NEGATIVE_NUMERIC_recoded',ds.test_env$local.values.3,11,-100)
-  .complete.expected.value.test('D$POSITIVE_NUMERIC','POSITIVE_NUMERIC_recoded',ds.test_env$local.values.3,12,0)
-  .complete.expected.value.test('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values.3,13,100)
   
   
 })
 
-context("<END>ds.recodeValues.o</END>")
