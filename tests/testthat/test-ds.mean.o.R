@@ -1,8 +1,6 @@
 source("connection_to_datasets/init_all_datasets.R")
 connect.all.datasets()
 
-
-
 context("ds.mean.o()::mathematical::Returns expected numerical value")
 test_that("combined data set",
 {
@@ -171,4 +169,3 @@ test_that("residual deviation tends to 0",
 })
 
 
-s
