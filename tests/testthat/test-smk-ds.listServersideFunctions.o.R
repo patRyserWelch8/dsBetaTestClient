@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.listServersideFunctions.o:smoke")
+# context("dsBetaTestClient::ds.listServersideFunctions.o:smoke")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.listServersideFunctions.o():smoke check results")
+context("ds.listServersideFunctions.o()::smoke::check results")
 test_that("check results", {
     assign.functions <- factor(c(
       "BooleDS.o", "as.character", "as.null", "as.numeric", "asCharacterDS.o", "asDataMatrixDS.o",
@@ -32,7 +32,7 @@ test_that("check results", {
       "asMatrixDS.o", "asNumericDS.o", "attach", "c", "cDS", "cbind",
       "cbindDS.o", "changeRefGroupDS", "complete.cases", "dataFrameDS.o", "dataFrameSortDS.o", "dataFrameSubsetDS2.o",
       "dataframeDS", "exp", "lexisDS", "lexisDS2.o", "lexisDS3.o", "list",
-      "listDS", "log", "matrixDS", "matrixDetDS2", "matrixDiagDS", "matrixDimnamesDS", "matrixInvertDS", 
+      "listDS", "log", "matrixDS", "matrixDetDS2", "matrixDiagDS", "matrixDimnamesDS", "matrixInvertDS",
       "matrixMultDS", "matrixTransposeDS", "mergeDS.o", "rBinomDS.o", "rNormDS.o", "rPoisDS.o",
       "rUnifDS.o", "rbindDS.o", "reShapeDS.o", "recodeLevelsDS", "recodeValuesDS2.o", "rep",
       "replaceNaDS", "rowColCalcDS", "seedDS.o", "seqDS.o", "subsetByClassDS", "subsetDS", "sum",
@@ -52,7 +52,7 @@ test_that("check results", {
       "namesDS", "numNaDS", "quantileMeanDS", "rangeDS",
       "recodeValuesDS1.o", "rilmDS.b", "rmDS.o", "scatterPlotDS.o",
       "scoreVectDS", "setSeedDS.o", "t.test", "tTestFDS2",
-      "table1dDS", "table2dDS", "tapplyDS.o", "testObjExistsDS.o",
+      "table1dDS", "table2DDS.o", "table2dDS", "tapplyDS.o", "testObjExistsDS.o",
       "unListDS.o", "varDS", "varDS.o"
     ))
 
@@ -61,7 +61,7 @@ test_that("check results", {
     expect_length(res, 2)
     expect_length(res$serverside.assign.functions, 3)
     expect_length(res$serverside.aggregate.functions, 3)
-    
+
     sim1.assign.res    <- res$serverside.assign.functions$sim1
     sim1.aggregate.res <- res$serverside.aggregate.functions$sim1
     sim2.assign.res    <- res$serverside.assign.functions$sim2
@@ -71,15 +71,15 @@ test_that("check results", {
 
     expect_length(sim1.assign.res, 58)
     expect_equal(sim1.assign.res, assign.functions)
-    expect_length(sim1.aggregate.res, 60)
+    expect_length(sim1.aggregate.res, 61)
     expect_equal(sim1.aggregate.res, aggregate.functions)
     expect_length(sim2.assign.res, 58)
     expect_equal(sim2.assign.res, assign.functions)
-    expect_length(sim2.aggregate.res, 60)
+    expect_length(sim2.aggregate.res, 61)
     expect_equal(sim2.aggregate.res, aggregate.functions)
     expect_length(sim3.assign.res, 58)
     expect_equal(sim3.assign.res, assign.functions)
-    expect_length(sim3.aggregate.res, 60)
+    expect_length(sim3.aggregate.res, 61)
     expect_equal(sim3.aggregate.res, aggregate.functions)
 })
 
@@ -87,4 +87,4 @@ test_that("check results", {
 # Done
 #
 
-context("dsBetaTestClient::ds.listServersideFunctions.o:smoke done")
+# context("dsBetaTestClient::ds.listServersideFunctions.o:smoke done")

@@ -1,6 +1,9 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
+variables:
+    datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
+
 steps:
 - bash: |
     sudo service mysql stop
@@ -55,12 +58,30 @@ steps:
   condition: always()
 
 - bash: |
-    R -e "library('devtools'); devtools::test()" | tee azure-pipelines_test.Rout
-    grep --quiet "Failed:   0" azure-pipelines_test.Rout
+    R -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); devtools::test(reporter = 'junit')" | tee azure-pipelines_test.Rout
+    #grep --quiet "Failed:   0" azure-pipelines_test.Rout
   displayName: 'Devtools tests'
   condition: always()
 
 - bash: |
     ./checkDocumentationUpdated.sh
   displayName: 'Check documents'
+  condition: always()
+
+- bash: |
+    git config --global user.email "you@example.com"
+    git config --global user.name "Azure pipeline"
+    git clone https://datashield:$(GHPAT)@github.com/datashield/dsBetaTestClient.git dsBetaTestClient
+    git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
+    cp test_results.xml testStatus/logs/
+    cp test_results.xml testStatus/logs/$(datetime).xml
+    testStatus/source/status.py testStatus/logs/$(datetime).xml status.html dsBetaTestClient
+    cd testStatus
+    cp ../status.html docs/latest/index.html
+    git add logs/test_results.xml
+    git add logs/$(datetime).xml
+    git add docs/latest/index.html
+    git commit -m "adding new test_results file"
+    git push
+  displayName: 'Parse test results'
   condition: always()
