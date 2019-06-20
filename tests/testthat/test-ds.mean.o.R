@@ -1,7 +1,7 @@
 source("connection_to_datasets/init_all_datasets.R")
 connect.all.datasets()
 
-context("ds.mean.o()::mathematical::Returns expected numerical value")
+context("ds.mean.o()::expct::multiple")
 test_that("combined data set",
 {
   #  print("positive and negative integers value")
