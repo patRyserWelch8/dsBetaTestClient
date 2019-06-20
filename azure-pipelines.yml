@@ -73,22 +73,26 @@ steps:
     git config --global user.name "Azure pipeline"
     git clone https://datashield:$(GHPAT)@github.com/datashield/dsBetaTestClient.git dsBetaTestClient
     git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
+
+    cd dsBetaTestClient
+    sudo R -e "install.packages('covr', dependencies=TRUE)"
+    sudo R -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"../coveragelist.csv")'
+    cd ../
+
+    cp coveragelist.csv testStatus/logs/
+    cp coveragelist.csv testStatus/logs/$(datetime).csv
+
     cp test_results.xml testStatus/logs/
     cp test_results.xml testStatus/logs/$(datetime).xml
-    testStatus/source/status.py testStatus/logs/$(datetime).xml status.html dsBetaTestClient
+
+    testStatus/source/status.py testStatus/logs/$(datetime).xml testStatus/logs/$(datetime).csv status.html dsBetaTestClient
     cd testStatus
     cp ../status.html docs/latest/index.html
-    #
-    sudo R -e "install.packages('covr', dependencies=TRUE)"
-    # sudo R -e 'library(covr);write.csv(coverage_to_list(),file="coveragelist.csv")'
-    cd dsBetaTestClient
-    # sudo R -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c("testthat::test_package('dsBetaTestClient', reporter = 'silent', stop_on_failure = FALSE)"))),file="coveragelist.csv")'
-    sudo R -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"coveragelist.csv")'
 
-    git add coveragelist.csv
-    #
+    git add logs/coveragelist.csv
     git add logs/test_results.xml
     git add logs/$(datetime).xml
+    git add logs/$(datetime).csv
     git add docs/latest/index.html
     git commit -m "adding new test_results file"
     git push
