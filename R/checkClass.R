@@ -12,12 +12,21 @@
 checkClass <- function(datasources=NULL, obj=NULL){
   # check the class of the input object
   cally <- paste0("class(", obj, ")")
-  objtype <- unique(unlist(opal::datashield.aggregate(datasources, cally)))
-  if(length(objtype) > 1){
+  objtypes <- opal::datashield.aggregate(datasources, cally)
+
+  index       <- 1
+  sameContent <- TRUE
+  while (index < length(objtypes))
+  {
+    sameContent <- sameContent && (length(setdiff(objtypes[[index]], objtypes[[index + 1]])) == 0)
+    index <- index + 1
+  }
+
+  if(! sameContent){
     message("The input data is not of the same class in all studies!")
     message("Use the function 'ds.class' to verify the class of the input object in each study.")
     stop(" End of process!", call.=FALSE)
   }else{
-    return(objtype)
+    return(unique(unlist(objtypes)))
   }
 }
