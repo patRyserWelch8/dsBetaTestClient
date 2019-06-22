@@ -16,7 +16,7 @@ If \code{type} is set to 'combine', a histogram that merges the single
 plot is displayed. Each histogram is plotted separately if If \code{type}
 is set to 'split'.}
 
-\item{num.breaks}{a numeric specifying the number of breaks of the histogram. The 
+\item{num.breaks}{a numeric specifying the number of breaks of the histogram. The
 default value is set to 10.}
 
 \item{method}{a character which defines which histogram will be created. If \code{method}
@@ -63,7 +63,7 @@ It calls a datashield server side function that produces the
 histogram objects to plot. Two options are possible as identified by the argument
 \code{method}. The first option creates a histogram that excludes bins with
 counts smaller than the allowed threshold. The second option creates a histogram
-of the centroids of each k nearest neighbours. The function allows for the user to plot 
+of the centroids of each k nearest neighbours. The function allows for the user to plot
 disctinct histograms (one for each study) or a combine histogram that merges
 the single plots.
 }
@@ -75,55 +75,55 @@ the single plots.
 
   # login to the servers
   opals <- datashield.login(logins=logindata, assign=TRUE)
-  
-  # Example 1: generate a histogram for each study separately (the default behaviour) 
+
+  # Example 1: generate a histogram for each study separately (the default behaviour)
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', type="split")
 
   # Example 2: generate a combined histogram with the default small cells counts
                suppression rule
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='smallCellsRule', type='combine')
-  
+
   # Example 3: if a variable is of type factor then the function returns an error
   ds.histogram.o(x='LD$PM_BMI_CATEGORICAL')
-  
+
   # Example 4: generate a combined histogram with the deterministic method
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='deterministic', type='combine')
-  
+
   # Example 5: same as Example 4 but with k=50
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', k=50, method='deterministic', type='combine')
-  
+
   # Example 6: same as Example 4 but with k=1740 (here we see that as k increases we have
                big utility loss)
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', k=1740, method='deterministic', type='combine')
-  
+
   # Example 7: same as Example 6 but for split analysis
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', k=1740, method='deterministic', type='split')
-  
+
   # Example 7: if k is less than the pre-specified threshold then the function returns an error
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', k=2, method='deterministic')
-  
-  # Example 8: generate a combined histogram with the probabilistic method 
+
+  # Example 8: generate a combined histogram with the probabilistic method
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', type='combine')
-  
+
   # Example 9: generate a histogram with the probabilistic method for each study separately
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', type='split')
-  
+
   # Example 10: same as Example 9 but with higher level of noise
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', noise=0.5, type='split')
-  
+
   # Example 11: if 'noise' is less than the pre-specified threshold then the function returns
                 an error
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', noise=0.1, type='split')
-  
+
   # Example 12: same as Example 9 but with bigger number of breaks
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', type='split', num.breaks=30)
-  
+
   # Example 13: same as Example 12 but the vertical axis shows densities instead of frequencies
   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', type='split', num.breaks=30,
                  vertical.axis='Density')
-  
+
   # Example 14: create a histogram and the probability density on the plot
-  hist <- ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', type='combine', 
+  hist <- ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', method='probabilistic', type='combine',
                          num.breaks=30, vertical.axis='Density')
   lines(hist$mids, hist$density)
 
