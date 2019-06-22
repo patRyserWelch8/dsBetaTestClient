@@ -45,6 +45,7 @@ steps:
     sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev libgsl-dev -y
     sudo apt-get install -qq r-base -y
     sudo R -e "install.packages('devtools', dependencies=TRUE)"
+    sudo R -e "install.packages('testthat', dependencies=TRUE)"
     sudo R -e "install.packages('metafor', dependencies=TRUE)"
     sudo R -e "devtools::install_github(repo='datashield/opal', ref='master')"
     sudo R -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
@@ -58,7 +59,7 @@ steps:
   condition: always()
 
 - bash: |
-    R -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); junit_reporter <- JunitReporter\$new(); summary_reporter <- SummaryReporter\$new(); multi_reporter <- MultiReporter$new(list(junit_reporter, summary_reporter)); testthat::test_dir('tests/testthat', reporter = multi_reporter)" | tee azure-pipelines_test.Rout
+    R -e "library('devtools'); library('testthat'); options(testthat.output_file = 'test_results.xml'); junit_reporter <- JunitReporter\$new(); summary_reporter <- SummaryReporter\$new(); multi_reporter <- MultiReporter$new(list(junit_reporter, summary_reporter)); testthat::test_dir('tests/testthat', reporter = multi_reporter)" | tee azure-pipelines_test.Rout
     grep --quiet "Failed:   0" azure-pipelines_test.Rout
   displayName: 'Devtools tests'
   condition: always()
