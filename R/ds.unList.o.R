@@ -68,10 +68,9 @@ ds.unList.o <- function(x.name=NULL, recursive=TRUE, newobj=NULL, datasources=NU
 	calltext <- call("unListDS.o", x.name, recursive, newobj)
 
 	out.message<-opal::datashield.aggregate(datasources, calltext)
-	print(out.message)
+#	print(out.message)
 #Don't include assign function completion module as it can print out an unhelpful
 #warning message when newobj is a list
 
 }
 # ds.unList.o
-
