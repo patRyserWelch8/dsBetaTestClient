@@ -59,7 +59,7 @@ steps:
   condition: always()
 
 - bash: |
-    R -e "library('devtools'); library('testthat'); options(testthat.output_file = 'test_results.xml'); junit_reporter <- JunitReporter\$new(); progress_reporter <- ProgressReporter\$new(file=stdout()); multi_reporter <- MultiReporter\$new(list(junit_reporter, progress_reporter)); testthat::test_dir('tests/testthat', reporter = multi_reporter)" | tee azure-pipelines_test.Rout
+    R -e "library('devtools'); library('testthat'); options(testthat.output_file = 'test_results.xml'); junit_reporter <- JunitReporter\$new(); progress_reporter <- ProgressReporter\$new(file=stdout()); multi_reporter <- MultiReporter\$new(list(junit_reporter, progress_reporter)); testthat::test_package("dsBetaTestClient", reporter = multi_reporter)" | tee azure-pipelines_test.Rout
     grep --quiet "Failed:   0" azure-pipelines_test.Rout
   displayName: 'Devtools tests'
   condition: always()
