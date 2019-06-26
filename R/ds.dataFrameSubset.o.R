@@ -63,6 +63,8 @@
 #' the argument can be specified as: e.g. datasources=opals.em[2].
 #' If you wish to specify the first and third opal servers in a set you specify:
 #' e.g. datasources=opals.em[c(1,3)]
+#' @param notify.of.progress specifies if console output should be produce to indicate
+#' progress. The default value for notify.of.progress is FALSE.
 #' @return the object specified by the <newobj> argument (or default name '<df.name>_subset').
 #' which is written to the serverside. In addition, two validity messages are returned
 #' indicating whether <newobj> has been created in each data source and if so whether
@@ -79,7 +81,7 @@
 #' @author DataSHIELD Development Team
 #' @export
 
-ds.dataFrameSubset.o<-function(df.name=NULL, V1.name=NULL, V2.name=NULL, Boolean.operator=NULL, keep.cols=NULL, rm.cols=NULL, keep.NAs=NULL, newobj=NULL, datasources=NULL){
+ds.dataFrameSubset.o<-function(df.name=NULL, V1.name=NULL, V2.name=NULL, Boolean.operator=NULL, keep.cols=NULL, rm.cols=NULL, keep.NAs=NULL, newobj=NULL, datasources=NULL, notify.of.progress=FALSE){
   
   # if no opal login details are provided look for 'opal' objects in the environment
   if(is.null(datasources)){
@@ -154,25 +156,28 @@ if(!is.null(rm.cols)){
   
   
     calltext1 <- call("dataFrameSubsetDS1.o", df.name, V1.name, V2.name, BO.n, keep.cols, rm.cols, keep.NAs=keep.NAs)
-  	return.warning.message<-opal::datashield.aggregate(datasources, calltext1)
+    return.warning.message<-opal::datashield.aggregate(datasources, calltext1)
 
     calltext2 <- call("dataFrameSubsetDS2.o", df.name, V1.name, V2.name, BO.n, keep.cols, rm.cols, keep.NAs=keep.NAs)
-  	opal::datashield.assign(datasources, newobj, calltext2)
+    opal::datashield.assign(datasources, newobj, calltext2)
 	
  
-	numsources<-length(datasources)
-	for(s in 1:numsources){
+    numsources<-length(datasources)
+    for(s in 1:numsources){
 	num.messages<-length(return.warning.message[[s]])
-	if(num.messages==1){
-	cat("\nSource",s,"\n",return.warning.message[[s]][[1]],"\n\n")
-	}else{
-	cat("\nSource",s,"\n")
+        if (notify.of.progress)
+	{
+            if(num.messages==1){
+	        cat("\nSource",s,"\n",return.warning.message[[s]][[1]],"\n")
+	    }else{
+	        cat("\nSource",s,"\n")
 		for(m in 1:(num.messages-1)){
-		cat(return.warning.message[[s]][[m]],"\n")
-		}
-		cat(return.warning.message[[s]][[num.messages]],"\n\n")
-	}
-}
+		    cat(return.warning.message[[s]][[m]],"\n")
+                }
+                cat(return.warning.message[[s]][[num.messages]],"\n")
+	    }
+        }
+    }
 
 #############################################################################################################
 #DataSHIELD CLIENTSIDE MODULE: CHECK KEY DATA OBJECTS SUCCESSFULLY CREATED                                  #
