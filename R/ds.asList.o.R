@@ -46,12 +46,12 @@ ds.asList.o = function(x.name=NULL, newobj=NULL, datasources=NULL){
     newobj <- paste0(x.name, ".list")
   }
 
-    # call the server side function that does the job
+  # call the server side function that does the job
 
-	calltext <- call("asListDS.o", x.name, newobj)
+  calltext <- call("asListDS.o", x.name, newobj)
 
-	out.message<-opal::datashield.aggregate(datasources, calltext)
-	print(out.message)
+  out.message<-opal::datashield.aggregate(datasources, calltext)
+# print(out.message)
 
 #Don't include assign function completion module as it can print out an unhelpful
 #warning message when newobj is a list

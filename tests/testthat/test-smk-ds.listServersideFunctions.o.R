@@ -44,7 +44,7 @@ test_that("check results", {
       "corDS", "covDS", "covDS.o", "dataFrameSubsetDS1.o",
       "densityGridDS", "dim", "dimDS", "dimDS.o",
       "exists", "glmDS1", "glmDS1.o", "glmDS2",
-      "glmDS2.o", "glmSLMADS2.o", "histogramDS", "is.character",
+      "glmDS2.o", "glmSLMADS2.o", "histogramDS", "histogramDS.o", "is.character",
       "is.factor", "is.list", "is.null", "is.numeric",
       "isNaDS", "isValidDS", "length", "lengthDS.o",
       "levels", "lexisDS1.o", "listDisclosureSettingsDS.o", "ls",
@@ -71,15 +71,15 @@ test_that("check results", {
 
     expect_length(sim1.assign.res, 58)
     expect_equal(sim1.assign.res, assign.functions)
-    expect_length(sim1.aggregate.res, 61)
+    expect_length(sim1.aggregate.res, 62)
     expect_equal(sim1.aggregate.res, aggregate.functions)
     expect_length(sim2.assign.res, 58)
     expect_equal(sim2.assign.res, assign.functions)
-    expect_length(sim2.aggregate.res, 61)
+    expect_length(sim2.aggregate.res, 62)
     expect_equal(sim2.aggregate.res, aggregate.functions)
     expect_length(sim3.assign.res, 58)
     expect_equal(sim3.assign.res, assign.functions)
-    expect_length(sim3.aggregate.res, 61)
+    expect_length(sim3.aggregate.res, 62)
     expect_equal(sim3.aggregate.res, aggregate.functions)
 })
 

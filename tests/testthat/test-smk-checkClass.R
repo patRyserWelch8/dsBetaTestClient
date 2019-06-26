@@ -31,7 +31,7 @@ test_that("simple test", {
 
     expect_length(res, 1)
     expect_equal(class(res), "character")
-    expect_equal(res, "haven_labelled")
+    expect_equal(res, "factor")
 })
 
 test_that("simple test", {
@@ -63,7 +63,7 @@ test_that("simple test", {
 
     expect_length(res, 1)
     expect_equal(class(res), "character")
-    expect_equal(res, "haven_labelled")
+    expect_equal(res, "factor")
 })
 
 test_that("simple test", {
@@ -71,7 +71,7 @@ test_that("simple test", {
 
     expect_length(res, 1)
     expect_equal(class(res), "character")
-    expect_equal(res, "haven_labelled")
+    expect_equal(res, "factor")
 })
 
 test_that("data.frame test", {
