@@ -99,7 +99,7 @@ ds.mean.o <- function(x=NULL, type='split', checks=FALSE, save.mean.Nvalid=FALSE
   # call the internal function that checks the input object is suitable in all studies        #
   varClass <- checkClass(datasources, x)                                                      #
   # the input object must be a numeric or an integer vector                                   #
-  if(varClass != 'integer' & varClass != 'numeric' & varClass != 'factor'){                   #
+  if(varClass != 'integer' & varClass != 'numeric'){                                          #
     stop("The input object must be an integer or a numeric vector.", call.=FALSE)             #
   }                                                                                           #
 }                                                                                             #
@@ -110,7 +110,7 @@ ds.mean.o <- function(x=NULL, type='split', checks=FALSE, save.mean.Nvalid=FALSE
 if(type == 'combine' | type == 'combined' | type == 'combines' | type == 'c') type <- 'combine'   #
 if(type == 'split' | type == 'splits' | type == 's') type <- 'split'                              #
 if(type == 'both' | type == 'b' ) type <- 'both'                                                  #
-																							      #
+																							                                                    #
 #MODIFY FUNCTION CODE TO DEAL WITH ALL THREE TYPES                                                #
 ###################################################################################################
 
