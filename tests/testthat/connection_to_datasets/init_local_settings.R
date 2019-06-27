@@ -5,7 +5,7 @@ init.ip.address <- function()
    file.name <- init.local.settings()
    if (file.exists(file.name))
    {
-      content <- read.csv(file.name)
+      content <- read.csv(file.name, header = FALSE)
       ip.address <- as.character(content[[1]][1])
    }
    else
