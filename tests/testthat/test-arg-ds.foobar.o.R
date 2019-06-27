@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.foobar.o:fail")
+# context("dsBetaTestClient::ds.foobar.o:arg")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,31 +24,31 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.foobar.o()::fail::aggregate")
+context("ds.foobar.o::arg::aggregate")
 test_that("NULL opal", {
     calltext <- call("fooBarDS.o")
     expect_error(opal::datashield.aggregate(opal=NULL, expr=calltext), "no applicable method for 'datashield.aggregate' applied to an object of class \"NULL\"", fixed=TRUE)
 })
 
-context("ds.foobar.o()::fail::aggregate")
+context("ds.foobar.o::arg::aggregate")
 test_that("NULL expr", {
     calltext <- call("fooBarDS.o")
     expect_error(opal::datashield.aggregate(opal=ds.test_env$connection.opal, expr=NULL), "Invalid expression type: 'NULL'. Expected a call or character vector.", fixed=TRUE)
 })
 
-context("ds.foobar.o()::fail::aggregate")
+context("ds.foobar.o::arg::aggregate")
 test_that("non existent aggregate foobarDS", {
     calltext <- call("fooBarDS.o")
     expect_error(opal::datashield.aggregate(opal=ds.test_env$connection.opal, expr=calltext), "Command 'fooBarDS.o()' failed on 'sim1': <no message>", fixed=TRUE)
 })
 
-context("ds.foobar.o()::fail::assign")
+context("ds.foobar.o::arg::assign")
 test_that("NULL opal", {
     calltext <- call("fooBarDS.o")
     expect_error(opal::datashield.assign(opal=NULL, symbol="new_obj", value=calltext), "no applicable method for 'datashield.assign' applied to an object of class \"NULL\"", fixed=TRUE)
 })
 
-#context("ds.foobar.o()::fail::assign")
+#context("ds.foobar.o::arg::assign")
 #test_that("NULL symbol", {
 #    calltext <- call("fooBarDS.o")
 #    res <- opal::datashield.assign(opal=ds.test_env$connection.opal, symbol=NULL, value=calltext)
@@ -56,13 +56,13 @@ test_that("NULL opal", {
 #    expect_length(res, 0)
 #})
 
-context("ds.foobar.o()::fail::assign")
+context("ds.foobar.o::arg::assign")
 test_that("NULL value", {
     calltext <- call("fooBarDS.o")
     expect_error(opal::datashield.assign(opal=ds.test_env$connection.opal, symbol="new_obj", value=NULL), "Invalid value type: 'NULL'. Use quote() to protect from early evaluation.", fixed=TRUE)
 })
 
-context("ds.foobar.o()::fail::assign")
+context("ds.foobar.o::arg::assign")
 test_that("non existent assign foobarDS", {
     calltext <- call("fooBarDS.o")
     res <- opal::datashield.assign(opal=ds.test_env$connection.opal, symbol="new_obj", value=calltext)
@@ -74,4 +74,4 @@ test_that("non existent assign foobarDS", {
 # Tear down
 #
 
-# context("dsBetaTestClient::ds.foobar.o:fail done")
+# context("dsBetaTestClient::ds.foobar.o::arg done")
