@@ -45,8 +45,8 @@ steps:
     sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev libgsl-dev -y
     sudo apt-get install -qq r-base -y
     sudo R -q -e "install.packages('devtools', dependencies=TRUE)"
-    sudo R -q -e "install.packages('testthat', dependencies=TRUE)"
     sudo R -q -e "install.packages('metafor', dependencies=TRUE)"
+    sudo R -q -e "install.packages('covr', dependencies=TRUE)"
     sudo R -q -e "devtools::install_github(repo='datashield/opal', ref='master')"
     sudo R -q -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
     sudo R -q -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='datashield_test&', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
@@ -59,9 +59,14 @@ steps:
   condition: always()
 
 - bash: |
-    R -q -e "library('devtools'); library('testthat'); options(testthat.output_file = 'test_results.xml'); junit_reporter <- JunitReporter\$new(); progress_reporter <- ProgressReporter\$new(file=stdout()); multi_reporter <- MultiReporter\$new(list(junit_reporter, progress_reporter)); testthat::test_package('dsBetaTestClient', reporter = multi_reporter)" | tee azure-pipelines_test.Rout
+    R -q -e "library('devtools'); devtools::test()" | tee azure-pipelines_test.Rout
     grep --quiet "Failed:   0" azure-pipelines_test.Rout
   displayName: 'Devtools tests'
+  condition: always()
+
+- bash: |
+    R -q -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); devtools::test(reporter = 'junit')"
+  displayName: 'Devtools test reports'
   condition: always()
 
 - bash: |
@@ -76,7 +81,6 @@ steps:
     git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
 
     cd dsBetaTestClient
-    sudo R -q -e "install.packages('covr', dependencies=TRUE)"
     sudo R -q -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"../coveragelist.csv")'
     cd ../
 
