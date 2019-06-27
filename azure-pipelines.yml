@@ -44,23 +44,28 @@ steps:
     sudo apt-get update
     sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev libgsl-dev -y
     sudo apt-get install -qq r-base -y
-    sudo R -e "install.packages('devtools', dependencies=TRUE)"
-    sudo R -e "install.packages('metafor', dependencies=TRUE)"
-    sudo R -e "devtools::install_github(repo='datashield/opal', ref='master')"
-    sudo R -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
-    sudo R -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='datashield_test&', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
+    sudo R -q -e "install.packages('devtools', dependencies=TRUE)"
+    sudo R -q -e "install.packages('metafor', dependencies=TRUE)"
+    sudo R -q -e "devtools::install_github(repo='datashield/opal', ref='master')"
+    sudo R -q -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
+    sudo R -q -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='datashield_test&', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
   displayName: 'Install R client'
 
 - bash: |
-    R -e "library('devtools'); devtools::check(args = c('--no-examples'))" | tee azure-pipelines_check.Rout
+    R -q -e "library('devtools'); devtools::check(args = c('--no-examples'))" | tee azure-pipelines_check.Rout
     grep --quiet "0 error" azure-pipelines_check.Rout && grep --quiet "0 warnings" azure-pipelines_check.Rout && grep --quiet "0 note" azure-pipelines_check.Rout
   displayName: 'Devtools checks'
   condition: always()
 
 - bash: |
-    R -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); devtools::test(reporter = 'junit')" | tee azure-pipelines_test.Rout
-    #grep --quiet "Failed:   0" azure-pipelines_test.Rout
+    R -q -e "library('devtools'); devtools::test()" | tee azure-pipelines_test.Rout
+    grep --quiet "Failed:   0" azure-pipelines_test.Rout
   displayName: 'Devtools tests'
+  condition: always()
+
+- bash: |
+    R -q -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); devtools::test(reporter = 'junit')"
+  displayName: 'Devtools test reports'
   condition: always()
 
 - bash: |
@@ -75,8 +80,8 @@ steps:
     git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
 
     cd dsBetaTestClient
-    sudo R -e "install.packages('covr', dependencies=TRUE)"
-    sudo R -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"../coveragelist.csv")'
+    sudo R -q -e "install.packages('covr', dependencies=TRUE)"
+    sudo R -q -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"../coveragelist.csv")'
     cd ../
 
     cp coveragelist.csv testStatus/logs/
