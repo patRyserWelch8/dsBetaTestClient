@@ -277,15 +277,6 @@ test_that("mean values [both]", {
     expect_true("Nvalid.study.specific" %in% ls.res$sim3)
 })
 
-context("ds.mean.o()::smoke::test errors")
-test_that("mean_erros", {
-    ds.asCharacter.o(x='D$LAB_TSC', newobj="not_a_numeric")
-
-    expect_error(ds.mean.o(), "Please provide the name of the input vector!", fixed=TRUE)
-#    expect_error(ds.mean.o(x='D$LAB_TSC', type='datashield'), 'Function argument "type" has to be either "combine" or "split"', fixed=TRUE)
-#    expect_error(ds.mean.o(x='not_a_numeric'), "The input object must be an integer or a numeric vector.", fixed=TRUE)
-})
-
 #
 # Done
 #
