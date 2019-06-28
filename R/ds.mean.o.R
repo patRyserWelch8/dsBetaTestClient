@@ -110,7 +110,9 @@ ds.mean.o <- function(x=NULL, type='split', checks=FALSE, save.mean.Nvalid=FALSE
 if(type == 'combine' | type == 'combined' | type == 'combines' | type == 'c') type <- 'combine'   #
 if(type == 'split' | type == 'splits' | type == 's') type <- 'split'                              #
 if(type == 'both' | type == 'b' ) type <- 'both'                                                  #
-																							                                                    #
+if(type != 'combine' & type != 'split' & type != 'both')                                          #
+  stop('Function argument "type" has to be either "both", "combine" or "split"', call.=FALSE)     #
+                                                                                                  #
 #MODIFY FUNCTION CODE TO DEAL WITH ALL THREE TYPES                                                #
 ###################################################################################################
 
