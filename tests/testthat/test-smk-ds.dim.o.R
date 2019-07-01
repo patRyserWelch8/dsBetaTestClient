@@ -25,13 +25,48 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 #
 
 context("ds.dim.o()::smoke")
-test_that("simple dim", {
-    dim.res <- ds.dim.o('D')
+test_that("simple dim, both", {
+    dim.res <- ds.dim.o('D', type='both')
 
+    expect_length(dim.res, 4)
+    expect_length(dim.res$`dimensions of D in sim1`, 2)
     expect_equal(dim.res$`dimensions of D in sim1`[[1]], 2163)
+    expect_equal(dim.res$`dimensions of D in sim1`[[2]], 1)
+    expect_length(dim.res$`dimensions of D in sim2`, 2)
     expect_equal(dim.res$`dimensions of D in sim2`[[1]], 3088)
+    expect_equal(dim.res$`dimensions of D in sim2`[[2]], 1)
+    expect_length(dim.res$`dimensions of D in sim3`, 2)
     expect_equal(dim.res$`dimensions of D in sim3`[[1]], 4128)
+    expect_equal(dim.res$`dimensions of D in sim3`[[2]], 1)
+    expect_length(dim.res$`dimensions of D in combined studies`, 2)
     expect_equal(dim.res$`dimensions of D in combined studies`[[1]], 9379)
+    expect_equal(dim.res$`dimensions of D in combined studies`[[2]], 1)
+})
+
+context("ds.dim.o()::smoke")
+test_that("simple dim, split", {
+    dim.res <- ds.dim.o('D', type='split')
+
+    expect_length(dim.res, 3)
+    expect_length(dim.res$`dimensions of D in sim1`, 2)
+    expect_equal(dim.res$`dimensions of D in sim1`[[1]], 2163)
+    expect_equal(dim.res$`dimensions of D in sim1`[[2]], 1)
+    expect_length(dim.res$`dimensions of D in sim2`, 2)
+    expect_equal(dim.res$`dimensions of D in sim2`[[1]], 3088)
+    expect_equal(dim.res$`dimensions of D in sim2`[[2]], 1)
+    expect_length(dim.res$`dimensions of D in sim3`, 2)
+    expect_equal(dim.res$`dimensions of D in sim3`[[1]], 4128)
+    expect_equal(dim.res$`dimensions of D in sim3`[[2]], 1)
+})
+
+context("ds.dim.o()::smoke")
+test_that("simple dim, combine", {
+    dim.res <- ds.dim.o('D', type='combine')
+
+    expect_length(dim.res, 1)
+    expect_length(dim.res$`dimensions of D in combined studies`, 2)
+    expect_equal(dim.res$`dimensions of D in combined studies`[[1]], 9379)
+    expect_equal(dim.res$`dimensions of D in combined studies`[[2]], 1)
 })
 
 #
