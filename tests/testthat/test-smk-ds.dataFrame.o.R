@@ -24,11 +24,10 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.dataFrame.o():smoke create a dataframe")
 context("ds.dataFrame.o()::smoke::create a dataframe")
 test_that("dataframe_exists", {
-    myvectors <- c('D$LAB_TSC', 'D$LAB_HDL')
-    ds.dataFrame.o(x=myvectors)
+    vectors <- c('D$LAB_TSC', 'D$LAB_HDL')
+    ds.dataFrame.o(x=vectors)
     res <- ds.ls(datasources=ds.test_env$connection.opal)
 
     expect_equal(res$sim1[2], "df_new")
@@ -36,10 +35,15 @@ test_that("dataframe_exists", {
     expect_equal(res$sim3[2], "df_new")
 })
 
-# context("dsBetaTestClient::ds.dataFrame.o() errors:smoke")
-context("ds.dataFrame.o()::smoke::errors")
-test_that("dataframe_errors", {
-    expect_error(ds.dataFrame.o(), "Please provide the name of the list that holds the input vectors!", fixed=TRUE)
+context("ds.dataFrame.o()::smoke::create a dataframe, with DataSHIELD.checks")
+test_that("dataframe_exists, with DataSHIELD.checks", {
+    vectors <- c('D$LAB_TSC', 'D$LAB_HDL')
+    ds.dataFrame.o(x=vectors, DataSHIELD.checks=TRUE)
+    res <- ds.ls(datasources=ds.test_env$connection.opal)
+
+    expect_equal(res$sim1[2], "df_new")
+    expect_equal(res$sim2[2], "df_new")
+    expect_equal(res$sim3[2], "df_new")
 })
 
 #
