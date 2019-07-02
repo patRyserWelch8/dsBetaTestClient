@@ -1,11 +1,7 @@
-
 source("connection_to_datasets/init_all_datasets.R")
 source("definition_tests/def-ds.recodeValues.R")
 
-
-
-
-context("ds.recodeValues.o()::expt::single::changes_applied")
+context("ds.recodeValues.o()::expt::changes_applied::single::")
 test_that("changes must be applied",
 {
   
@@ -44,7 +40,7 @@ test_that("changes must be applied",
 })
 
 
-context("ds.recodeValues.o()::expt::multiple::changes_applied")
+context("ds.recodeValues.o()::expt::changes_applied::multiple")
 test_that("changes must be applied",
 {
     
@@ -85,7 +81,7 @@ test_that("changes must be applied",
 
 
 
-  context("ds.recodeValues.o()::expt::single::no_change_applied")
+  context("ds.recodeValues.o()::expt::no_change_applied::single")
   test_that("no_change_applied",
   {
       connect.dataset.1() 
@@ -133,14 +129,14 @@ test_that("changes must be applied",
   })            
               
           
-context("ds.recodeValues.o()::expt::multiple::no_change_applied")
+context("ds.recodeValues.o()::expt::no_change_applied::multiple")
 test_that("no_change_applied",
 {
     connect.all.datasets()
     values.to.replace <- c()
     .test.apply.no.change('D$NEGATIVE_NUMERIC','NEGATIVE_NUMERIC_recoded',ds.test_env$local.values,13,values.to.replace)
     .test.apply.no.change('D$FACTOR_INTEGER','FACTOR_INTEGER_recoded',ds.test_env$local.values,15,values.to.replace)
-    .test.apply.no.change('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values,9,values.to.replace)
+   .test.apply.no.change('D$NEGATIVE_INTEGER','NEGATIVE_INTEGER_recoded',ds.test_env$local.values,9,values.to.replace)
             
     values.to.replace <- c()
     .test.apply.no.change('D$INTEGER','INTEGER_recoded',ds.test_env$local.values,6,values.to.replace)
