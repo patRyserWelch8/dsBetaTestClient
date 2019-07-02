@@ -26,7 +26,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 
 context("ds.cbind.o::arg::test errors")
 test_that("cbind_erros", {
-    expect_error(ds.cbind.o(), "Please provide a the name of a data.frame or matrix!", fixed=TRUE)
+    expect_error(ds.cbind.o(), "Please provide a vector of character strings holding the name of the input elements!", fixed=TRUE)
 })
 
 #
