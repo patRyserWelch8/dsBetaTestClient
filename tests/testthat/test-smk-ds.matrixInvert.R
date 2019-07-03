@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.matrixInvert:smoke")
+# context("dsBetaTestClient::ds.matrixInvert::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.matrixInvert()::smoke")
+context("ds.matrixInvert::smk")
 test_that("simplest ds.matrixInvert", {
     matrix <- c(-2, 1, 3, 0, -1, 1, 1, 2, 0)
 
@@ -47,4 +47,4 @@ test_that("simplest ds.matrixInvert", {
 # Tear down
 #
 
-# context("dsBetaTestClient::ds.matrixInvert:smoke done")
+# context("dsBetaTestClient::ds.matrixInvert::smk done")

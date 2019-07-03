@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.meanSdGp:smoke")
+# context("dsBetaTestClient::ds.meanSdGp::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.survival(list("age.60", "female"))
 # Tests
 #
 
-context("ds.meanSdGp()::smoke::type=split")
+context("ds.meanSdGp::smk::type=split")
 test_that("meanSdGp values [split]", {
     stat.meanSdGp <- ds.meanSdGp(x='D$age.60', y='D$female', type='split')
 
@@ -38,7 +38,7 @@ test_that("meanSdGp values [split]", {
     expect_equal(class(stat.meanSdGp$Total_Ntotal), "numeric")
 })
 
-context("ds.meanSdGp()::smoke::type=combine")
+context("ds.meanSdGp::smk::type=combine")
 test_that("meanSdGp values [combine]", {
     stat.meanSdGp <- ds.meanSdGp(x='D$age.60', y='D$female', type='combine')
 
@@ -52,7 +52,7 @@ test_that("meanSdGp values [combine]", {
     expect_equal(class(stat.meanSdGp$Total_Ntotal), "numeric")
 })
 
-context("ds.meanSdGp()::smoke::type=both")
+context("ds.meanSdGp::smk::type=both")
 test_that("meanSdGp values [both]", {
     stat.meanSdGp <- ds.meanSdGp(x='D$age.60', y='D$female', type='both')
 
@@ -70,4 +70,4 @@ test_that("meanSdGp values [both]", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.meanSdGp:smoke done")
+# context("dsBetaTestClient::ds.meanSdGp::smk done")

@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.dim.o:smoke")
+# context("dsBetaTestClient::ds.dim.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.dim.o()::smoke")
+context("ds.dim.o::smk")
 test_that("simple dim, both", {
     dim.res <- ds.dim.o('D', type='both')
 
@@ -43,7 +43,7 @@ test_that("simple dim, both", {
     expect_equal(dim.res$`dimensions of D in combined studies`[[2]], 1)
 })
 
-context("ds.dim.o()::smoke")
+context("ds.dim.o::smk")
 test_that("simple dim, split", {
     dim.res <- ds.dim.o('D', type='split')
 
@@ -59,7 +59,7 @@ test_that("simple dim, split", {
     expect_equal(dim.res$`dimensions of D in sim3`[[2]], 1)
 })
 
-context("ds.dim.o()::smoke")
+context("ds.dim.o::smk")
 test_that("simple dim, combine", {
     dim.res <- ds.dim.o('D', type='combine')
 
@@ -73,4 +73,4 @@ test_that("simple dim, combine", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.dim.o:smoke done")
+# context("dsBetaTestClient::ds.dim.o::smk done")

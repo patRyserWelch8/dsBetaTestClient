@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.listOpals.o:smoke")
+# context("dsBetaTestClient::ds.listOpals.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("ds.listOpals.o()::smoke::check results")
+context("ds.listOpals.o::smk::check results")
 test_that("check results", {
     message <- "\n*  This function lists all Opal objects in the R analysis environment\n\n\n*  There is only one set of opals available,\n that is: 'ds.test_env$connection.opal'\n\n\n\n*  This set of Opals has been copied to create 'default.opals',\n which all DataSHIELD functions will now use by default.\n If you want to change the default Opal object,\n please run the function ds.setDefaultOpals() again. \n\n\n\n"
 
@@ -35,4 +35,4 @@ test_that("check results", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.listOpals.o:smoke done")
+# context("dsBetaTestClient::ds.listOpals.o::smk done")

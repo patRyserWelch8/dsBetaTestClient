@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.glm.o 2:smoke")
+# context("dsBetaTestClient::ds.glm.o 2::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,9 +24,9 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.glm.o(): Standard Gaussian regression model for piecewise exponential regression analysis:smoke")
+# context("dsBetaTestClient::ds.glm.o: Standard Gaussian regression model for piecewise exponential regression analysis:smk")
 
-context("ds.glm.o()::smoke::Standard Gaussian regression model for piecewise exponential regression analysis")
+context("ds.glm.o::smk::Standard Gaussian regression model for piecewise exponential regression analysis")
 
 mod.D <- ds.glm.o('D$LAB_TSC~D$LAB_TRIG',family="gaussian")
 output.D1 <- mod.D$coefficients[,1]
@@ -44,4 +44,4 @@ test_that("glm_gaussian", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.glm.o:smoke done")
+# context("dsBetaTestClient::ds.glm.o:smk done")

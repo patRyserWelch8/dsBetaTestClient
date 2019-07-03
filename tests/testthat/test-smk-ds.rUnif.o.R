@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.rUnif.o:smoke")
+# context("dsBetaTestClient::ds.rUnif.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,8 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.rUnif.o():smoke simple test")
-context("ds.rUnif.o()::smoke::simple test")
+# context("dsBetaTestClient::ds.rUnif.o::smk simple test")
+context("ds.rUnif.o::smk::simple test")
 
 test_that("simple test", {
     res <- ds.rUnif.o(samp.size = 50, min = 0, max = 1, newobj = "unif_dist", seed.as.integer = 27, force.output.to.k.decimal.places = 4)
@@ -47,4 +47,4 @@ test_that("simple test", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.rUnif.o:smoke done")
+# context("dsBetaTestClient::ds.rUnif.o::smk done")

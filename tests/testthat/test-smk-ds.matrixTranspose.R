@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.matrixTranspose:smoke")
+# context("dsBetaTestClient::ds.matrixTranspose::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.matrixTranspose()::smoke")
+context("ds.matrixTranspose::smk")
 test_that("simplest ds.matrixTranspose", {
     matrix <- c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11)
 
@@ -47,4 +47,4 @@ test_that("simplest ds.matrixTranspose", {
 # Tear down
 #
 
-# context("dsBetaTestClient::ds.matrixTranspose:smoke done")
+# context("dsBetaTestClient::ds.matrixTranspose::smk done")

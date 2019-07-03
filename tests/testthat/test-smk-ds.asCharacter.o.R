@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.asCharacter.o:smoke")
+# context("dsBetaTestClient::ds.asCharacter.o:smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,8 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.asCharacter.o():smoke simple test")
-context("ds.asCharacter.o()::smoke::simple test")
+# context("dsBetaTestClient::ds.asCharacter.o::smk simple test")
+context("ds.asCharacter.o::smk::simple test")
 
 test_that("simple test", {
     res <- ds.asCharacter.o("D$LAB_TSC")
@@ -39,4 +39,4 @@ test_that("simple test", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.asCharacter.o 1:smoke done")
+# context("dsBetaTestClient::ds.asCharacter.o 1::smk done")
