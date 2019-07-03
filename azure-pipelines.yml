@@ -1,5 +1,5 @@
 jobs:
-- job: DataSHIELD-CI
+- job: DataSHIELD_CI
 
   timeoutInMinutes: 90
 
