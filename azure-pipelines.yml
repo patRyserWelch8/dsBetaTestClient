@@ -1,6 +1,8 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
+timeoutInMinutes: 90
+
 variables:
     datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
     repoName: 'dsBetaTestClient'
