@@ -40,11 +40,11 @@ steps:
   displayName: 'Install DataSHIELD server'
 
 - bash: |
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-    sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/'
-    sudo apt-get update
+#    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+#    sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/'
+#    sudo apt-get update
     sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev libgsl-dev -y
-    sudo apt-get install -qq r-base -y
+#    sudo apt-get install -qq r-base -y
     sudo R -q -e "install.packages('devtools', dependencies=TRUE)"
     sudo R -q -e "install.packages('metafor', dependencies=TRUE)"
     sudo R -q -e "install.packages('covr', dependencies=TRUE)"
