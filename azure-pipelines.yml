@@ -1,7 +1,9 @@
-pool:
-  vmImage: 'Ubuntu 16.04'
+job: DataSHIELD_CI
 
 timeoutInMinutes: 90
+
+pool:
+  vmImage: 'Ubuntu 16.04'
 
 variables:
     datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
