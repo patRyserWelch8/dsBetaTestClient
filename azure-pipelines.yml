@@ -1,7 +1,7 @@
 jobs:
 - job: DSCI
 
-  timeoutInMinutes: 10
+  timeoutInMinutes: 90
 
   pool:
     vmImage: 'Ubuntu 16.04'
