@@ -39,7 +39,7 @@ test_that("NULL expr", {
 context("ds.foobar.o::arg::aggregate")
 test_that("non existent aggregate foobarDS", {
     calltext <- call("fooBarDS.o")
-    expect_error(opal::datashield.aggregate(opal=ds.test_env$connection.opal, expr=calltext), "Command 'fooBarDS.o()' failed on 'sim1': <no message>", fixed=TRUE)
+    expect_error(opal::datashield.aggregate(opal=ds.test_env$connection.opal, expr=calltext), "Command 'fooBarDS.o()' failed on 'sim1': No such DataSHIELD 'AGGREGATE' method with name: fooBarDS.o", fixed=TRUE)
 })
 
 context("ds.foobar.o::arg::assign")
