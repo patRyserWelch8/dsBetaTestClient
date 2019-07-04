@@ -18,7 +18,6 @@ source("connection_to_datasets/init_all_datasets.R")
   expect_equal(var.servers[[1]][1], var.local.1, tolerance = ds.test_env$tolerance)
   expect_equal(var.servers[[1]][2], var.local.2, tolerance = ds.test_env$tolerance)
   expect_equal(var.servers[[1]][3], var.local.3, tolerance = ds.test_env$tolerance)
-  
 }
 
 .test.variance.positive.combine <- function(variable.name)
@@ -59,3 +58,4 @@ source("connection_to_datasets/init_all_datasets.R")
   expect_equal(std.servers[2],std.local.2, tolerance = ds.test_env$tolerance)
   expect_equal(std.servers[3],std.local.3, tolerance = ds.test_env$tolerance)
 }
+

@@ -1,45 +1,40 @@
 
 
-.test.mean.combined <- function(variable.name,some.values,column)
+.test.mean.combined <- function(variable.name,some.values)
 {
-  mean.from.files <- mean(some.values[,column])
-  mean.from.servers <- ds.mean.o(x=variable.name,type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-  expect_equal(mean.from.servers[[1]][1], mean.from.files, tolerance = ds.test_env$tolerance)
+  mean.local <- mean(some.values)
+  mean.server <- ds.mean.o(x=variable.name,type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  expect_equal(mean.server[[1]][1], mean.local, tolerance = ds.test_env$tolerance)
 }
 
-.test.mean.split <- function(variable.name,some.values.1,some.values.2,some.values.3,column)
+.test.mean.split <- function(variable.name,some.values.1,some.values.2,some.values.3)
 {
-  if(is.null(some.values.1))
-  {
-    mean.from.file.1 <- 0
-  }
-  else
-  {
-    mean.from.file.1 <- mean(some.values.1[,column])
-  }
+  mean.local.1 <- mean(some.values.1)
+  mean.local.2 <- mean(some.values.2)
+  mean.local.3 <- mean(some.values.3)
   
-  if(is.null(some.values.2))
-  {
-    mean.from.file.2 <- 0
-  }
-  else
-  {
-    mean.from.file.2 <- mean(some.values.2[,column])
-  }
+  mean.server <- ds.mean.o(x=variable.name,type='split', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  expect_equal(mean.server[[1]][1], mean.local.1, tolerance = ds.test_env$tolerance)
+  expect_equal(mean.server[[1]][2], mean.local.2, tolerance = ds.test_env$tolerance)
+  expect_equal(mean.server[[1]][3], mean.local.3, tolerance = ds.test_env$tolerance)
+}
 
-  if(is.null(some.values.3))
-  {
-    mean.from.file.3 <- 0
-  }
-  else
-  {
-    mean.from.file.3 <- mean(some.values.3[,column])
-  }
+.test.residual.combined <- function(variable.name, some.values)
+{
+  mean.server <- ds.mean.o(variable.name,type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  residue <- sum(some.values - mean.server[[1]][1])
+  expect_equal(residue, 0, tolerance = ds.test_env$tolerance)
+}  
+
+
+.test.residual.split <- function(variable.name, some.values.1,some.values.2,some.values.3)
+{
+  mean.server <- ds.mean.o(variable.name,type='split', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  residue.1 <- sum(some.values.1 - mean.server[[1]][1])
+  residue.2 <- sum(some.values.2 - mean.server[[1]][2])
+  residue.3 <- sum(some.values.3 - mean.server[[1]][3])
   
-  mean.from.servers <- ds.mean.o(x=variable.name,type='split', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
-  print(mean.from.servers)
-  expect_equal(mean.from.servers[[1]][1], mean.from.file.1, tolerance = ds.test_env$tolerance)
-  expect_equal(mean.from.servers[[1]][2], mean.from.file.2, tolerance = ds.test_env$tolerance)
-  expect_equal(mean.from.servers[[1]][3], mean.from.file.3, tolerance = ds.test_env$tolerance)
-  
+  expect_equal(residue.1, 0, tolerance = ds.test_env$tolerance)
+  expect_equal(residue.2, 0, tolerance = ds.test_env$tolerance)
+  expect_equal(residue.3, 0, tolerance = ds.test_env$tolerance)
 }
