@@ -22,7 +22,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
-context("ds.cov.o()::forceFail")
+context("ds.cov.o::forceFail")
 
 test_that("simple test", {
     res <- ds.cov.o(x="D$survtime", y="D$time.id")

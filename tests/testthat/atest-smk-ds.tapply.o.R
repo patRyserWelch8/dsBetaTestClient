@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "GENDER"))
 # Tests
 #
 
-context("ds.tapply.o()::smk")
+context("ds.tapply.o::smk")
 test_that("simplest 'ds.tapply.o'", {
     list <- ds.tapply.o('D$LAB_TSC', INDEX.names=c('D$GENDER'), FUN.name='sum', datasources=ds.test_env$connection.opal)
 
