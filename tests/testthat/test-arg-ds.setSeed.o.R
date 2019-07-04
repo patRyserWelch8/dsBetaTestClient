@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.unList.o::args test")
+# context("dsBetaTestClient::ds.setSeed.o::args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,13 +24,15 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.unList.o::arg::test errors")
-test_that("unList_erros", {
-    expect_error(ds.unList.o(), "Please provide the name of the input vector!", fixed=TRUE)
+context("ds.setSeed.o::arg::test errors")
+test_that("setSeed_erros", {
+    res <- ds.setSeed.o(seed.as.integer="Test")
+
+    expect_equal(res, "ERROR terminated: seed.as.integer must be set as an integer [numeric] or as being NULL")
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.unList.o::arg done")
+# context("dsBetaTestClient::ds.setSeed.o::arg done")

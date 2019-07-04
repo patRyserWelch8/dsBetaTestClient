@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.unList.o::args test")
+# context("dsBetaTestClient::ds.matrix:args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,13 +24,15 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.unList.o::arg::test errors")
-test_that("unList_erros", {
-    expect_error(ds.unList.o(), "Please provide the name of the input vector!", fixed=TRUE)
+context("ds.matrix::arg::test errors")
+test_that("matrix_erros", {
+    res <- ds.matrix(mdata=NULL)
+
+    expect_equal(res, "Error: mdata must be a character string, a numeric vector or a scalar")
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.unList.o::arg done")
+# context("dsBetaTestClient::ds.matrix:arg done")

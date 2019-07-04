@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.unList.o::args test")
+# context("dsBetaTestClient::ds.seq.o::args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,13 +24,13 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.unList.o::arg::test errors")
-test_that("unList_erros", {
-    expect_error(ds.unList.o(), "Please provide the name of the input vector!", fixed=TRUE)
+context("ds.seq.o::arg::test errors")
+test_that("seq_erros", {
+    expect_error(ds.seq.o(FROM.value.char="Test"), "object 'Test' not found", fixed=TRUE)
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.unList.o::arg done")
+# context("dsBetaTestClient::ds.seq.o::arg done")

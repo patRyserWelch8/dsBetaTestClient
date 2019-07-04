@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.unList.o::args test")
+# context("dsBetaTestClient::ds.make.o:args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,13 +24,13 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.unList.o::arg::test errors")
-test_that("unList_erros", {
-    expect_error(ds.unList.o(), "Please provide the name of the input vector!", fixed=TRUE)
+context("ds.make.o::arg::test errors")
+test_that("make_erros", {
+    expect_error(ds.make.o(), "Please give the name of object to assign or an expression to evaluate and assign.!\n", fixed=TRUE)
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.unList.o::arg done")
+# context("dsBetaTestClient::ds.make.o:arg done")

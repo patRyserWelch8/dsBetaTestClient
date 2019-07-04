@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.unList.o::args test")
+# context("dsBetaTestClient::ds.meanSdGp::args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,13 +24,13 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.unList.o::arg::test errors")
-test_that("unList_erros", {
-    expect_error(ds.unList.o(), "Please provide the name of the input vector!", fixed=TRUE)
+context("ds.meanSdGp::arg::test errors")
+test_that("meanSdGp_erros", {
+    expect_error(ds.meanSdGp(), "Please provide the name of the input vector!", fixed=TRUE)
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.unList.o::arg done")
+# context("dsBetaTestClient::ds.meanSdGp::arg done")
