@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.look.o:smoke")
+# context("dsBetaTestClient::ds.look.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG", "LAB_HDL"))
 # Tests
 #
 
-context("ds.look.o()::smoke")
+context("ds.look.o::smk")
 test_that("simple look", {
     res <- ds.look.o("lengthDS.o('D$LAB_TSC')")
 
@@ -39,4 +39,4 @@ test_that("simple look", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.look.o:smoke done")
+# context("dsBetaTestClient::ds.look.o::smk done")

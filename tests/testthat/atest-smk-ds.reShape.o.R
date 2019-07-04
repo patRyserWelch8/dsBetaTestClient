@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.reShape.o:smoke")
+# context("dsBetaTestClient::ds.reShape.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.reShape.o()")
+context("ds.reShape.o::smk")
 test_that("simplest ds.reShape.o", {
     myvectors <- c("D$LAB_TSC", "D$LAB_HDL")
     ds.dataFrame.o(x=myvectors, newobj = "orig_df")
@@ -40,4 +40,4 @@ test_that("simplest ds.reShape.o", {
 # Done
 #
 
-context("dsBetaTestClient::ds.reShape.o:smoke done")
+# context("dsBetaTestClient::ds.reShape.o::smk done")

@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.glm.o 1:smoke")
+# context("dsBetaTestClient::ds.glm.o 1::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female", "age.60"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.glm.o(): Standard Poisson regression model for piecewise exponential regression analysis:smoke")
+context("ds.glm.o::smk::poisson")
 
 # mod.D<-ds.glm.o("D$survtime~D$time.id+D$female+D$age.60",family="poisson")
 mod.D<-ds.glm.o("D$survtime~1+D$time.id+D$female",family="poisson")
@@ -39,7 +39,7 @@ test_that("glm_poisson", {
     expect_equal(ds.ls()$sim1[2],output.D,output.R)
 })
 
-context("dsBetaTestClient::ds.glm.o() errors:smoke")
+context("ds.glm.o::smk::errors")
 test_that("glm_errors", {
     expect_error(ds.glm.o(), "argument is of length zero", fixed=TRUE)
 })
@@ -48,4 +48,4 @@ test_that("glm_errors", {
 # Done
 #
 
-context("dsBetaTestClient::ds.glm.o 1:smoke done")
+# context("dsBetaTestClient::ds.glm.o 1::smk done")

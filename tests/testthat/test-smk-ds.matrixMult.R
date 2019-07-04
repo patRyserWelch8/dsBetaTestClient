@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.matrixMult:smoke")
+# context("dsBetaTestClient::ds.matrixMult::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.matrixMult()::smoke")
+context("ds.matrixMult::smk")
 test_that("simplest ds.matrixMult", {
     matrix1 <- c(-2, 1, 3, 0, -1, 1, 1, 2, 0)
     matrix2 <- c(-2, 1, 3, 1, -1, 1, 1, 2, 1)
@@ -49,4 +49,4 @@ test_that("simplest ds.matrixMult", {
 # Tear down
 #
 
-# context("dsBetaTestClient::ds.matrixMult:smoke done")
+# context("dsBetaTestClient::ds.matrixMult::smk done")

@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.make.o:smoke")
+# context("dsBetaTestClient::ds.make.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG", "LAB_HDL"))
 # Tests
 #
 
-context("ds.make.o()::smoke")
+context("ds.make.o::smk")
 test_that("simple make", {
     res <- ds.make.o("(D$LAB_TSC*D$LAB_TRIG*D$LAB_HDL)", "maded.rand")
 
@@ -37,4 +37,4 @@ test_that("simple make", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.make.o:smoke done")
+# context("dsBetaTestClient::ds.make.o::smk done")

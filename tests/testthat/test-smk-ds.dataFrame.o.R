@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.dataFrame.o:smoke")
+# context("dsBetaTestClient::ds.dataFrame.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("ds.dataFrame.o()::smoke::create a dataframe")
+context("ds.dataFrame.o::smk::create a dataframe")
 test_that("dataframe_exists", {
     vectors <- c('D$LAB_TSC', 'D$LAB_HDL')
     ds.dataFrame.o(x=vectors)
@@ -35,7 +35,7 @@ test_that("dataframe_exists", {
     expect_equal(res$sim3[2], "df_new")
 })
 
-context("ds.dataFrame.o()::smoke::create a dataframe, with DataSHIELD.checks")
+context("ds.dataFrame.o::smk::create a dataframe, with DataSHIELD.checks")
 test_that("dataframe_exists, with DataSHIELD.checks", {
     vectors <- c('D$LAB_TSC', 'D$LAB_HDL')
     ds.dataFrame.o(x=vectors, DataSHIELD.checks=TRUE)
@@ -50,4 +50,4 @@ test_that("dataframe_exists, with DataSHIELD.checks", {
 # Done
 #
 
-## context("dsBetaTestClient::ds.dataFrame.o:smoke done")
+## context("dsBetaTestClient::ds.dataFrame.o::smk done")

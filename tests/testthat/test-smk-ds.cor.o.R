@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.cor.o:smoke")
+# context("dsBetaTestClient::ds.cor.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
-context("ds.cor.o()::smoke")
+context("ds.cor.o::smk")
 
 test_that("simple test, combine", {
     res <- ds.cor.o(x="D$survtime", y="D$time.id", type="combine")
@@ -68,4 +68,4 @@ test_that("simple test, split", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.cor.o 1:smoke done")
+# context("dsBetaTestClient::ds.cor.o 1::smk done")

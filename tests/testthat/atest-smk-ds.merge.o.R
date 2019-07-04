@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.merge.o:smoke")
+# context("dsBetaTestClient::ds.merge.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG", "LAB_HDL", "DIS_CVA", "DIS_A
 # Tests
 #
 
-context("ds.merge.o()::smoke")
+context("ds.merge.o::smk")
 
 test_that("simple test", {
     spec_vectors_1 <- c('D$LAB_TSC', 'D$LAB_HDL')
@@ -58,4 +58,4 @@ test_that("simple test", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.merge.o 1:smoke done")
+# context("dsBetaTestClient::ds.merge.o 1::smk done")

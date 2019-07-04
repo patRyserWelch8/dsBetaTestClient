@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.var.o:smoke")
+# context("dsBetaTestClient::ds.var.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.var.o()::smoke::split")
+context("ds.var.o::smk::split")
 test_that("simple var, split", {
     var.res <- ds.var.o(x = 'D$LAB_TSC', type='split', datasources = ds.test_env$connection.opal)
 
@@ -49,7 +49,7 @@ test_that("simple var, split", {
     expect_equal(var.res$ValidityMessage[3], "VALID ANALYSIS")
 })
 
-context("ds.var.o()::smoke::combine")
+context("ds.var.o::smk::combine")
 test_that("simple var, combine", {
     var.res <- ds.var.o(x = 'D$LAB_TSC', type='combine', datasources = ds.test_env$connection.opal)
 
@@ -66,7 +66,7 @@ test_that("simple var, combine", {
     expect_equal(var.res$ValidityMessage[3], "VALID ANALYSIS")
 })
 
-context("ds.var.o()::smoke::both")
+context("ds.var.o::smk::both")
 test_that("simple var, both", {
     var.res <- ds.var.o(x = 'D$LAB_TSC', type='both', datasources = ds.test_env$connection.opal)
 
@@ -100,4 +100,4 @@ test_that("simple var, both", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.var.o:smoke done")
+# context("dsBetaTestClient::ds.var.o::smk done")

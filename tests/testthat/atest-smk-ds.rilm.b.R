@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.rilm.b:smoke")
+# context("dsBetaTestClient::ds.rilm.b::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("ds.rilm.b()::smoke")
+context("ds.rilm.b::smk")
 test_that("simple dim", {
     rilm.res <- ds.rilm.b(c('D$LAB_TSC'), y="D$LAB_HDL")
 
@@ -35,4 +35,4 @@ test_that("simple dim", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.rilm.b:smoke done")
+# context("dsBetaTestClient::ds.rilm.b:smk done")

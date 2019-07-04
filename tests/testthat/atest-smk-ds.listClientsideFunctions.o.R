@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.listClientsideFunctions.o:smoke")
+# context("dsBetaTestClient::ds.listClientsideFunctions.o::smk")
 
 # source("connection_to_datasets/init_all_datasets.R")
 # source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@
 # Tests
 #
 
-context("ds.listClientsideFunctions.o()::smoke::check results")
+context("ds.listClientsideFunctions.o::smk::check results")
 test_that("check results", {
     print("======")
     ds.listClientsideFunctions.o(all.functions=FALSE, dsBetaTestClient=TRUE)
@@ -117,4 +117,4 @@ test_that("check results", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.listClientsideFunctions.o:smoke done")
+# context("dsBetaTestClient::ds.listClientsideFunctions.o::smk done")

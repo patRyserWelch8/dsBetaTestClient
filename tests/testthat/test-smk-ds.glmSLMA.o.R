@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.glmSLMA.o:smoke")
+# context("dsBetaTestClient::ds.glmSLMA.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG", "GENDER"))
 # Tests
 #
 
-context("ds.glmSLMA.o()::smoke::gaussian")
+context("ds.glmSLMA.o::smk::gaussian")
 test_that("simple glmSLMA, gaussian", {
     glmSLMA.res <- ds.glmSLMA.o('D$LAB_TSC~D$LAB_TRIG', family="gaussian")
 
@@ -67,7 +67,7 @@ test_that("simple glmSLMA, gaussian", {
     expect_equal(glmSLMA.res$study3$Nmissing, 655)
 })
 
-#context("ds.glmSLMA.o()::smoke::binomial")
+#context("ds.glmSLMA.o::smk::binomial")
 #test_that("simple glmSLMA, binomial", {
 #    ds.asNumeric.o('D$GENDER', 'num.gender')
 #
@@ -109,7 +109,7 @@ test_that("simple glmSLMA, gaussian", {
 #    expect_equal(glmSLMA.res$study3$Nmissing, 655)
 #})
 
-context("ds.glmSLMA.o()::smoke::poisson")
+context("ds.glmSLMA.o::smk::poisson")
 test_that("simple glmSLMA, poisson", {
     glmSLMA.res <- ds.glmSLMA.o('D$LAB_TSC~D$LAB_TRIG', family="poisson")
 
@@ -152,4 +152,4 @@ test_that("simple glmSLMA, poisson", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.glmSLMA.o:smoke done")
+# context("dsBetaTestClient::ds.glmSLMA.o::smk done")

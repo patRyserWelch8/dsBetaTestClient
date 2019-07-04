@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.asMatrix.o:smoke")
+# context("dsBetaTestClient::ds.asMatrix.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,8 +24,8 @@ connect.smk.dataset.sim(list("GENDER"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.asMatrix.o():smoke simple test")
-context("ds.asMatrix.o()::smoke::simple test")
+# context("dsBetaTestClient::ds.asMatrix.o::smk simple test")
+context("ds.asMatrix.o::smk::simple test")
 
 test_that("simple test", {
     res <- ds.asMatrix.o(x.name="D$GENDER")
@@ -39,4 +39,4 @@ test_that("simple test", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.asMatrix.o 1:smoke done")
+# context("dsBetaTestClient::ds.asMatrix.o 1::smk done")

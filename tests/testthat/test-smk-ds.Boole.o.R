@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.Boole.o:smoke")
+# context("dsBetaTestClient::ds.Boole.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG"))
 # Tests
 #
 
-context("ds.Boole.o::smoke")
+context("ds.Boole.o::smk")
 test_that("simple boole", {
     res <- ds.Boole.o("D$LAB_TSC", "D$LAB_TRIG", "==")
 
@@ -37,4 +37,4 @@ test_that("simple boole", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.Boole.o:smoke done")
+# context("dsBetaTestClient::ds.Boole.o::smk done")

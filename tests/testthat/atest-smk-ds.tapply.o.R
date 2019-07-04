@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.tapply.o:smoke")
+# context("dsBetaTestClient::ds.tapply.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "GENDER"))
 # Tests
 #
 
-context("dsBetaTestClient::ds.tapply.o()")
+context("ds.tapply.o()::smk")
 test_that("simplest 'ds.tapply.o'", {
     list <- ds.tapply.o('D$LAB_TSC', INDEX.names=c('D$GENDER'), FUN.name='sum', datasources=ds.test_env$connection.opal)
 
@@ -35,4 +35,4 @@ test_that("simplest 'ds.tapply.o'", {
 # Tear down
 #
 
-context("dsBetaTestClient::ds.tapply.o:smoke done")
+# context("dsBetaTestClient::ds.tapply.o::smk done")
