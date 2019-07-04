@@ -6,33 +6,34 @@
 # are made available under the terms of the GNU Public License v3.0.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# along with this program.  If not, see <http://www.gnurg/licenses/>.
 #-------------------------------------------------------------------------------
 
 #
 # Set up
 #
 
-# context("dsBetaTestClient::ds.tapply.o::smk")
+# context("dsBetaTestClient::ds.matrixDet.report::arg")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
 
-connect.smk.dataset.sim(list("LAB_TSC", "GENDER"))
+connect.smk.dataset.sim(list("LAB_TSC"))
 
 #
 # Tests
 #
 
-context("ds.tapply.o::smk")
-test_that("simplest 'ds.tapply.o'", {
-    list <- ds.tapply.o('D$LAB_TSC', INDEX.names=c('D$GENDER'), FUN.name='sum', datasources=ds.test_env$connection.opal)
+context("ds.matrixDet.report::arg::test errors")
 
-    expect_true(length(list) == 0)
+test_that("ds.matixDet.report erros", {
+    res <- ds.matrixDet.report(M1=NULL)
+
+    expect_equal(res, "Error: Please provide the name of the matrix representing M1")
 })
 
 #
 # Tear down
 #
 
-# context("dsBetaTestClient::ds.tapply.o::smk done")
+# context("dsBetaTestClient::ds.matrixDet.report::arg done")

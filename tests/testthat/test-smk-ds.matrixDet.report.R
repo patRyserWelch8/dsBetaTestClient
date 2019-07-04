@@ -47,12 +47,6 @@ test_that("simplest ds.matrixDet.report", {
     expect_equal(res$matrix.determinant$sim3$matrix.determinant$sign, 1)
 })
 
-# context("ds.matrixDet.report::smk::test errors")
-
-# test_that("ds.matixDet.report erros", {
-#     expect_error(ds.matrixDet.report(M1=NULL), "Error: Please provide the name of the matrix representing M1", fixed=TRUE)
-# })
-
 #
 # Tear down
 #
