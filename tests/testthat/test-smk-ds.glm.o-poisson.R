@@ -18,22 +18,20 @@
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
 
-connect.smk.dataset.sim(list("LAB_TSC", "LAB_TRIG"))
+connect.smk.dataset.survival(list("survtime", "time.id", "female", "age.60"))
 
 #
 # Tests
 #
 
-# context("dsBetaTestClient::ds.glm.o:smk::gaussian")
-
-context("ds.glm.o::smk::gaussian")
+context("ds.glm.o::smk::poisson")
 test_that("glm_gaussian", {
-    res <- ds.glm.o('D$LAB_TSC~D$LAB_TRIG',family="gaussian")
+    res <- ds.glm.o("D$survtime~1+D$time.id+D$female",family="poisson")
 
     expect_length(res, 13)
-    expect_equal(res$Nvalid, 7800)
-    expect_equal(res$Nmissing, 1579)
-    expect_equal(res$Ntotal, 9379)
+    expect_equal(res$Nvalid, 6299)
+    expect_equal(res$Nmissing, 89)
+    expect_equal(res$Ntotal, 6388)
     expect_length(res$disclosure.risk, 3)
     expect_equal(res$disclosure[1], 0)
     expect_equal(res$disclosure[3], 0)
@@ -42,13 +40,13 @@ test_that("glm_gaussian", {
     expect_equal(res$errorMessage[1], "No errors")
     expect_equal(res$errorMessage[2], "No errors")
     expect_equal(res$errorMessage[3], "No errors")
-    expect_equal(res$nsubs, 7800)
-    expect_equal(res$iter, 3)
+    expect_equal(res$nsubs, 6299)
+    expect_equal(res$iter, 5)
     expect_equal(class(res$family), "family")
-    expect_equal(res$formula, "D$LAB_TSC ~ D$LAB_TRIG")
+    expect_equal(res$formula, "D$survtime ~ 1 + D$time.id + D$female")
     expect_equal(class(res$coefficients), "matrix")
-    expect_equal(res$dev, 8936.32, tolerance=0.00001)
-    expect_equal(res$df, 7798)
+    expect_equal(res$dev, 3522.598, tolerance=0.00001)
+    expect_equal(res$df, 6296)
     expect_equal(res$output.information, "SEE TOP OF OUTPUT FOR INFORMATION ON MISSING DATA AND ERROR MESSAGES")
 })
 
@@ -56,4 +54,4 @@ test_that("glm_gaussian", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.glm.o:smk done")
+# context("dsBetaTestClient::ds.glm.o::smk done")
