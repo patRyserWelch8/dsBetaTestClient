@@ -21,24 +21,24 @@ source("definition_tests/def-assign-stats.R")
 
 .identify.values.unique<- function(some.values, length)
 {
-   values <- c()
-   if (length > 0 || !is.null(some.values))
-   {
-      factors <- list(levels(as.factor(some.values)))
-      
-      for (i in 1:length)
-      {
-        index <-sample(length(factors[[1]]),1)
-        values[i]  <- as.numeric(factors[[1]][index])
-      }
-   }
-   return(values)
+  values <- c()
+  if (length > 0 || !is.null(some.values))
+  {
+    factors <- list(levels(as.factor(some.values)))
+    
+    for (i in 1:length)
+    {
+      index <-sample(length(factors[[1]]),1)
+      values[i]  <- as.numeric(factors[[1]][index])
+    }
+  }
+  return(values)
 }
 
 .identify.values.invalid <- function(some.values, length)
 {
   values <- c()
-
+  
   if (length > 0 || !is.null(some.values))
   {
     max.value <- max(some.values)
@@ -64,7 +64,7 @@ source("definition_tests/def-assign-stats.R")
   #test the values to replace have been set to at least one value
   if (!is.null(values.to.replace))
   {
- 
+    
     #identifies one or more values from the local data set. changes these values  locally and on the server.
     values <- .identify.values.unique(some.values[,column], length(values.to.replace))
     some.values[,column] <- .apply.changes.locally(some.values[,column],values, values.to.replace)
@@ -101,7 +101,7 @@ source("definition_tests/def-assign-stats.R")
   #test the values to replace have been set to at least one value
   if (!is.null(values.to.replace))
   {
-   
+    
     #identifies one or more values from the local data set. changes these values  locally and on the server.
     values <- .identify.values.invalid(some.values[,column], length(values.to.replace))
     some.values[,column] <- .apply.changes.locally(some.values[,column],values, values.to.replace)
@@ -110,7 +110,7 @@ source("definition_tests/def-assign-stats.R")
     #calculate the distribution of the local and server datasets after the changes
     dist.local.recoded <- .calc.distribution.locally(some.values[,column])
     dist.server.recoded <- .calc.distribution.server(variable.recoded)
-  
+    
     expect_equal(dist.local.original[1],dist.server.original[1], tolerance = ds.test_env$tolerance)
     expect_equal(dist.local.original[1],dist.server.original[1], tolerance = ds.test_env$tolerance)
     expect_equal(dist.local.recoded[2],dist.server.recoded[2], tolerance = ds.test_env$tolerance)
@@ -124,10 +124,10 @@ source("definition_tests/def-assign-stats.R")
 }
 
 .test.differences.in.sets <- function(variable.name, 
-                                variable.recoded, 
-                                some.values, 
-                                column,
-                                values.to.replace)
+                                      variable.recoded, 
+                                      some.values, 
+                                      column,
+                                      values.to.replace)
 {
   if (!is.null(values.to.replace))
   {
@@ -141,7 +141,7 @@ source("definition_tests/def-assign-stats.R")
     #calculate the sum of the data set on the server before recoding
     sum.server.original <- dist.server.original[1] * dist.server.original[3]
     sum.server.previous <- sum.server.original
-   
+    
     
     #keep the difference brought by changing each values
     differences.recorded  <- c()
@@ -169,10 +169,11 @@ source("definition_tests/def-assign-stats.R")
     difference.total <- sum.server.original - sum.server.recoded
     
     expect_equal(sum(differences.recorded), difference.total)
-  
+    
   }
   else
   {
     expect_error(ds.recodeValues.o(variable.names,values,values.to.replace,name.variable.recoded,datasources = ds.test_env$connection.opal))
   }
 }
+
