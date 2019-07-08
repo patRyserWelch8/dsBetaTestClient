@@ -18,7 +18,7 @@
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
 
-connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
+connect.smk.dataset.survival(list("id", "study.id", "time.id", "cens", "age.60", "female"))
 
 #
 # Tests
@@ -26,14 +26,20 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 
 context("ds.reShape.o::smk")
 test_that("simplest ds.reShape.o", {
-    myvectors <- c("D$LAB_TSC", "D$LAB_HDL")
-    ds.dataFrame.o(x=myvectors, newobj = "orig_df")
+    vectors <- c("D$id", "D$study.id", "D$time.id", "D$cens", "D$age.60", "D$female")
+    ds.dataFrame.o(x=vectors, newobj = "sur_df")
 
-    reshape.res <- ds.reShape.o("orig_df", varying=c("A"), v.names=c("B"), direction='wide')
+    print("====")
+    print(ds.colnames("sur_df", datasources=ds.test_env$connection.opal))
+    print("====")
 
-    print(paste0("[" + reshape.res + "]"))
+    res <- ds.reShape.o(data.name="sur_df", v.names="outcome", timevar.name="D$time.id", idvar.name="D$age.60", direction='wide', newobj="reshape_obj")
 
-    expect_true(length(reshape.res) == 0)
+    print("====")
+    print(res)
+    print("====")
+
+    expect_length(res, 3)
 })
 
 #
