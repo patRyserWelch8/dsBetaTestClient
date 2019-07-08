@@ -13,20 +13,20 @@
 # Set up
 #
 
-context("dsBetaTestClient::ds.tapply.assign.o")
+# context("dsBetaTestClient::ds.tapply.assign.o::smk")
 
-options(opal.server1="sim1", opal.server2="sim2", opal.server3="sim3")
-options(opal.table1="CNSIM.CNSIM1", opal.table2="CNSIM.CNSIM2", opal.table3="CNSIM.CNSIM3")
-options(datashield.variables=list("LAB_TSC","GENDER"))
-source("setup.R")
+source("connection_to_datasets/init_all_datasets.R")
+source("connection_to_datasets/init_smk_datasets.R")
+
+connect.smk.dataset.sim(list("LAB_TSC", "GENDER"))
 
 #
 # Tests
 #
 
-context("dsBetaTestClient::ds.tapply.assign.o()")
-test_that("simplest 'tapply.assign'", {
-    list <- ds.tapply.assign.o(X.name='D$LAB_TSC', INDEX.name='GENDER', FUN.name='sum', newobj='D$TEMP', datasources=opals)
+context("ds.tapply.assign.o::smk")
+test_that("simplest 'ds.tapply.assign.o'", {
+    list <- ds.tapply.assign.o(X.name='D$LAB_TSC', INDEX.names=c('D$GENDER'), FUN.name='sum', newobj='temp.obj')
 
     expect_true(length(list) == 0)
 })
@@ -35,6 +35,5 @@ test_that("simplest 'tapply.assign'", {
 # Tear down
 #
 
-source("teardown.R")
+# context("dsBetaTestClient::ds.tapply.assign.o::smk done")
 
-context("dsBetaTestClient::ds.tapply.assign.o done")
