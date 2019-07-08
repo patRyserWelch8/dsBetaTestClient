@@ -9,12 +9,11 @@
 #' disctinct histograms (one for each study) or a combine histogram that merges
 #' the single plots.
 #' @param x a charcater, the name of the vector of values for which the histogram is desired.
-#' @param type a character which represent the type of graph to display.
-#' If \code{type} is set to 'combine', a histogram that merges the single
-#' plot is displayed. Each histogram is plotted separately if If \code{type}
-#' is set to 'split'.
-#' @param num.breaks a numeric specifying the number of breaks of the histogram. The
-#' default value is set to 10.
+#' @param type a character which represent the type of graph to display. If \code{type} is set to
+#' 'combine', a histogram that merges the single plot is displayed. Each histogram is plotted
+#' separately if \code{type} is set to 'split'.
+#' @param num.breaks a numeric specifying the number of breaks of the histogram. The default value
+#' is set to 10.
 #' @param method a character which defines which histogram will be created. If \code{method}
 #' is set to 'smallCellsRule' (default option), the histogram of the actual variable is
 #' created but bins with low counts are removed. If \code{method} is set to 'deterministic'
@@ -53,7 +52,7 @@
 #'   data(logindata)
 #'
 #'   # login to the servers
-#'   opals <- datashield.login(logins=logindata, assign=TRUE)
+#'   opals <- opal::datashield.login(logins=logindata, assign=TRUE)
 #'
 #'   # Example 1: generate a histogram for each study separately (the default behaviour)
 #'   ds.histogram.o(x='LD$PM_BMI_CONTINUOUS', type="split")
@@ -107,7 +106,7 @@
 #'   lines(hist$mids, hist$density)
 #'
 #'   # clear the Datashield R sessions and logout
-#'   datashield.logout(opals)
+#'   opal::datashield.logout(opals)
 #'
 #' }
 #'
