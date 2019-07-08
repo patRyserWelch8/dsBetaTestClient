@@ -6,7 +6,7 @@
 \usage{
 ds.recodeValues.o(var.name = NULL, values2replace.vector = NULL,
   new.values.vector = NULL, force.output.format = "no",
-  newobj = NULL, datasources = NULL)
+  newobj = NULL, datasources = NULL, notify.of.progress = FALSE)
 }
 \arguments{
 \item{var.name}{a character string providing the name for the vector representing the
@@ -59,6 +59,9 @@ apply the function solely to e.g. the second opal server in a set of three,
 the argument can be specified as: e.g. datasources=opals.em[2].
 If you wish to specify the first and third opal servers in a set you specify:
 e.g. datasources=opals.em[c(1,3)]}
+
+\item{notify.of.progress}{specifies if console output should be produce to indicate
+progress. The default value for notify.of.progress is FALSE.}
 }
 \value{
 the object specified by the <newobj> argument (or default name '<var.name>_recoded').
