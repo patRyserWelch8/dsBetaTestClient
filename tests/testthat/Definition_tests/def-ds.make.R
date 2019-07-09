@@ -20,11 +20,27 @@ source("definition_tests/def-assign-stats.R")
   expect_equal(dist.server.original[2],dist.server.new.object[2], tolerance = ds.test_env$tolerance)
 }
 
-.test.operation.vectors <- function(first.variable.name, second.variable.name, variable.created, first.values, second.values, arithmetic.operator)
+.test.operation.vectors <- function(first.variable.name, second.variable.name, variable.created, arithmetic.operator, result.local)
 {
-  #add the vectors locally and on the server
-  result.local <- .add.vectors(first.values, second.values)
-  operation <- paste(first.variable.name, arithmetic.operator, second.variable.name)
+  #build expressions and applies on the server
+  operation <- paste("(",first.variable.name, arithmetic.operator, second.variable.name,")",sep="")
+  result.server <- ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  #distribution the results between the local and server data.
+  dist.local <- .calc.distribution.locally(result.local)
+  dist.server.new.object <- .calc.distribution.server(variable.created)
+
+ 
+  #compare the results between the local and server data distribution.
+  expect_equal(dist.local[1],dist.server.new.object[1], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.local[2],dist.server.new.object[2], tolerance = ds.test_env$tolerance)
+}
+
+.test.operation.constant <- function(first.variable.name, constant.value, variable.created, arithmetic.operator, result.local)
+{
+  #build expressions and applies on the server
+  operation <- paste("(",first.variable.name, arithmetic.operator, constant.value,")",sep="")
+  
   result.server <- ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
   
   #distribution the results between the local and server data.
@@ -35,4 +51,3 @@ source("definition_tests/def-assign-stats.R")
   expect_equal(dist.local[1],dist.server.new.object[1], tolerance = ds.test_env$tolerance)
   expect_equal(dist.local[2],dist.server.new.object[2], tolerance = ds.test_env$tolerance)
 }
-

@@ -53,7 +53,8 @@
 
 .divide.vectors <- function(first.vector, second.vector)
 {
-  return(first.vector / second.vector)
+   result <- first.vector / second.vector
+   return(result[!is.na(result)])
 }
 
 .substract.vectors <- function(first.vector, second.vector)
