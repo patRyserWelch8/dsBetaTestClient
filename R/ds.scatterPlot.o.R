@@ -54,12 +54,12 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' 
+#'
 #'   # load the file that contains the login details
 #'   data(logindata)
 #' 
 #'   # login to the servers
-#'   opals <- datashield.login(logins=logindata, assign=TRUE)
+#'   opals <- opal::datashield.login(logins=logindata, assign=TRUE)
 #' 
 #'   # Example 1: generate a scatter plot for each study separately (the default behaviour)
 #'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', type="split")
@@ -88,7 +88,7 @@
 #'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=2,
 #'                    method='deterministic')
 #'
-#'   # Example 8: generate a combined scatter plot with the probabilistic method 
+#'   # Example 8: generate a combined scatter plot with the probabilistic method
 #'   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic',
 #'                    type='combine')
 #'
@@ -105,10 +105,10 @@
 #'                    noise=0.1, type='split')
 #'
 #'   # clear the Datashield R sessions and logout
-#'   datashield.logout(opals)
+#'   opal::datashield.logout(opals)
 #'
 #' }
-#' 
+#'
 ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise=0.25, type="split", datasources=NULL){
 
   # if no opal login details are provided look for 'opal' objects in the environment
@@ -119,11 +119,11 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise
   if(is.null(y)){
     stop("Please provide the y-variable", call.=FALSE)
   }
-    
+
   if(is.null(datasources)){
     datasources <- findLoginObjects()
   }
-  
+
   # the input variable might be given as column table (i.e. D$object)
   # or just as a vector not attached to a table (i.e. object)
   # we have to make sure the function deals with each case
@@ -131,7 +131,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise
   xnames <- extract(objects)
   varnames <- xnames$elements
   obj2lookfor <- xnames$holders
-  
+
   # check if the input object(s) is(are) defined in all the studies
   for(i in 1:length(varnames)){
     if(is.na(obj2lookfor[i])){
@@ -140,7 +140,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise
       defined <- isDefined(datasources, obj2lookfor[i])
     }
   }
-  
+
   # call the internal function that checks the input object(s) is(are) of the same class in all studies.
   typ.x <- checkClass(datasources, x)
   typ.y <- checkClass(datasources, y)
@@ -154,7 +154,7 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise
     message(paste0(y, " is of type ", typ.y, "!"))
     stop("The input objects must be integer or numeric vectors.", call.=FALSE)
   }
- 
+
   # the input variable might be given as column table (i.e. D$x)
   # or just as a vector not attached to a table (i.e. x)
   # we have to make sure the function deals with each case
@@ -162,13 +162,13 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise
   x.lab <- xnames[[length(xnames)]]
   ynames <- extract(y)
   y.lab <- ynames[[length(ynames)]]
-  
+
   # name of the studies to be used in the plots' titles
   stdnames <- names(datasources)
-  
+
   # number of studies
   num.sources <- length(datasources)
-  
+
   if(method=='deterministic'){ method.indicator <- 1 }
   if(method=='probabilistic'){ method.indicator <- 2 }
 
@@ -201,17 +201,17 @@ ds.scatterPlot.o <- function (x=NULL, y=NULL, method='deterministic', k=3, noise
           numc <- 2
           graphics::par(mfrow=c(numr,numc))
           scatter <- list()
-		    }
-		    for(i in 1:num.sources){
-          title <- paste0("Scatter plot of ", stdnames[i])
-	        x <- output[[i]][[1]]
-          y <- output[[i]][[2]]
-          graphics::plot(x, y, xlab=x.lab, ylab=y.lab, main=title)			
         }
-	return.message <- "Split plot created"
-		    return(return.message)
+        for(i in 1:num.sources){
+          title <- paste0("Scatter plot of ", stdnames[i])
+          x <- output[[i]][[1]]
+          y <- output[[i]][[2]]
+          graphics::plot(x, y, xlab=x.lab, ylab=y.lab, main=title)
+        }
+        return.message <- "Split plot created"
+        return(return.message)
     }else{
-        stop('Function argument "type" has to be either "combine" or "split"')
+      stop('Function argument "type" has to be either "combine" or "split"')
     }
   }
 }
