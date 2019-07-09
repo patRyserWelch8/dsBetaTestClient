@@ -40,8 +40,7 @@ source("definition_tests/def-assign-stats.R")
 {
   #build expressions and applies on the server
   operation <- paste("(",first.variable.name, arithmetic.operator, constant.value,")",sep="")
-  
-  result.server <- ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
   
   #distribution the results between the local and server data.
   dist.local <- .calc.distribution.locally(result.local)
@@ -74,6 +73,37 @@ source("definition_tests/def-assign-stats.R")
    expect_true(mean.original != mean.transformed)
 }
 
+.test.copy.apply.operator <- function(first.variable.name, constant.value, variable.created, arithmetic.operator, some.values,result.local)
+{
+  #calculate the distribution of the localserver
+  dist.local <- .calc.distribution.locally(some.values)
+  dist.local.result <- .calc.distribution.locally(result.local)
+  dist.server.original <- .calc.distribution.server(first.variable.name)
+  
+  #create a new object with the same values. calculate distribution of new object
+  variable.created.cp <- paste(variable.created, "_cp")
+  ds.make.o(first.variable.name,variable.created.cp,datasources = ds.test_env$connection.opal)
+  dist.server.new.object <- .calc.distribution.server(variable.created)
+  
+  #apply the operator to the server
+  operation <- paste("(",variable.created.cp, arithmetic.operator, constant.value,")",sep="")
+  ds.make.o(operation,variable.created.cp,datasources = ds.test_env$connection.opal)
+  
+  #distribution second changes
+  dist.server.result <- .calc.distribution.server(variable.created)
+  
+  #compare the results between the local and server data distribution.
+  expect_equal(dist.local[1],dist.server.original[1], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.local[2],dist.server.original[2], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.local[1],dist.server.new.object[1], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.local[2],dist.server.new.object[2], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.server.original[1],dist.server.new.object[1], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.server.original[2],dist.server.new.object[2], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.local.result[1],dist.server.result[1], tolerance = ds.test_env$tolerance)
+  expect_equal(dist.local.result[2],dist.server.result[2], tolerance = ds.test_env$tolerance)
+  
+}
+
 .test.inverse <- function(first.variable.name, constant.value, variable.created, arithmetic.operator, inverse.operator)
 {
   #calc mean of the original values
@@ -88,7 +118,6 @@ source("definition_tests/def-assign-stats.R")
   
   #build expressions and applies on the server - inverse
   operation <- paste("(", variable.created, inverse.operator, constant.value,")",sep="")
-  print(operation)
   variable.created.inverse <- paste(variable.created, "_inv")
   result.server.inverse <- ds.make.o(operation,variable.created.inverse,datasources = ds.test_env$connection.opal)
   print(result.server.inverse)
