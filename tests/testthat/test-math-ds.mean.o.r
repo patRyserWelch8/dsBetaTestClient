@@ -5,7 +5,6 @@ context("ds.mean.o()::math::residual::multiple")
 test_that("residual deviation tends to 0",
 {
   connect.all.datasets()
-  
   .test.residual.combined('D$INTEGER',ds.test_env$local.values[,6])
   .test.residual.combined('D$NON_NEGATIVE_INTEGER',ds.test_env$local.values[,7])
   .test.residual.combined('D$POSITIVE_INTEGER',ds.test_env$local.values[,8])

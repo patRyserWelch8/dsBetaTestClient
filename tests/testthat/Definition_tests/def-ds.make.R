@@ -51,3 +51,55 @@ source("definition_tests/def-assign-stats.R")
   expect_equal(dist.local[1],dist.server.new.object[1], tolerance = ds.test_env$tolerance)
   expect_equal(dist.local[2],dist.server.new.object[2], tolerance = ds.test_env$tolerance)
 }
+
+.test.operation.mean <- function(first.variable.name, constant.value, variable.created, arithmetic.operator)
+{
+   #calc mean of the original values
+   server.dist <- .calc.distribution.server(first.variable.name)
+   mean.original <- server.dist[1]
+
+   #build expressions and applies on the server
+   operation <- paste("(",first.variable.name, arithmetic.operator, constant.value,")",sep="")
+   result.server <- ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+   
+   #distribution the results server data.
+   dist.server.new.object <- .calc.distribution.server(variable.created)
+  
+   #transform the mean by applying the same operations and constant value to the mean. 
+   expression <- paste("mean.transformed <- mean.original", arithmetic.operator, constant.value)
+   eval(parse(text = expression))
+   
+   #compare results
+   expect_equal(mean.transformed,dist.server.new.object[1])
+   expect_true(mean.original != mean.transformed)
+}
+
+.test.inverse <- function(first.variable.name, constant.value, variable.created, arithmetic.operator, inverse.operator)
+{
+  #calc mean of the original values
+  dist.server <- .calc.distribution.server(first.variable.name)
+
+  #build expressions and applies on the server
+  operation <- paste("(",first.variable.name, arithmetic.operator, constant.value,")",sep="")
+  result.server <- ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  #distribution the results server data.
+  dist.server.prime <- .calc.distribution.server(variable.created)
+  
+  #build expressions and applies on the server - inverse
+  operation <- paste("(", variable.created, inverse.operator, constant.value,")",sep="")
+  print(operation)
+  variable.created.inverse <- paste(variable.created, "_inv")
+  result.server.inverse <- ds.make.o(operation,variable.created.inverse,datasources = ds.test_env$connection.opal)
+  print(result.server.inverse)
+  
+  
+  #distribution the inverse set
+  dist.server.inverse <- .calc.distribution.server(variable.created.inverse)
+  
+  #compare results
+  expect_equal(dist.server[1], dist.server.inverse[1])
+  expect_equal(dist.servert[2], dist.server.inverse[2])
+  expect_true(dist.server[1] != dist.server.prime[1])
+  expect_true(dist.server.prime[1] != dist.server.inverse[1])
+}
