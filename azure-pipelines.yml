@@ -10,6 +10,15 @@ jobs:
     datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
     repoName: 'dsBetaTestClient'
 
+
+  schedules:
+  - cron: "0 0 * * *"
+    displayName: Daily midnight build
+    branches:
+      include:
+      - master
+    always: true
+
   steps:
   - bash: |
       sudo service mysql stop
