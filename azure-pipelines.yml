@@ -1,3 +1,12 @@
+schedules:
+  - cron: "0 0 * * *"
+    displayName: Daily midnight build
+    branches:
+      include:
+      - master
+    always: true
+
+
 jobs:
 - job: DataSHIELD_CI
 
@@ -11,13 +20,6 @@ jobs:
     repoName: 'dsBetaTestClient'
 
 
-  schedules:
-  - cron: "0 0 * * *"
-    displayName: Daily midnight build
-    branches:
-      include:
-      - master
-    always: true
 
   steps:
   - bash: |
