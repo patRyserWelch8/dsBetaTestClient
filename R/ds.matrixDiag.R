@@ -56,8 +56,7 @@
 #' @param newobj A character string specifying the name of the output object
 #' to be written to the serverside which may be a matrix or a vector
 #' depending on the value of the <aim> argument.If no <newobj> argument is
-#' specified, the output object name defaults to "diag_<x1>" where <x1>
-#' is the value of the <x1> argument
+#' specified, the output object name defaults to "diag".
 #' @param datasources specifies the particular opal object(s) to use. If the <datasources>
 #' argument is not specified the default set of opals will be used. The default opals
 #' are called default.opals and the default can be set using the function
@@ -68,7 +67,7 @@
 #' If you wish to specify the first and third opal servers in a set you specify:
 #' e.g. datasources=opals.em[c(1,3)]
 #' @return the matrix or vector specified by the <newobj> argument
-#' (or default name diag_<x1>)
+#' (or default name diag)
 #' which is written to the serverside. In addition, two validity messages are returned
 #' indicating whether <newobj> has been created in each data source and if so whether
 #' it is in a valid form. If its form is not valid in at least one study - e.g. because
@@ -99,7 +98,7 @@ ds.matrixDiag<-function(x1=NULL, aim=NULL, nrows.scalar=NULL, newobj=NULL, datas
   # if no value spcified for output object, then specify a default
   if(is.null(newobj))
   {
-    newobj <- paste0("diag_",x1)
+    newobj <- "diag"
   }
 
   #process x1 to make transmittable depending on aim
