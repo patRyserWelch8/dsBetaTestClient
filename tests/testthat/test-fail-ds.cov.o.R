@@ -13,6 +13,11 @@
 # Set up
 #
 
+<<<<<<< HEAD:tests/testthat/test-fail-ds.cov.o.R
+=======
+# context("dsBetaTestClient::ds.rilm.b::smk")
+
+>>>>>>> upstream/master:tests/testthat/atest-smk-ds.rilm.b.R
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
 
@@ -22,6 +27,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
+<<<<<<< HEAD:tests/testthat/test-fail-ds.cov.o.R
 context("ds.cov.o()::forceFail")
 
 test_that("simple test", {
@@ -33,9 +39,19 @@ test_that("simple test", {
 
     expect_equal(class(res[[1]]$`Number of missing values in each variable`), "matrix")
     expect_equal(class(res[[1]]$`Number of missing values in each variable`), "horse")
+=======
+context("ds.rilm.b::smk")
+test_that("simple dim", {
+    rilm.res <- ds.rilm.b(c('D$LAB_TSC'), y="D$LAB_HDL")
+>>>>>>> upstream/master:tests/testthat/atest-smk-ds.rilm.b.R
 
 })
 
 #
 # Done
 #
+<<<<<<< HEAD:tests/testthat/test-fail-ds.cov.o.R
+=======
+
+# context("dsBetaTestClient::ds.rilm.b:smk done")
+>>>>>>> upstream/master:tests/testthat/atest-smk-ds.rilm.b.R

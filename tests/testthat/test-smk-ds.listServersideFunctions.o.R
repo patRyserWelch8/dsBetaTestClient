@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.listServersideFunctions.o:smoke")
+# context("dsBetaTestClient::ds.listServersideFunctions.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("ds.listServersideFunctions.o()::smoke::check results")
+context("ds.listServersideFunctions.o::smk::check results")
 test_that("check results", {
     assign.functions <- factor(c(
       "BooleDS.o", "as.character", "as.null", "as.numeric", "asCharacterDS.o", "asDataMatrixDS.o",
@@ -87,4 +87,4 @@ test_that("check results", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.listServersideFunctions.o:smoke done")
+# context("dsBetaTestClient::ds.listServersideFunctions.o::smk done")

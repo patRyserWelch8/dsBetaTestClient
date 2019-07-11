@@ -70,10 +70,10 @@ test_that("The number of servers the same has setup",
 #print(nrow(ds.test_env$local.values))
 #print(dimensions[[1]][1] == nrow(ds.test_env$local.values))
 
-context("The number of rows of the test data are the same on the server and locally")
-test_that("The of rows are the same",
-{
-  dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
-  expect_true(dimensions[[1]][1] == nrow(ds.test_env$local.values))
-})
+#context("The number of rows of the test data are the same on the server and locally")
+#test_that("The of rows are the same",
+#{
+#  dimensions <- ds.dim(x='D',type='combine',datasources = ds.test_env$connection.opal)
+#  expect_true(dimensions[[1]][1] == nrow(ds.test_env$local.values))
+#})
 

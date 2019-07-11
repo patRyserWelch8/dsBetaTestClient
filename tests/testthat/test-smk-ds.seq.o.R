@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.seq.o:smoke")
+# context("dsBetaTestClient::ds.seq.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.seq.o()::smoke")
+context("ds.seq.o::smk")
 test_that("simplest ds.seq.o", {
     seq.res <- ds.seq.o("1", "1", "10", "D$LAB_TSC", "obj")
 
@@ -37,4 +37,4 @@ test_that("simplest ds.seq.o", {
 # Tear down
 #
 
-# context("dsBetaTestClient::ds.seq.o:smoke done")
+# context("dsBetaTestClient::ds.seq.o::smk done")

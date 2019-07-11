@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.rm.o:smoke")
+# context("dsBetaTestClient::ds.rm.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
-context("ds.rm.o()::smoke")
+context("ds.rm.o::smk")
 
 test_that("simple test", {
     res1 <- ds.rm.o("nonexistant_object")
@@ -50,14 +50,8 @@ test_that("simple test", {
     expect_equal(res2$survival3$return.message, "Object <existing_object> successfully deleted")
 })
 
-context("ds.rm.o()::smoke::test errors")
-
-test_that("ds.rm.o erros", {
-    expect_error(ds.rm.o(), "Please provide the name of the object to be deleted (eg 'object.name') as the x.name argument", fixed=TRUE)
-})
-
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.rm.o:smoke done")
+# context("dsBetaTestClient::ds.rm.o::smk done")

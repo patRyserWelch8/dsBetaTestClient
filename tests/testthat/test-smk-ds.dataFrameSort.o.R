@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.dataFrameSort.o:smoke")
+# context("dsBetaTestClient::ds.dataFrameSort.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,8 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.dataFrameSort.o():smoke create a sorted dataframe")
-context("ds.dataFrameSort.o()::smoke::create a sorted dataframe")
+# context("dsBetaTestClient::ds.dataFrameSort.o::smk create a sorted dataframe")
+context("ds.dataFrameSort.o::smk::create a sorted dataframe")
 test_that("dataFrameSort_exists", {
     myvectors <- c('D$LAB_TSC', 'D$LAB_HDL')
     ds.dataFrame.o(x=myvectors, newobj="unsorted_df")
@@ -41,4 +41,4 @@ test_that("dataFrameSort_exists", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.dataFrameSort.o:smoke done")
+# context("dsBetaTestClient::ds.dataFrameSort.o::smk done")

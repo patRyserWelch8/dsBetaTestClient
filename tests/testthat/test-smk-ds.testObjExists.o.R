@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.testObjExists.o:smoke")
+# context("dsBetaTestClient::ds.testObjExists.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-context("ds.testObjExists.o()::smoke")
+context("ds.testObjExists.o::smk")
 test_that("simple testObjExists", {
     res <- ds.testObjExists.o('D')
 
@@ -47,4 +47,4 @@ test_that("simple testObjExists", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.testObjExists.o:smoke done")
+# context("dsBetaTestClient::ds.testObjExists.o::smk done")

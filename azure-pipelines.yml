@@ -1,105 +1,114 @@
-pool:
-  vmImage: 'Ubuntu 16.04'
+schedules:
+  - cron: "0 0 * * *"
+    displayName: Daily midnight build
+    branches:
+      include:
+      - master
+    always: true
 
-variables:
+
+jobs:
+- job: DataSHIELD_CI
+
+  timeoutInMinutes: 90
+
+  pool:
+    vmImage: 'Ubuntu 16.04'
+
+  variables:
     datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
+    repoName: 'dsBetaTestClient'
 
-steps:
-- bash: |
-    sudo service mysql stop
-    sudo apt-get update
-    sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
-    sudo apt-get purge mysql-client mysql-server mysql-common -y
-    sudo apt-get autoremove -y
-    sudo apt-get autoclean -y
-    sudo rm -rf /var/lib/mysql/
 
-    wget -nv https://apt.puppetlabs.com/puppet5-release-xenial.deb
-    sudo dpkg -i puppet5-release-xenial.deb
-    sudo apt-get install -qq -f
-    sudo apt-get update
-    sudo rm -f puppet5-release-xenial.deb
 
-    sudo apt-get install puppet-agent -y
+  steps:
+  - bash: |
+      sudo service mysql stop
+      sudo apt-get update
+      sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
+      sudo apt-get purge mysql-client mysql-server mysql-common -y
+      sudo apt-get autoremove -y
+      sudo apt-get autoclean -y
+      sudo rm -rf /var/lib/mysql/
 
-    sudo apt-get clean all
-    sudo apt-get update
-    sudo apt-get autoremove -y
-    sudo apt-get clean all
+      wget -nv https://apt.puppetlabs.com/puppet5-release-xenial.deb
+      sudo dpkg -i puppet5-release-xenial.deb
+      sudo apt-get install -qq -f
+      sudo apt-get update
+      sudo rm -f puppet5-release-xenial.deb
 
-    sudo /opt/puppetlabs/puppet/bin/gem install r10k
+      sudo apt-get install puppet-agent -y
 
-    echo -n "Puppet version: "
-    /opt/puppetlabs/bin/puppet --version
-    /opt/puppetlabs/puppet/bin/r10k version
+      sudo /opt/puppetlabs/puppet/bin/gem install r10k
 
-    git clone -b ubuntu16 https://github.com/datashield/datashield-infrastructure.git ../datashield-infrastructure
-    pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install && popd
-    sudo /opt/puppetlabs/bin/puppet apply azure-pipelines_site.pp --environment datashield_azurepipelines --environmentpath ../datashield-infrastructure/puppet/environments
-  displayName: 'Install DataSHIELD server'
+      echo -n "Puppet version: "
+      /opt/puppetlabs/bin/puppet --version
+      /opt/puppetlabs/puppet/bin/r10k version
 
-- bash: |
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
-    sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu xenial-cran35/'
-    sudo apt-get update
-    sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev libgsl-dev -y
-    sudo apt-get install -qq r-base -y
-    sudo R -q -e "install.packages('devtools', dependencies=TRUE)"
-    sudo R -q -e "install.packages('metafor', dependencies=TRUE)"
-    sudo R -q -e "install.packages('covr', dependencies=TRUE)"
-    sudo R -q -e "devtools::install_github(repo='datashield/opal', ref='master')"
-    sudo R -q -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
-    sudo R -q -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='datashield_test&', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
-  displayName: 'Install R client'
+      git clone -b ubuntu16 https://github.com/datashield/datashield-infrastructure.git ../datashield-infrastructure
+      pushd ../datashield-infrastructure/puppet/environments/datashield_azurepipelines && sudo /opt/puppetlabs/puppet/bin/r10k puppetfile install && popd
+      sudo /opt/puppetlabs/bin/puppet apply azure-pipelines_site.pp --environment datashield_azurepipelines --environmentpath ../datashield-infrastructure/puppet/environments
+    displayName: 'Install DataSHIELD server'
 
-- bash: |
-    R -q -e "library('devtools'); devtools::check(args = c('--no-examples'))" | tee azure-pipelines_check.Rout
-    grep --quiet "0 error" azure-pipelines_check.Rout && grep --quiet "0 warnings" azure-pipelines_check.Rout && grep --quiet "0 note" azure-pipelines_check.Rout
-  displayName: 'Devtools checks'
-  condition: always()
+  - bash: |
+      sudo apt-get install -qq libxml2-dev libcurl4-openssl-dev libssl-dev libgsl-dev -y
+      sudo R -q -e "install.packages('devtools', dependencies=TRUE)"
+      sudo R -q -e "install.packages('metafor', dependencies=TRUE)"
+      sudo R -q -e "install.packages('covr', dependencies=TRUE)"
+      sudo R -q -e "devtools::install_github(repo='datashield/opal', ref='master')"
+      sudo R -q -e "devtools::install_github(repo='datashield/opaladmin', ref='master')"
+      sudo R -q -e "library('devtools'); library('opal'); library('opaladmin'); opals <- opal.login(username='administrator', password='datashield_test&', url='http://127.0.0.1:8080'); opaladmin::dsadmin.install_package(opal=opals,pkg='dsBetaTest',githubusername='datashield',ref='master'); datashield.logout(opals)"
+    displayName: 'Install R client'
 
-- bash: |
-    R -q -e "library('devtools'); devtools::test()" | tee azure-pipelines_test.Rout
-    grep --quiet "Failed:   0" azure-pipelines_test.Rout
-  displayName: 'Devtools tests'
-  condition: always()
+  - bash: |
+      R -q -e "library('devtools'); devtools::check(args = c('--no-examples'))" | tee azure-pipelines_check.Rout
+      grep --quiet "0 error" azure-pipelines_check.Rout && grep --quiet "0 warnings" azure-pipelines_check.Rout && grep --quiet "0 note" azure-pipelines_check.Rout
+    displayName: 'Devtools checks'
+    condition: always()
 
-- bash: |
-    R -q -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); devtools::test(reporter = 'junit')"
-  displayName: 'Devtools test reports'
-  condition: always()
+  - bash: |
+      R -q -e "library('devtools'); devtools::test()" | tee azure-pipelines_test.Rout
+      grep --quiet "Failed:   0" azure-pipelines_test.Rout
+    displayName: 'Devtools tests'
+    condition: always()
 
-- bash: |
-    ./checkDocumentationUpdated.sh
-  displayName: 'Check documents'
-  condition: always()
+  - bash: |
+      R -q -e "library('devtools'); options(testthat.output_file = 'test_results.xml'); devtools::test(reporter = 'junit')"
+    displayName: 'Devtools test reports'
+    condition: always()
 
-- bash: |
-    git config --global user.email "you@example.com"
-    git config --global user.name "Azure pipeline"
-    git clone https://datashield:$(GHPAT)@github.com/datashield/dsBetaTestClient.git dsBetaTestClient
-    git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
+  - bash: |
+      ./checkDocumentationUpdated.sh
+    displayName: 'Check documents'
+    condition: always()
 
-    cd dsBetaTestClient
-    sudo R -q -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"../coveragelist.csv")'
-    cd ../
+  - bash: |
+      git config --global user.email "you@example.com"
+      git config --global user.name "Azure pipeline"
+      git clone https://datashield:$(GHPAT)@github.com/datashield/dsBetaTestClient.git dsBetaTestClient
+      git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
 
-    cp coveragelist.csv testStatus/logs/
-    cp coveragelist.csv testStatus/logs/$(datetime).csv
+      cd dsBetaTestClient
+      sudo R -q -e 'library(covr);write.csv(coverage_to_list(covr::package_coverage(type = c("none"), code = c('"'"'testthat::test_package("dsBetaTestClient", reporter = "silent", stop_on_failure = FALSE)'"'"'))),"../coveragelist.csv")'
+      cd ../
 
-    cp test_results.xml testStatus/logs/
-    cp test_results.xml testStatus/logs/$(datetime).xml
+      cp coveragelist.csv testStatus/logs/$(repoName)/
+      cp coveragelist.csv testStatus/logs/$(repoName)/$(datetime).csv
 
-    testStatus/source/status.py testStatus/logs/$(datetime).xml testStatus/logs/$(datetime).csv status.html dsBetaTestClient
-    cd testStatus
-    cp ../status.html docs/latest/index.html
+      cp test_results.xml testStatus/logs/$(repoName)/
+      cp test_results.xml testStatus/logs/$(repoName)/$(datetime).xml
 
-    git add logs/coveragelist.csv
-    git add logs/test_results.xml
-    git add logs/$(datetime).xml
-    git add logs/$(datetime).csv
-    git add docs/latest/index.html
-    git commit -m "adding new test_results file"
-    git push
-  displayName: 'Parse test results'
-  condition: always()
+      testStatus/source/status.py testStatus/logs/$(repoName)/$(datetime).xml testStatus/logs/$(repoName)/$(datetime).csv status.html dsBetaTestClient
+      cd testStatus
+      cp ../status.html docs/$(repoName)/latest/index.html
+
+      git add logs/$(repoName)/coveragelist.csv
+      git add logs/$(repoName)/test_results.xml
+      git add logs/$(repoName)/$(datetime).xml
+      git add logs/$(repoName)/$(datetime).csv
+      git add docs/$(repoName)/latest/index.html
+      git commit -m "adding new test_results file"
+      git push
+      exit 0
+    displayName: 'Parse test results'
+    condition: always()

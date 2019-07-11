@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.dataFrameSubset.o:smoke")
+# context("dsBetaTestClient::ds.dataFrameSubset.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,8 +24,8 @@ connect.smk.dataset.sim(list("LAB_TSC", "LAB_HDL"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.dataFrameSubset.o():smoke create a subset dataframe")
-context("ds.dataFrameSubset.o()::smoke::create a subset dataframe")
+# context("dsBetaTestClient::ds.dataFrameSubset.o::smk create a subset dataframe")
+context("ds.dataFrameSubset.o::smk::create a subset dataframe")
 test_that("dataFrameSubset_exists", {
     myvectors <- c('D$LAB_TSC', 'D$LAB_HDL')
     ds.dataFrame.o(x=myvectors, newobj="unsubset_df")
@@ -41,4 +41,4 @@ test_that("dataFrameSubset_exists", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.dataFrameSubset.o:smoke done")
+# context("dsBetaTestClient::ds.dataFrameSubset.o::smk done")

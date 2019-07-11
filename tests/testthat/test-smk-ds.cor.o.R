@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.cor.o:smoke")
+# context("dsBetaTestClient::ds.cor.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,10 +24,24 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
-context("ds.cor.o()::smoke")
+context("ds.cor.o::smk")
 
-test_that("simple test", {
-    res <- ds.cor.o(x="D$survtime", y="D$time.id")
+test_that("simple test, combine", {
+    res <- ds.cor.o(x="D$survtime", y="D$time.id", type="combine")
+
+    expect_length(res, 5)
+    expect_equal(class(res$`Number of missing values in each variable`), "matrix")
+    expect_equal(class(res$`Number of missing values pairwise`), "matrix")
+    expect_equal(class(res$`Correlation Matrix`), "matrix")
+    expect_equal(class(res$`Number of complete cases used`), "matrix")
+    expect_length(res$`Error message`, 3)
+    expect_equal(res$`Error message`[[1]], NA)
+    expect_equal(res$`Error message`[[2]], NA)
+    expect_equal(res$`Error message`[[3]], NA)
+})
+
+test_that("simple test, split", {
+    res <- ds.cor.o(x="D$survtime", y="D$time.id", type="split")
 
     expect_length(res, 3)
     expect_length(res[[1]], 5)
@@ -48,11 +62,10 @@ test_that("simple test", {
     expect_equal(class(res[[3]]$`Correlation Matrix`), "matrix")
     expect_equal(class(res[[3]]$`Number of complete cases used`), "matrix")
     expect_equal(res[[3]]$`Error message`, NA)
-
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.cor.o 1:smoke done")
+# context("dsBetaTestClient::ds.cor.o 1::smk done")

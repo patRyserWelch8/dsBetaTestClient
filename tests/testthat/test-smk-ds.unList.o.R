@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.unList.o:smoke")
+# context("dsBetaTestClient::ds.unList.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,8 +24,8 @@ connect.smk.dataset.sim(list("GENDER"))
 # Tests
 #
 
-# context("dsBetaTestClient::ds.unList.o():smoke simple test")
-context("ds.unList.o()::smoke::simple test")
+# context("dsBetaTestClient::ds.unList.o::smk simple test")
+context("ds.unList.o::smk::simple test")
 
 test_that("simple test", {
     ds.asList.o(x.name="D$GENDER")
@@ -48,4 +48,4 @@ test_that("simple test", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.unList.o:smoke done")
+# context("dsBetaTestClient::ds.unList.o::smk done")

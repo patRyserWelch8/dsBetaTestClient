@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.table2D.o:smoke")
+# context("dsBetaTestClient::ds.table2D.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.sim(list("DIS_DIAB", "GENDER"))
 # Tests
 #
 
-context("ds.table2D.o()::smoke")
+context("ds.table2D.o::smk")
 test_that("simple table2D", {
     table2D.res <- ds.table2D.o(x='D$DIS_DIAB', y='D$GENDER')
 
@@ -56,4 +56,4 @@ test_that("simple table2D", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.table2D.o:smoke done")
+# context("dsBetaTestClient::ds.table2D.o::smk done")

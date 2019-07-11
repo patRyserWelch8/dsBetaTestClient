@@ -78,7 +78,7 @@ that chooses the probabilistic method in a given set of variables.
   data(logindata)
 
   # login to the servers
-  opals <- datashield.login(logins=logindata, assign=TRUE)
+  opals <- opal::datashield.login(logins=logindata, assign=TRUE)
 
   # Example 1: generate a scatter plot for each study separately (the default behaviour)
   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', type="split")
@@ -107,7 +107,7 @@ that chooses the probabilistic method in a given set of variables.
   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', k=2,
                    method='deterministic')
 
-  # Example 8: generate a combined scatter plot with the probabilistic method 
+  # Example 8: generate a combined scatter plot with the probabilistic method
   ds.scatterPlot.o(x='LD$PM_BMI_CONTINUOUS', y='LD$LAB_GLUC_ADJUSTED', method='probabilistic',
                    type='combine')
 
@@ -124,7 +124,7 @@ that chooses the probabilistic method in a given set of variables.
                    noise=0.1, type='split')
 
   # clear the Datashield R sessions and logout
-  datashield.logout(opals)
+  opal::datashield.logout(opals)
 
 }
 

@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.rbind.o:smoke")
+# context("dsBetaTestClient::ds.rbind.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,7 +24,7 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female", "age.60"))
 # Tests
 #
 
-context("ds.rbind.o()::smoke")
+context("ds.rbind.o::smk")
 
 test_that("simple test", {
     res <- ds.rbind.o(c("D$survtime", "D$time.id", "D$female", "D$age.60"), newobj="rbind_newobj")
@@ -43,4 +43,4 @@ test_that("simple test", {
 # Done
 #
 
-# context("dsBetaTestClient::ds.rbind.o 1:smoke done")
+# context("dsBetaTestClient::ds.rbind.o 1::smk done")

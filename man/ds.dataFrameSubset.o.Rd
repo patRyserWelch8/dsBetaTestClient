@@ -6,7 +6,8 @@
 \usage{
 ds.dataFrameSubset.o(df.name = NULL, V1.name = NULL, V2.name = NULL,
   Boolean.operator = NULL, keep.cols = NULL, rm.cols = NULL,
-  keep.NAs = NULL, newobj = NULL, datasources = NULL)
+  keep.NAs = NULL, newobj = NULL, datasources = NULL,
+  notify.of.progress = FALSE)
 }
 \arguments{
 \item{df.name}{a character string providing the name for the data.frame
@@ -65,6 +66,9 @@ apply the function solely to e.g. the second opal server in a set of three,
 the argument can be specified as: e.g. datasources=opals.em[2].
 If you wish to specify the first and third opal servers in a set you specify:
 e.g. datasources=opals.em[c(1,3)]}
+
+\item{notify.of.progress}{specifies if console output should be produce to indicate
+progress. The default value for notify.of.progress is FALSE.}
 }
 \value{
 the object specified by the <newobj> argument (or default name '<df.name>_subset').

@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.cov.o:smoke")
+# context("dsBetaTestClient::ds.cov.o::smk")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,10 +24,10 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 # Tests
 #
 
-context("ds.cov.o()::smoke")
+context("ds.cov.o::smk")
 
-test_that("simple test", {
-    res <- ds.cov.o(x="D$survtime", y="D$time.id")
+test_that("simple test, split", {
+    res <- ds.cov.o(x="D$survtime", y="D$time.id", type="split")
 
     expect_length(res, 3)
     expect_length(res[[1]], 5)
@@ -50,8 +50,22 @@ test_that("simple test", {
     expect_equal(res[[3]]$`Error message`, NA)
 })
 
+test_that("simple test, split", {
+    res <- ds.cov.o(x="D$survtime", y="D$time.id", type="combine")
+
+    expect_length(res, 5)
+    expect_equal(class(res$`Number of missing values in each variable`), "matrix")
+    expect_equal(class(res$`Number of missing values pairwise`), "matrix")
+    expect_equal(class(res$`Variance-Covariance Matrix`), "matrix")
+    expect_equal(class(res$`Number of complete cases used`), "matrix")
+    expect_length(res$`Error message`, 3)
+    expect_equal(res$`Error message`[[1]], NA)
+    expect_equal(res$`Error message`[[2]], NA)
+    expect_equal(res$`Error message`[[3]], NA)
+})
+
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.cov.o 1:smoke done")
+# context("dsBetaTestClient::ds.cov.o 1::smk done")
