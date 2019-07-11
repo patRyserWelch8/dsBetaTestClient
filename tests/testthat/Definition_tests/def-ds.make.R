@@ -118,7 +118,7 @@ source("definition_tests/def-assign-stats.R")
   
   #build expressions and applies on the server - inverse
   operation <- paste("(", variable.created, inverse.operator, constant.value,")",sep="")
-  variable.created.inverse <- paste(variable.created, "_inv",sep="")
+  variable.created.inverse <- paste(variable.created, ".inv",sep="")
   result.server.inverse <- ds.make.o(operation,variable.created.inverse,datasources = ds.test_env$connection.opal)
   print(result.server.inverse)
   
