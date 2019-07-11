@@ -30,7 +30,7 @@ test_that("split data set",
   .test.var.split('D$NEGATIVE_NUMERIC',ds.test_env$local.values.1[,13],ds.test_env$local.values.2[,13],ds.test_env$local.values.3[,13])
 })
 
-context("ds.var.o()::expt::large_values::multiple")
+context("ds.var.o()::expt::large_values::multiples")
 test_that("large values",
 {
   connect.all.datasets()

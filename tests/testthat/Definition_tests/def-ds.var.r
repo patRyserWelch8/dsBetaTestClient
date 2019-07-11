@@ -1,4 +1,5 @@
 source("connection_to_datasets/init_all_datasets.R")
+source("definition_tests/def-assign-stats.R")
 
 .test.var.combined <- function(variable.name,some.values)
 {
@@ -57,5 +58,25 @@ source("connection_to_datasets/init_all_datasets.R")
   expect_equal(std.servers[1],std.local.1, tolerance = ds.test_env$tolerance)
   expect_equal(std.servers[2],std.local.2, tolerance = ds.test_env$tolerance)
   expect_equal(std.servers[3],std.local.3, tolerance = ds.test_env$tolerance)
+}
+
+.test.variance.large <- function(variable.name, some.values)
+{
+  #define a constant values
+  constant.value <- sample(10^5:10^15,1)
+  
+  #local values 
+  large.local.values <- .mult.vectors(some.values, some.values)
+  var.local <- var(large.local.values)
+  
+  #server values
+  variable.created <- "temp.value"
+  operation <- paste("(",variable.name, "*",variable.name,")",sep="")
+ 
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+
+  
+  var.server <- ds.var.o(variable.created,type='combine', check=TRUE, datasources=ds.test_env$connection.opal)
+  expect_equal(var.server[[1]][1], var.local, tolerance = ds.test_env$tolerance)
 }
 
