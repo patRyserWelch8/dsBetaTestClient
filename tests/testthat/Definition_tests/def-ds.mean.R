@@ -1,4 +1,5 @@
 
+source("definition_tests/def-assign-stats.R")
 
 .test.mean.combined <- function(variable.name,some.values)
 {
@@ -38,3 +39,54 @@
   expect_equal(residue.2, 0, tolerance = ds.test_env$tolerance)
   expect_equal(residue.3, 0, tolerance = ds.test_env$tolerance)
 }
+
+.test.mean.large <- function(variable.name, some.values)
+{
+  
+  #local values 
+  large.local.values <- .mult.vectors(some.values, some.values)
+  mean.local <- mean(large.local.values)
+  
+  #server values
+  variable.created <- "temp.value"
+  operation <- paste("(",variable.name, "*",variable.name,")",sep="")
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  
+  mean.server <- ds.mean.o(variable.created,type='combine', check=TRUE, datasources=ds.test_env$connection.opal)
+  expect_equal(mean.server[[1]][1], mean.local, tolerance = ds.test_env$tolerance)
+}
+
+.test.location.parameter <- function(variable.name)
+{
+  #define a constant values
+  constant.value <- sample(-1000:1000,1)
+  variable.created <- "temp.value"
+  operation <- paste("(",variable.name, "+",constant.value,")",sep="")
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  #calculate variances
+  var.no.change <- ds.mean.o(variable.name,type='combine',check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  var.changes <- ds.mean.o(variable.created,type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  difference <- var.changes[[1]][1] - var.no.change[[1]][1]
+ 
+  #comparison
+  expect_equal(constant.value, difference, tolerance = ds.test_env$tolerance)
+}
+
+.test.scale <- function(variable.name)
+{
+  #define a constant values
+  constant.value <- sample(-10:10,1)
+  variable.created <- "temp.value"
+  operation <- paste("(",variable.name,"*",constant.value,")",sep="")
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  #calculate variances
+  var.no.change <- ds.mean.o(variable.name,type='combine',check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  var.changes <- ds.mean.o(variable.created,type='combine', check=TRUE,save.mean.Nvalid=FALSE, datasources=ds.test_env$connection.opal)
+  scale <- constant.value * var.no.change[[1]][1]
+  #comparison
+  expect_equal(scale, var.changes[[1]][1], tolerance = ds.test_env$tolerance)
+}
+

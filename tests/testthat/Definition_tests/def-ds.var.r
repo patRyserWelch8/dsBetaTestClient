@@ -62,8 +62,6 @@ source("definition_tests/def-assign-stats.R")
 
 .test.variance.large <- function(variable.name, some.values)
 {
-  #define a constant values
-  constant.value <- sample(10^5:10^15,1)
   
   #local values 
   large.local.values <- .mult.vectors(some.values, some.values)
@@ -72,7 +70,6 @@ source("definition_tests/def-assign-stats.R")
   #server values
   variable.created <- "temp.value"
   operation <- paste("(",variable.name, "*",variable.name,")",sep="")
- 
   ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
 
   
@@ -80,3 +77,34 @@ source("definition_tests/def-assign-stats.R")
   expect_equal(var.server[[1]][1], var.local, tolerance = ds.test_env$tolerance)
 }
 
+.test.location.parameter <- function(variable.name)
+{
+  #define a constant values
+  constant.value <- sample(-1000:1000,1)
+  variable.created <- "temp.value"
+  operation <- paste("(",variable.name, "+",constant.value,")",sep="")
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  #calculate variances
+  var.no.change <- ds.var.o(variable.name,type='combine', check=TRUE, datasources=ds.test_env$connection.opal)
+  var.changes <- ds.var.o(variable.created,type='combine', check=TRUE, datasources=ds.test_env$connection.opal)
+  
+  #comparison
+  expect_equal(var.no.change[[1]][1], var.changes[[1]][1], tolerance = ds.test_env$tolerance)
+}
+
+.test.scale <- function(variable.name)
+{
+  #define a constant values
+  constant.value <- sample(-10:10,1)
+  variable.created <- "temp.value"
+  operation <- paste("(",variable.name,"*",constant.value,")",sep="")
+  ds.make.o(operation,variable.created,datasources = ds.test_env$connection.opal)
+  
+  #calculate variances
+  var.no.change <- ds.var.o(variable.name,type='combine', check=TRUE, datasources=ds.test_env$connection.opal)
+  var.changes <- ds.var.o(variable.created,type='combine', check=TRUE, datasources=ds.test_env$connection.opal)
+  scale <- constant.value^2 * var.no.change[[1]][1]
+  #comparison
+  expect_equal(scale, var.changes[[1]][1], tolerance = ds.test_env$tolerance)
+}

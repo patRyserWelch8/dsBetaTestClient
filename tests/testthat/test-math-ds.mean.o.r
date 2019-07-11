@@ -1,6 +1,8 @@
 source("connection_to_datasets/init_all_datasets.R")
 source("definition_tests/def-ds.mean.r")
 
+
+
 context("ds.mean.o()::math::residual::multiple")
 test_that("residual deviation tends to 0",
 {
@@ -51,3 +53,65 @@ test_that("residual deviation tends to 0",
 })
 
 
+context("ds.mean.o()::math::location_parameter::single")
+test_that("mean(X+a) - mean(X) = a",
+{
+  connect.dataset.1()
+  
+  .test.location.parameter('D$INTEGER')
+  .test.location.parameter('D$NON_NEGATIVE_INTEGER')
+  .test.location.parameter('D$POSITIVE_INTEGER')
+  .test.location.parameter('D$NEGATIVE_INTEGER') 
+  .test.location.parameter('D$NUMERIC')
+  .test.location.parameter('D$NON_NEGATIVE_NUMERIC')
+  .test.location.parameter('D$POSITIVE_NUMERIC')
+  .test.location.parameter('D$NEGATIVE_NUMERIC') 
+})
+
+context("ds.mean.o()::math::location_parameter::multiple")
+test_that("mean(X+a) - mean(X) = a",
+{
+  connect.all.datasets()
+  
+  .test.location.parameter('D$INTEGER')
+  .test.location.parameter('D$NON_NEGATIVE_INTEGER')
+  .test.location.parameter('D$POSITIVE_INTEGER')
+  .test.location.parameter('D$NEGATIVE_INTEGER') 
+  .test.location.parameter('D$NUMERIC')
+  .test.location.parameter('D$NON_NEGATIVE_NUMERIC')
+  .test.location.parameter('D$POSITIVE_NUMERIC')
+  .test.location.parameter('D$NEGATIVE_NUMERIC') 
+})
+
+
+
+
+context("ds.mean.o()::math::scale::multiple")
+test_that("mean(X+a) / mean(X) = a",
+{
+  connect.all.datasets()
+  
+  .test.scale('D$INTEGER')
+  .test.scale('D$NON_NEGATIVE_INTEGER')
+  .test.scale('D$POSITIVE_INTEGER')
+  .test.scale('D$NEGATIVE_INTEGER') 
+  .test.scale('D$NUMERIC')
+  .test.scale('D$NON_NEGATIVE_NUMERIC')
+  .test.scale('D$POSITIVE_NUMERIC')
+  .test.scale('D$NEGATIVE_NUMERIC') 
+})
+
+context("ds.mean.o()::math::scale::single")
+test_that("mean(X*a) / mean(X) = a",
+{
+  connect.dataset.1()
+  
+  .test.scale('D$INTEGER')
+  .test.scale('D$NON_NEGATIVE_INTEGER')
+  .test.scale('D$POSITIVE_INTEGER')
+  .test.scale('D$NEGATIVE_INTEGER') 
+  .test.scale('D$NUMERIC')
+  .test.scale('D$NON_NEGATIVE_NUMERIC')
+  .test.scale('D$POSITIVE_NUMERIC')
+  .test.scale('D$NEGATIVE_NUMERIC') 
+})
