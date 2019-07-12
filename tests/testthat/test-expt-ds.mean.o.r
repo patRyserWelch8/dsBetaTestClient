@@ -1,5 +1,5 @@
 source("connection_to_datasets/init_all_datasets.R")
-source("definition_tests/def-ds.mean.r")
+source("definition_tests/def-ds.mean.R")
 
 
 context("ds.mean.o()::expt::combine::multiple")
