@@ -1,5 +1,5 @@
 source("connection_to_datasets/init_all_datasets.R")
-source("definition_tests/def-ds.make.r")
+source("definition_tests/def-ds.make.R")
 
 
 context("ds.make.o()::math::transformation::multiple")
