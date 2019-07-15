@@ -1,5 +1,5 @@
 source("connection_to_datasets/init_all_datasets.R")
-source("definition_tests/def-ds.var.r")
+source("definition_tests/def-ds.var.R")
 
 context("ds.var.o()::math::positive_result::multiple")
 test_that("variance >=0",
