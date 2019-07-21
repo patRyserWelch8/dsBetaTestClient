@@ -84,7 +84,7 @@ ds.reShape.o <- function(data.name=NULL, varying=NULL, v.names=NULL, timevar.nam
   }
 
  
-  if (!is.character(sep) || length(sep) != 1L){ 
+  if (!is.character(sep) || (nchar(sep) != 1)){
     stop("'sep' must be a character string", call.=FALSE)
   }
   
