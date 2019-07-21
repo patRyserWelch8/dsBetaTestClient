@@ -43,10 +43,6 @@ test_that("simple test, combine, pairwise.complete", {
 test_that("simple test, combine, casewise.complete", {
     res <- ds.cor.o(x="D$survtime", y="D$time.id", type="combine", naAction="casewise.complete")
 
-    print("====")
-    print(res)
-    print("====")
-
     expect_length(res, 5)
     expect_equal(class(res$`Number of missing values in each variable`), "matrix")
     expect_equal(class(res$`Number of missing values casewise`), "matrix")
