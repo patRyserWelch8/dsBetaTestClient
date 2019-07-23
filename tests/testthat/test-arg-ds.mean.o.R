@@ -30,7 +30,7 @@ test_that("mean_erros", {
 
     expect_error(ds.mean.o(), "Please provide the name of the input vector!", fixed=TRUE)
     expect_error(ds.mean.o(x='D$LAB_TSC', type='datashield'), 'Function argument "type" has to be either "both", "combine" or "split"', fixed=TRUE)
-#    expect_error(ds.mean.o(x='not_a_numeric'), "The input object must be an integer or a numeric vector.", fixed=TRUE)
+    expect_error(ds.mean.o(x='not_a_numeric'), "The input object must be an integer or a numeric vector.", fixed=TRUE)
 })
 
 #
