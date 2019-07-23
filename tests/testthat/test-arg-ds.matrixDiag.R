@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.glm.o:args test")
+# context("dsBetaTestClient::ds.matrixDiag::args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,14 +24,16 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.glm.o::arg::test errors")
-test_that("glm_erros", {
-    expect_error(ds.glm.o(), " Please provide a valid regression formula!", fixed=TRUE)
-    expect_error(ds.glm.o("D$LAB_TSC~D$LAB_TSC"), " Please provide a valid 'family' argument!", fixed=TRUE)
+context("ds.matrixDiag::arg::test errors")
+test_that("matrixDiag_erros", {
+    res <- ds.matrixDiag()
+
+    expect_length(res, 1)
+    expect_equal(res, "Error: x1 must have a value which is a character string, a numeric vector or a scalar", fixed=TRUE)
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.glm.o:arg done")
+# context("dsBetaTestClient::ds.matrixDiag::arg done")
