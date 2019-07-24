@@ -22,11 +22,11 @@ jobs:
 
 
   steps:
-- bash:|
+#- bash:|
       #branch: $(Build.SourceBranchName)
       #repo: $(Build.Repository.Name)
-      env
-  displayName: 'local vars'
+      #env
+  #displayName: 'local vars'
 
 - bash: |
       sudo service mysql stop
