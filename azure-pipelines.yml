@@ -26,7 +26,7 @@ jobs:
       #branch: $(Build.SourceBranchName)
       #repo: $(Build.Repository.Name)
       env
-    displayName: 'local vars'
+  displayName: 'local vars'
 
 - bash: |
       sudo service mysql stop
