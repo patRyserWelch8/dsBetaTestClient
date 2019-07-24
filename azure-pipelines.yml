@@ -22,7 +22,12 @@ jobs:
 
 
   steps:
-  - bash: |
+- bash:|
+      echo ${Build.SourceBranchName}
+      echo ${Build.Repository.Name}
+    displayName: 'local vars'
+
+- bash: |
       sudo service mysql stop
       sudo apt-get update
       sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
