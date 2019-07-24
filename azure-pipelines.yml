@@ -23,8 +23,8 @@ jobs:
 
   steps:
 - bash:|
-      echo ${Build.SourceBranchName}
-      echo ${Build.Repository.Name}
+      echo $(Build.SourceBranchName)
+      echo $(Build.Repository.Name)
     displayName: 'local vars'
 
 - bash: |
