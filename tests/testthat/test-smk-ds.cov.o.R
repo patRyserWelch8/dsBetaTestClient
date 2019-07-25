@@ -50,7 +50,7 @@ test_that("simple test, split", {
     expect_equal(res[[3]]$`Error message`, NA)
 })
 
-test_that("simple test, combine", {
+test_that("simple test, split", {
     res <- ds.cov.o(x="D$survtime", y="D$time.id", type="combine")
 
     expect_length(res, 5)

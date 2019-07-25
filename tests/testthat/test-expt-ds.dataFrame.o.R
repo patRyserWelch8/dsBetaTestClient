@@ -1,0 +1,101 @@
+source("connection_to_datasets/init_all_datasets.R")
+source("definition_tests/def-ds.data.frame.R")
+
+context("ds.dataFrame.o()::expt::one_column::single")
+test_that("numeric data",
+{
+  init.dataset.2()
+  .test.data.frame.creation(c("D$NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$POSITIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$POSITIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NEGATIVE_INTEGER"),'integer_df')
+  
+  init.dataset.1()
+  .test.data.frame.creation(c("D$NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$POSITIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$POSITIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NEGATIVE_INTEGER"),'integer_df')
+  
+  init.dataset.3()
+  .test.data.frame.creation(c("D$NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$POSITIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$POSITIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NEGATIVE_INTEGER"),'integer_df')
+  
+  
+})
+
+context("ds.dataFrame.o()::expt::one_column::multiple ")
+test_that("numeric data",
+{
+  init.all.datasets()
+  .test.data.frame.creation(c("D$NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$POSITIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$NEGATIVE_NUMERIC"),'numeric_df')
+  .test.data.frame.creation(c("D$INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NON_NEGATIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$POSITIVE_INTEGER"),'integer_df')
+  .test.data.frame.creation(c("D$NEGATIVE_INTEGER"),'integer_df')
+})
+
+
+context("ds.dataFrame.o()::expt::one_column_from_objects::single")
+test_that("numeric data",
+{
+  init.dataset.2()
+  .test.data.frame.from.objects("D$NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_INTEGER","numeric_created",'numeric_df')
+  
+  init.dataset.1()
+  .test.data.frame.from.objects("D$NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_INTEGER","numeric_created",'numeric_df')
+  
+  init.dataset.3()
+  .test.data.frame.from.objects("D$NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_INTEGER","numeric_created",'numeric_df')
+})
+
+context("ds.dataFrame.o()::expt::multiple ")
+test_that("numeric data",
+{
+  init.all.datasets()
+  .test.data.frame.from.objects("D$NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_NUMERIC","numeric_created" ,'numeric_df')
+  .test.data.frame.from.objects("D$INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NON_NEGATIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$POSITIVE_INTEGER","numeric_created",'numeric_df')
+  .test.data.frame.from.objects("D$NEGATIVE_INTEGER","numeric_created",'numeric_df')
+})
