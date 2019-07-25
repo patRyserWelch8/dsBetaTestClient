@@ -17,7 +17,8 @@ jobs:
 
   variables:
     datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
-    repoName: 'dsBetaTestClient'
+    # repoName: 'dsBetaTestClient'
+    repoName: $(Build.Repository.Name)
     branchName: $(Build.SourceBranchName)
 
 
@@ -25,6 +26,7 @@ jobs:
   steps:
   - bash: |
       echo $(branchName)
+      echo $(repoName)
       sudo service mysql stop
       sudo apt-get update
       sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
