@@ -32,3 +32,4 @@ source("definition_tests/def-assign-stats.R")
   }
   expect_true(type[[1]][1]=="data.frame")
 }
+#
