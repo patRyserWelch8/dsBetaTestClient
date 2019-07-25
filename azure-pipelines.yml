@@ -101,22 +101,25 @@ jobs:
   - bash: |
       git clone https://datashield:$(GHPAT)@github.com/datashield/testStatus.git testStatus
 
-      cp coveragelist.csv testStatus/logs/$(repoName)/
-      cp coveragelist.csv testStatus/logs/$(repoName)/$(datetime).csv
+      # Make the directories if they dont already exist
+      mkdir --parents testStatus/logs/$(repoName)/$(branchName)
 
-      cp test_results.xml testStatus/logs/$(repoName)/
-      cp test_results.xml testStatus/logs/$(repoName)/$(datetime).xml
+      cp coveragelist.csv testStatus/logs/$(repoName)/$(branchName)/
+      cp coveragelist.csv testStatus/logs/$(repoName)/$(branchName)/$(datetime).csv
 
-      testStatus/source/status.py testStatus/logs/$(repoName)/$(datetime).xml testStatus/logs/$(repoName)/$(datetime).csv status.html $(repoName) $(repoName) $(branchName)
+      cp test_results.xml testStatus/logs/$(repoName)/$(branchName)/
+      cp test_results.xml testStatus/logs/$(repoName)/$(branchName)/$(datetime).xml
+
+      testStatus/source/status.py testStatus/logs/$(repoName)/$(branchName)/$(datetime).xml testStatus/logs/$(repoName)/$(branchName)/$(datetime).csv status.html $(repoName) $(repoName) $(branchName)
       cd testStatus
-      cp ../status.html docs/$(repoName)/latest/index.html
+      cp ../status.html docs/$(repoName)/$(branchName)/latest/index.html
 
-      git add logs/$(repoName)/coveragelist.csv
-      git add logs/$(repoName)/test_results.xml
-      git add logs/$(repoName)/$(datetime).xml
-      git add logs/$(repoName)/$(datetime).csv
-      git add docs/$(repoName)/latest/index.html
-      git commit -m "adding new test_results file"
+      git add logs/$(repoName)/$(branchName)/coveragelist.csv
+      git add logs/$(repoName)/$(branchName)/test_results.xml
+      git add logs/$(repoName)/$(branchName)/$(datetime).xml
+      git add logs/$(repoName)/$(branchName)/$(datetime).csv
+      git add docs/$(repoName)/$(branchName)/latest/index.html
+      git commit -m "Test Status update for $(repoName)/$(branchName)"
       git push
       exit 0
     displayName: 'Parse test results'
