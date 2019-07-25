@@ -24,7 +24,7 @@ jobs:
 
   steps:
   - bash: |
-      echo branchName
+      echo $(branchName)
       sudo service mysql stop
       sudo apt-get update
       sudo apt-get remove --purge mysql-client mysql-server mysql-common -y
