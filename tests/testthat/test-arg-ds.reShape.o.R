@@ -13,7 +13,7 @@
 # Set up
 #
 
-# context("dsBetaTestClient::ds.var.o::args test")
+# context("dsBetaTestClient::ds.reShape.o:args test")
 
 source("connection_to_datasets/init_all_datasets.R")
 source("connection_to_datasets/init_smk_datasets.R")
@@ -24,16 +24,16 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 # Tests
 #
 
-context("ds.var.o::arg::test errors")
-test_that("var_erros", {
-    ds.asCharacter.o(x='D$LAB_TSC', newobj="not_a_numeric")
-
-    expect_error(ds.var.o(), "Please provide the name of the input vector!", fixed=TRUE)
-    expect_error(ds.var.o(x="not_a_numeric", checks=TRUE), "The input object must be an integer or a numeric vector.", fixed=TRUE)
+context("ds.reShape.o::arg::test errors")
+test_that("reShape_erros", {
+    expect_error(ds.reShape.o(), "Please provide the name of the list that holds the input vectors!", fixed=TRUE)
+    expect_error(ds.reShape.o(data.name="test", sep=TRUE), "'sep' must be a character string", fixed=TRUE)
+    expect_error(ds.reShape.o(data.name="test", sep=""), "'sep' must be a character string", fixed=TRUE)
+    expect_error(ds.reShape.o(data.name="test", sep="ts"), "'sep' must be a character string", fixed=TRUE)
 })
 
 #
 # Done
 #
 
-# context("dsBetaTestClient::ds.var.o::arg done")
+# context("dsBetaTestClient::ds.reShape.o:arg done")
