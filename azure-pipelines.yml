@@ -18,6 +18,7 @@ jobs:
   variables:
     datetime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
     repoName: 'dsBetaTestClient'
+    branch: Build.SourceBranchName
 
 
 
