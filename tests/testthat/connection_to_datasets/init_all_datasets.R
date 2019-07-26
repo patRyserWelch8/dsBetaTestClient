@@ -2,6 +2,7 @@
 
 init.all.datasets <- function()
 {
+  log.out.data.server()
   if (ds.test_env$secure_login_details)
   {
     #reading data from local files 
@@ -34,6 +35,7 @@ init.all.datasets <- function()
 
 init.dataset.3 <- function()
 {
+  log.out.data.server()
   if (ds.test_env$secure_login_details)
   {
 
@@ -63,6 +65,7 @@ init.dataset.3 <- function()
 
 init.dataset.2 <- function()
 {
+  log.out.data.server()
   if (ds.test_env$secure_login_details)
   {
     ds.test_env$local.values.2 <- read.csv("data_files/DATASET2.csv", header = TRUE)
@@ -91,6 +94,7 @@ init.dataset.2 <- function()
 
 init.dataset.1 <- function()
 {
+  log.out.data.server()
   if (ds.test_env$secure_login_details)
   {
 
