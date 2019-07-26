@@ -61,8 +61,8 @@ context('ds.rPois.o()::ext::lambdas::single')
 test_that("lambdas",
 {
   connect.all.datasets()
-  .test.lambdas(30, variable.created, c(10,10,10))
-  .test.lambdas(30, variable.created, c(5,15,10))
+  .test.lambdas(30, 'poisson_dist_1', c(10,10,10))
+  .test.lambdas(30, 'poisson_dist_2', c(5,15,10))
 })
 
 
