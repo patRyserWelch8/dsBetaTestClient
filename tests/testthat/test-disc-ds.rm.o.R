@@ -25,8 +25,8 @@ connect.smk.dataset.survival(list("survtime", "time.id", "female"))
 
 context("ds.rm.o::disc")
 
-test_that("simple test", {
-    res1 <- ds.rm.o("thisisareallylongname_testing_datashield")
+test_that("justovertest", {
+    res1 <- ds.rm.o(c("12345678910","12345678910"))
 
     expect_length(res1, 3)
     expect_length(res1$survival1, 1)
@@ -37,6 +37,34 @@ test_that("simple test", {
     expect_equal(res1$survival3$return.message, "Disclosure risk, number of characters in x.name must not exceed nfilter.stringShort which is currently set at: 20")
     
 
+    res2 <- ds.rm.o(c("12345678910","12345678"))
+    expect_length(res2, 3)
+    expect_length(res2$survival1, 1)
+    expect_equal(res2$survival1$return.message[1], "Object to be deleted, i.e. <12345678910> , does not exist so does not need deleting")
+    expect_equal(res2$survival1$return.message[2], "Object to be deleted, i.e. <12345678> , does not exist so does not need deleting")
+    
+    expect_length(res2$survival2, 1)
+    expect_equal(res2$survival2$return.message[1], "Object to be deleted, i.e. <12345678910> , does not exist so does not need deleting")
+    expect_equal(res2$survival2$return.message[2], "Object to be deleted, i.e. <12345678> , does not exist so does not need deleting")
+    
+    expect_length(res2$survival3, 1)
+    expect_equal(res2$survival3$return.message[1], "Object to be deleted, i.e. <12345678910> , does not exist so does not need deleting")
+    expect_equal(res2$survival3$return.message[2], "Object to be deleted, i.e. <12345678> , does not exist so does not need deleting")
+    
+})
+
+test_that("simple test", {
+    res1 <- ds.rm.o("thisisareallylongname_testing_datashield")
+    
+    expect_length(res1, 3)
+    expect_length(res1$survival1, 1)
+    expect_equal(res1$survival1$return.message, "Disclosure risk, number of characters in x.name must not exceed nfilter.stringShort which is currently set at: 20")
+    expect_length(res1$survival2, 1)
+    expect_equal(res1$survival2$return.message, "Disclosure risk, number of characters in x.name must not exceed nfilter.stringShort which is currently set at: 20")
+    expect_length(res1$survival3, 1)
+    expect_equal(res1$survival3$return.message, "Disclosure risk, number of characters in x.name must not exceed nfilter.stringShort which is currently set at: 20")
+    
+    
     res2 <- ds.rm.o(c("erty33u88","erty33u88","erty33u88","erty33u88","erty33u88"))
     expect_length(res2, 3)
     expect_length(res2$survival1, 1)
@@ -46,9 +74,5 @@ test_that("simple test", {
     expect_length(res2$survival3, 1)
     expect_equal(res2$survival3$return.message, "Disclosure risk, number of characters in x.name must not exceed nfilter.stringShort which is currently set at: 20")
 })
-
-#
-# Done
-#
 
 
