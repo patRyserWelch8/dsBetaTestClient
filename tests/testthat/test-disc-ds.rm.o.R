@@ -27,7 +27,7 @@ context("ds.rm.o::disc")
 
 test_that("simple test", {
     res1 <- ds.rm.o("thisisareallylongname_testing_datashield")
-print(res1)
+
     expect_length(res1, 3)
     expect_length(res1$survival1, 1)
     expect_equal(res1$survival1$return.message, "Disclosure risk, number of characters in x.name must not exceed nfilter.stringShort which is currently set at: 20")
