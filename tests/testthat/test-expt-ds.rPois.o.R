@@ -14,7 +14,7 @@ test_that("Poisson without seeds",
 })
 
 
-context("ds.rPoiss.o()::expt::no seeds::multiple")
+context("ds.rPois.o()::expt::no seeds::multiple")
 test_that("Poisson without seeds",
 {
   connect.all.datasets()
@@ -43,7 +43,7 @@ test_that("Poisson with seeds",
   .test.basic.expectation.with.seeds(2^31,'poisson_dist_7')
 })
 
-context("ds.rPoiss.o()::expt::with seeds::multiple")
+context("ds.rPois.o()::expt::with seeds::multiple")
 test_that("Poisson with seeds",
 {
   connect.all.datasets()
@@ -55,9 +55,10 @@ test_that("Poisson with seeds",
   .test.basic.expectation.with.seeds(2^31-1,'poisson_dist_6')
   .test.basic.expectation.with.seeds(2^31,'poisson_dist_7')
   .test.too.large.seed(3)
+  .test.too.negative.seed()
 })
 
-context('ds.rPois.o()::ext::lambdas::single')
+context('ds.rPois.o()::ext::lambdas::multiple')
 test_that("lambdas",
 {
   connect.all.datasets()
@@ -65,4 +66,11 @@ test_that("lambdas",
   .test.lambdas(30, 'poisson_dist_2', c(5,15,10))
 })
 
+context('ds.rPois.o()::ext::lambdas::single')
+test_that("lambdas",
+{
+  connect.dataset.1()
+  .test.lambdas(30, 'poisson_dist_1', c(10,10,10))
+  .test.lambdas(30, 'poisson_dist_2', c(5,15,10))
+})
 
