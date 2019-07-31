@@ -26,7 +26,10 @@ connect.smk.dataset.sim(list("LAB_TSC"))
 
 context("ds.var.o::arg::test errors")
 test_that("var_erros", {
+    ds.asCharacter.o(x='D$LAB_TSC', newobj="not_a_numeric")
+
     expect_error(ds.var.o(), "Please provide the name of the input vector!", fixed=TRUE)
+    expect_error(ds.var.o(x="not_a_numeric", checks=TRUE), "The input object must be an integer or a numeric vector.", fixed=TRUE)
 })
 
 #
