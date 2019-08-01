@@ -1,6 +1,7 @@
 source("connection_to_datasets/init_all_datasets.R")
 source("definition_tests/def-ds.rPois.R")
 
+
 context("ds.rPois.o()::expt::no seeds::single")
 test_that("Poisson without seeds",
 {
@@ -58,19 +59,4 @@ test_that("Poisson with seeds",
   .test.too.negative.seed()
 })
 
-context('ds.rPois.o()::ext::lambdas::multiple')
-test_that("lambdas",
-{
-  connect.all.datasets()
-  .test.lambdas(30, 'poisson_dist_1', c(10,10,10))
-  .test.lambdas(30, 'poisson_dist_2', c(5,15,10))
-})
-
-context('ds.rPois.o()::ext::lambdas::single')
-test_that("lambdas",
-{
-  connect.dataset.1()
-  .test.lambdas(30, 'poisson_dist_1', c(10,10,10))
-  .test.lambdas(30, 'poisson_dist_2', c(5,15,10))
-})
 
