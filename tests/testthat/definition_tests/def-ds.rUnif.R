@@ -1,5 +1,7 @@
 source("definition_tests/def-assign-stats.R")
 
+
+
 #check sample of reasonable size are created. Also verifies a variable
 #on the server is created with a suitable type (i.e. integer).
 #The length of each sample on each server is checked.
@@ -94,8 +96,64 @@ source("definition_tests/def-assign-stats.R")
 
 
 
-.test.range.values <- function(min.value, max.value)
+.test.range.values <- function(min.value, max.value, variable.created)
 {
+  # init size of sample and randomly generates distribution on server
+  size <- 20000
+  ds.rUnif.o(samp.size = size, min = min.value, max = max.value, newobj = variable.created,  datasources=ds.test_env$connection.opal)
+ 
+  # compute distribution statistics
+  dist.stats        <- .calc.distribution.server(variable.created)
+  expected.mean     <-  (1/2)*(min.value + max.value)
+  expected.variance <- (1/12)*(max.value - min.value)^2
+
+  
+  # test 
+  expect_equal(dist.stats[5],max.value, tolerance = 10^2)
+  expect_equal(dist.stats[4],min.value, tolerance = 10^2)
+  expect_equal(dist.stats[1], expected.mean, tolerance = 10^2) 
+  expect_equal(dist.stats[2], expected.variance, tolerance = 10^2) 
+}
+
+
+.test.dispersions.stats.same.distribution <- function(min.value, max.value, seed)
+{
+  size <- 20000
+  #create distribution on the server
+  ds.rUnif.o(samp.size = size, min = min.value, max = max.value, newobj ="first.dist",  seed.as.integer = seed, datasources=ds.test_env$connection.opal)
+  ds.rUnif.o(samp.size = size, min = min.value, max = max.value, newobj ="second.dist", seed.as.integer = seed,  datasources=ds.test_env$connection.opal)
+  
+  #compute errors 
+  errors <- .compute.errors.between.distributions("first.dist","second.dist",size)
+  
+  #test
+  expect_equal(errors[1],0, tolerance = ds.test_env$tolerance)
+  expect_equal(errors[2],0, tolerance = ds.test_env$tolerance)
+}
+
+.test.dispersions.stats.diff.distribution <- function(first.dist.min.value, first.dist.max.value, first.seed, second.dist.min.value, second.dist.max.value, second.seed)
+{
+  #initialisation of variables
+  size <- 20000
+  expected.errors <- c(0,0)
+  
+  #create distribution on the server
+  ds.rUnif.o(samp.size = size, min = first.dist.min.value, max = first.dist.max.value, newobj ="first.dist", seed.as.integer = first.seed, datasources=ds.test_env$connection.opal)
+  ds.rUnif.o(samp.size = size, min = second.dist.min.value, max = second.dist.max.value, newobj ="second.dist", seed.as.integer = second.seed,  datasources=ds.test_env$connection.opal)
+
+  #compute errors 
+  errors <- .compute.errors.between.distributions("first.dist","second.dist",size)
+  expected.errors[1] <- (((1/2)*(first.dist.max.value - first.dist.min.value)) - 
+                               ((1/2)*(second.dist.max.value - second.dist.min.value)))/size
+  
+  expected.errors[2] <- (((1/12)*(first.dist.max.value - first.dist.min.value)^2) - 
+                               ((1/12)*(second.dist.max.value - second.dist.min.value)^2))/size
+  
+  #test
+  expect_equal(errors[1],expected.errors[1], tolerance = 10^2)
+  expect_equal(errors[2],expected.errors[2], tolerance = 10^2)
   
 }
+
+
 

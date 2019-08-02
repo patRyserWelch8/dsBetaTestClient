@@ -113,35 +113,30 @@ source("definition_tests/def-assign-stats.R")
   #create distribution on the server
   ds.rPois.o(samp.size = size, lambda = lambda.first.dist, newobj="first.dist",seed.as.integer = seed.first.dist,datasources=ds.test_env$connection.opal)
   ds.rPois.o(samp.size = size, lambda = lambda.second.dist, newobj="second.dist",seed.as.integer = seed.second.dist,datasources=ds.test_env$connection.opal)
- 
-  first.dist <- .calc.distribution.server("first.dist")
-  second.dist <- .calc.distribution.server("second.dist")
- 
-  #calculate the error between the mean and variance
-  error.mean <- (first.dist[1]- second.dist[1])/size
-  error.var  <- (first.dist[1] - second.dist[1])/size
   
-  expect_true(error.mean == 0)
-  expect_true(error.var  == 0)
+  errors <- .compute.errors.between.distributions("first.dist","second.dist",size)
+ 
+  #test
+  expect_equal(errors[ds.test_env$MEAN],0, tolerance = ds.test_env$tolerance)
+  expect_equal(errors[ds.test_env$VARIANCE],0, tolerance = ds.test_env$tolerance)
 }
 
 .test.dispersions.stats.diff.distribution <- function(seed.first.dist,lambda.first.dist, seed.second.dist, lambda.second.dist)
 {
   
   size <- 20000
+  
   #create distribution on the server
-  ds.rPois.o(samp.size = size, lambda = lambda.first.dist, newobj="first.dist",seed.as.integer = seed.first.dist,datasources=ds.test_env$connection.opal)
-  ds.rPois.o(samp.size = size, lambda = lambda.second.dist, newobj="second.dist",seed.as.integer = seed.second.dist,datasources=ds.test_env$connection.opal)
+  ds.rPois.o(samp.size = size, lambda = lambda.first.dist, newobj="first.dist.diff",seed.as.integer = seed.first.dist,datasources=ds.test_env$connection.opal)
+  ds.rPois.o(samp.size = size, lambda = lambda.second.dist, newobj="second.dist.diff",seed.as.integer = seed.second.dist,datasources=ds.test_env$connection.opal)
   
-  first.dist <- .calc.distribution.server("first.dist")
-  second.dist <- .calc.distribution.server("second.dist")
- 
-  #calculate the error between the mean and variance
-  error.mean <- (first.dist[1] - second.dist[1])/size
-  error.var  <- (first.dist[2] - second.dist[2])/size
+  # compute errors
+  errors <- .compute.errors.between.distributions("first.dist.diff","second.dist.diff",size)
   
-  expect_equal(lambda.first.dist - lambda.second.dist, first.dist[1] - second.dist[1], tolerance = 10^-1)
-  expect_equal(lambda.first.dist - lambda.second.dist, first.dist[2] - second.dist[2], tolerance = 10^-1)
+  # test 
+  expect_equal(errors[ds.test_env$MEAN],lambda.first.dist - lambda.second.dist, tolerance = 10^1)
+  expect_equal(errors[ds.test_env$VARIANCE],lambda.first.dist - lambda.second.dist, tolerance = 10^1)
+  
 
 }
 

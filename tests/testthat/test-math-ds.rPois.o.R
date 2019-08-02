@@ -25,7 +25,6 @@ test_that("lamdba == mean and lambda == var",
   
 })
 
-
 context("ds.rPois.o()::math::distributions comparison::multiple")
 test_that("changes in distribution",
 {
@@ -43,7 +42,6 @@ test_that("changes in distribution",
 {
   connect.dataset.3()
   seed <- random.number/1000
-  seed <- as.integer(as.POSIXct(Sys.time(), "GMT"))/1000
   .test.dispersions.stats.same.distribution(seed, c(6),seed,c(6))
   .test.dispersions.stats.diff.distribution(seed/1000, c(10),seed,c(8))
   .test.dispersions.stats.diff.distribution(seed/1000, c(19),seed,c(11))
